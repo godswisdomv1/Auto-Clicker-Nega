@@ -5,7 +5,7 @@
 # CLI tools run only in CI (see .github/workflows/check.yml): ktlint 1.8.0 and detekt 1.23.8.
 
 [versions]
-agp = "9.3.3"
+agp = "9.5.0"
 kotlin = "2.4.21"
 composeBom = "2026.08.00"
 activityCompose = "1.13.0"
