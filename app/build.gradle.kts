@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.zdmgold.autoclickernega"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.zdmgold.autoclickernega"

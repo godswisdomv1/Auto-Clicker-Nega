@@ -1,13 +1,4 @@
 # Applied on top of detekt's default configuration (--build-upon-default-config).
-comments:
-  ForbiddenComment:
-    active: true
-    values:
-      - 'TODO'
-      - 'FIXME'
-      - 'STOPSHIP'
-    allowedPatterns: ''
-
 complexity:
   LongMethod:
     active: true
@@ -40,6 +31,13 @@ naming:
     constantPattern: '[A-Za-z][_A-Za-z0-9]*'
 
 style:
+  ForbiddenComment:
+    active: true
+    values:
+      - 'TODO'
+      - 'FIXME'
+      - 'STOPSHIP'
+    allowedPatterns: ''
   MagicNumber:
     active: true
     ignorePropertyDeclaration: true
