@@ -1,0 +1,27 @@
+# Build output
+build/
+.gradle/
+*.apk
+*.aab
+*.class
+
+# Local configuration and secrets (never committed)
+local.properties
+*.jks
+*.keystore
+*keystore-base64*
+*.pem
+.env
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tools downloaded by CI
+tools/
+logs/

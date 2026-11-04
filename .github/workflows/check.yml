@@ -1,0 +1,93 @@
+name: check
+
+on:
+  push:
+    branches: [ci-analyser]
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  KTLINT_VERSION: "1.8.0"
+  DETEKT_VERSION: "1.23.8"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - uses: actions/setup-java@v6.1.0
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: gradle/actions/setup-gradle@v6.4.1
+
+      - name: Prepare
+        run: mkdir -p logs tools
+
+      - name: ktlint
+        id: ktlint
+        continue-on-error: true
+        run: |
+          curl -fsSL -o tools/ktlint "https://github.com/ktlint/ktlint/releases/download/${KTLINT_VERSION}/ktlint"
+          chmod +x tools/ktlint
+          tools/ktlint --relative "**/*.kt" "**/*.kts" "!**/build/**" 2>&1 | tee logs/ktlint.log
+
+      - name: detekt
+        id: detekt
+        continue-on-error: true
+        run: |
+          curl -fsSL -o tools/detekt.jar "https://github.com/detekt/detekt/releases/download/v${DETEKT_VERSION}/detekt-cli-${DETEKT_VERSION}-all.jar"
+          java -jar tools/detekt.jar --config config/detekt/detekt.yml --build-upon-default-config --input app/src 2>&1 | tee logs/detekt.log
+
+      - name: lintDebug
+        id: lint
+        continue-on-error: true
+        run: ./gradlew --console=plain --stacktrace lintDebug 2>&1 | tee logs/lint.log
+
+      - name: testDebugUnitTest
+        id: test
+        continue-on-error: true
+        run: ./gradlew --console=plain --stacktrace testDebugUnitTest 2>&1 | tee logs/test.log
+
+      - name: assembleDebug
+        id: assemble
+        continue-on-error: true
+        run: ./gradlew --console=plain --stacktrace assembleDebug 2>&1 | tee logs/assemble.log
+
+      - name: Wrapper checksum (information)
+        if: always()
+        continue-on-error: true
+        run: |
+          {
+            find ~/.gradle/wrapper/dists -name 'gradle-*-bin.zip' -exec sha256sum {} \;
+            curl -fsSL https://services.gradle.org/distributions/gradle-9.6.1-bin.zip.sha256 || true
+            echo
+            sha256sum gradle/wrapper/gradle-wrapper.jar
+          } 2>&1 | tee logs/wrapper-checksum.log
+
+      - name: Publish logs
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STATUS: ${{ steps.ktlint.outcome }}/${{ steps.detekt.outcome }}/${{ steps.lint.outcome }}/${{ steps.test.outcome }}/${{ steps.assemble.outcome }}
+        run: scripts/ci_publish_logs.sh logs
+
+      - name: Verdict
+        if: always()
+        run: |
+          echo "ktlint=${{ steps.ktlint.outcome }} detekt=${{ steps.detekt.outcome }} lint=${{ steps.lint.outcome }} test=${{ steps.test.outcome }} assemble=${{ steps.assemble.outcome }}"
+          for o in "${{ steps.ktlint.outcome }}" "${{ steps.detekt.outcome }}" "${{ steps.lint.outcome }}" "${{ steps.test.outcome }}" "${{ steps.assemble.outcome }}"; do
+            [ "$o" = "success" ] || exit 1
+          done

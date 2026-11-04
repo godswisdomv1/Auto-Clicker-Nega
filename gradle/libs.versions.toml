@@ -1,0 +1,23 @@
+# Every build dependency and plugin is pinned to an exact version. Nothing floats.
+# Versions were read from the official release notes and release pages on 4 November 2026.
+# Dependencies for later batches (Room, DataStore, coroutines, ads, billing, OCR) are added
+# in the batch that first uses them, each pinned the same way.
+# CLI tools run only in CI (see .github/workflows/check.yml): ktlint 1.8.0 and detekt 1.23.8.
+
+[versions]
+agp = "9.3.3"
+kotlin = "2.4.21"
+composeBom = "2026.08.00"
+activityCompose = "1.13.0"
+junit = "4.13.2"
+
+[libraries]
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
