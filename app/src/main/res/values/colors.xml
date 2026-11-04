@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Window background before Compose draws, so there is no blank flash. Must equal Tokens.light.bgPrimary. -->
+  <color name="nega_bg_primary">#F5F6F8</color>
+</resources>

@@ -33,7 +33,7 @@ naming:
 style:
   ForbiddenComment:
     active: true
-    values:
+    comments:
       - 'TODO'
       - 'FIXME'
       - 'STOPSHIP'

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="Theme.Nega" parent="android:Theme.DeviceDefault.Light.NoActionBar">
+    <item name="android:windowBackground">@color/nega_bg_primary</item>
+    <item name="android:colorBackground">@color/nega_bg_primary</item>
+  </style>
+</resources>
