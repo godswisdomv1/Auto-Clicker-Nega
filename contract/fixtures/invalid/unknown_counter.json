@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "id": "s1",
+  "name": "Fixture",
+  "mode": "smart",
+  "screen": {
+    "w": 1080,
+    "h": 2400,
+    "density": 420
+  },
+  "run": {
+    "globalTimerMs": 0,
+    "startDelayMs": 3000,
+    "countdownSec": 3
+  },
+  "templates": {
+    "t1": {
+      "file": "t1.png",
+      "w": 96,
+      "h": 64,
+      "refDensity": 420
+    }
+  },
+  "counters": [
+    {
+      "id": "c1",
+      "name": "Collected",
+      "start": 0
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "name": "e1",
+      "priority": 1,
+      "cooldownMs": 500,
+      "when": {
+        "op": "AND",
+        "items": [
+          {
+            "type": "counter",
+            "id": "zzz",
+            "cmp": "<",
+            "value": 1
+          }
+        ]
+      },
+      "do": [
+        {
+          "type": "stop"
+        }
+      ]
+    }
+  ]
+}

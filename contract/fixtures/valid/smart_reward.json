@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "name": "Collect reward",
+  "mode": "smart",
+  "screen": {
+    "w": 1080,
+    "h": 2400,
+    "density": 420
+  },
+  "run": {
+    "globalTimerMs": 0,
+    "startDelayMs": 3000,
+    "countdownSec": 3
+  },
+  "templates": {
+    "t1": {
+      "file": "t1.png",
+      "w": 96,
+      "h": 64,
+      "refDensity": 420
+    }
+  },
+  "counters": [
+    {
+      "id": "c1",
+      "name": "Collected",
+      "start": 0
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "name": "Reward button",
+      "priority": 1,
+      "cooldownMs": 500,
+      "when": {
+        "op": "AND",
+        "items": [
+          {
+            "type": "image",
+            "template": "t1",
+            "confidence": 0.85,
+            "mode": "safe",
+            "region": [
+              0,
+              1600,
+              1080,
+              2400
+            ]
+          },
+          {
+            "type": "counter",
+            "id": "c1",
+            "cmp": "<",
+            "value": 50
+          }
+        ]
+      },
+      "do": [
+        {
+          "type": "tap",
+          "at": "match",
+          "offset": [
+            0,
+            0
+          ],
+          "holdMs": 40
+        },
+        {
+          "type": "counter",
+          "id": "c1",
+          "op": "add",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "name": "Done",
+      "priority": 2,
+      "when": {
+        "op": "AND",
+        "items": [
+          {
+            "type": "counter",
+            "id": "c1",
+            "cmp": ">=",
+            "value": 50
+          }
+        ]
+      },
+      "do": [
+        {
+          "type": "stop"
+        }
+      ]
+    }
+  ]
+}

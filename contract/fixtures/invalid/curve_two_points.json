@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "s1",
+  "name": "Fixture",
+  "mode": "simple",
+  "screen": {
+    "w": 1080,
+    "h": 2400,
+    "density": 420
+  },
+  "run": {
+    "loops": 0,
+    "globalTimerMs": 600000,
+    "startDelayMs": 3000,
+    "countdownSec": 3
+  },
+  "steps": [
+    {
+      "type": "curve",
+      "points": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "durationMs": 300
+    }
+  ]
+}

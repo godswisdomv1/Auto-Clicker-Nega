@@ -39,6 +39,7 @@ sealed class AppError(
 
     data class MalformedImport(
         val reason: ImportProblem,
+        val detail: String = "",
     ) : AppError("malformed_import", recoverable = false, retriable = false)
 
     data class SchemaTooNew(
@@ -61,4 +62,16 @@ enum class CaptureCause { SecureScreen, TooFrequent, Internal }
 
 enum class PackCause { Missing, DownloadFailed, HashMismatch }
 
-enum class ImportProblem { BadJson, BadBundle, HashMismatch, TooLarge, TooManyItems, InvalidField, Cycle }
+/** Why an import was refused. [code] is the stable name shared with the contract fixtures. */
+enum class ImportProblem(
+    val code: String,
+) {
+    BadJson("bad_json"),
+    BadBundle("bad_bundle"),
+    HashMismatch("hash_mismatch"),
+    TooLarge("too_large"),
+    TooManyItems("too_many_items"),
+    InvalidField("invalid_field"),
+    Cycle("cycle"),
+    TooDeep("too_deep"),
+}

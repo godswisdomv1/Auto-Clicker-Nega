@@ -1,0 +1,89 @@
+{
+  "valid/simple_tap_loop.json": {
+    "ok": true
+  },
+  "valid/smart_reward.json": {
+    "ok": true
+  },
+  "valid/smart_all_conditions.json": {
+    "ok": true
+  },
+  "valid/simple_minimal.json": {
+    "ok": true
+  },
+  "valid/smart_two_events_priority.json": {
+    "ok": true
+  },
+  "invalid/not_json.json": {
+    "ok": false,
+    "code": "bad_json"
+  },
+  "invalid/top_level_array.json": {
+    "ok": false,
+    "code": "bad_json"
+  },
+  "invalid/duplicate_key.json": {
+    "ok": false,
+    "code": "bad_json"
+  },
+  "invalid/schema_too_new.json": {
+    "ok": false,
+    "code": "schema_too_new"
+  },
+  "invalid/missing_mode.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/unknown_action_type.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/empty_name.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/bad_color.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/four_conditions.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/no_conditions.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/tap_match_without_image.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/unknown_template.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/unknown_counter.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/duplicate_event_ids.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/curve_two_points.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/multi_one_stroke.json": {
+    "ok": false,
+    "code": "invalid_field"
+  },
+  "invalid/self_run_script.json": {
+    "ok": false,
+    "code": "cycle"
+  },
+  "invalid/too_many_items.json": {
+    "ok": false,
+    "code": "too_many_items"
+  }
+}

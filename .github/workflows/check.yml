@@ -61,6 +61,23 @@ jobs:
         continue-on-error: true
         run: ./gradlew --console=plain --stacktrace testDebugUnitTest 2>&1 | tee logs/test.log
 
+      - name: Test summary (information)
+        if: always()
+        continue-on-error: true
+        run: |
+          python3 - <<'PYEOF' 2>&1 | tee logs/test-summary.log
+          import glob, xml.etree.ElementTree as ET
+          t = f = e = s = 0
+          for path in glob.glob("app/build/test-results/testDebugUnitTest/*.xml"):
+              r = ET.parse(path).getroot()
+              t += int(r.get("tests", 0)); f += int(r.get("failures", 0))
+              e += int(r.get("errors", 0)); s += int(r.get("skipped", 0))
+              for c in r.iter("testcase"):
+                  for bad in list(c.findall("failure")) + list(c.findall("error")):
+                      print("FAILED", c.get("classname"), c.get("name"), (bad.get("message") or "")[:300])
+          print(f"tests={t} failures={f} errors={e} skipped={s}")
+          PYEOF
+
       - name: assembleDebug
         id: assemble
         continue-on-error: true

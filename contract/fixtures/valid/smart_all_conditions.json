@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "id": "s1",
+  "name": "Fixture",
+  "mode": "smart",
+  "screen": {
+    "w": 1080,
+    "h": 2400,
+    "density": 420
+  },
+  "run": {
+    "globalTimerMs": 0,
+    "startDelayMs": 3000,
+    "countdownSec": 3
+  },
+  "templates": {
+    "t1": {
+      "file": "t1.png",
+      "w": 96,
+      "h": 64,
+      "refDensity": 420
+    }
+  },
+  "counters": [
+    {
+      "id": "c1",
+      "name": "Collected",
+      "start": 0
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "name": "e1",
+      "priority": 1,
+      "cooldownMs": 500,
+      "when": {
+        "op": "AND",
+        "items": [
+          {
+            "type": "image",
+            "template": "t1",
+            "confidence": 0.85,
+            "mode": "safe",
+            "region": [
+              0,
+              1600,
+              1080,
+              2400
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Collect",
+            "kind": "equals",
+            "caseSensitive": true,
+            "lang": "en",
+            "region": [
+              0,
+              200,
+              1080,
+              600
+            ]
+          },
+          {
+            "type": "color",
+            "x": 540,
+            "y": 1200,
+            "rgb": "#12C79C",
+            "tolerance": 20
+          }
+        ]
+      },
+      "do": [
+        {
+          "type": "tap",
+          "at": "match",
+          "offset": [
+            4,
+            -4
+          ],
+          "holdMs": 60,
+          "jitterPx": 2
+        },
+        {
+          "type": "wait",
+          "ms": 250
+        },
+        {
+          "type": "counter",
+          "id": "c1",
+          "op": "add",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "name": "e2",
+      "priority": 2,
+      "cooldownMs": 500,
+      "when": {
+        "op": "OR",
+        "items": [
+          {
+            "type": "number",
+            "region": [
+              0,
+              0,
+              540,
+              200
+            ],
+            "cmp": ">=",
+            "value": 10.5,
+            "lang": "en"
+          },
+          {
+            "type": "timer",
+            "since": "event:e1",
+            "cmp": ">",
+            "ms": 5000
+          },
+          {
+            "type": "counter",
+            "id": "c1",
+            "cmp": "<",
+            "value": 5,
+            "negate": true
+          }
+        ]
+      },
+      "do": [
+        {
+          "type": "swipe",
+          "from": [
+            540,
+            1800
+          ],
+          "to": [
+            540,
+            600
+          ],
+          "durationMs": 300,
+          "intervalMs": 400
+        },
+        {
+          "type": "curve",
+          "points": [
+            [
+              100,
+              100
+            ],
+            [
+              200,
+              300
+            ],
+            [
+              300,
+              100
+            ],
+            [
+              400,
+              300
+            ]
+          ],
+          "durationMs": 500,
+          "intervalMs": 400,
+          "timingJitterMs": 20
+        },
+        {
+          "type": "multi",
+          "strokes": [
+            {
+              "from": [
+                300,
+                1200
+              ],
+              "to": [
+                200,
+                1200
+              ]
+            },
+            {
+              "from": [
+                700,
+                1200
+              ],
+              "to": [
+                800,
+                1200
+              ]
+            },
+            {
+              "from": [
+                500,
+                1000
+              ],
+              "to": [
+                500,
+                900
+              ]
+            }
+          ],
+          "durationMs": 300,
+          "intervalMs": 400
+        },
+        {
+          "type": "counter",
+          "id": "c1",
+          "op": "set",
+          "value": 0
+        },
+        {
+          "type": "stop"
+        }
+      ]
+    }
+  ]
+}

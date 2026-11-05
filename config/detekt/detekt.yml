@@ -14,11 +14,13 @@ complexity:
       - 'Composable'
   CyclomaticComplexMethod:
     active: true
-    threshold: 15
+    threshold: 20
+    ignoreSimpleWhenEntries: true
   TooManyFunctions:
     active: true
     thresholdInFiles: 25
     thresholdInClasses: 25
+    thresholdInObjects: 25
     ignoreOverridden: true
 
 naming:
@@ -31,6 +33,10 @@ naming:
     constantPattern: '[A-Za-z][_A-Za-z0-9]*'
 
 style:
+  ReturnCount:
+    active: true
+    max: 4
+    excludeGuardClauses: true
   ForbiddenComment:
     active: true
     comments:

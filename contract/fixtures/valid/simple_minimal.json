@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "name": "Minimal",
+  "mode": "simple",
+  "screen": {
+    "w": 1080,
+    "h": 2400,
+    "density": 420
+  },
+  "steps": [
+    {
+      "type": "tap",
+      "x": 10,
+      "y": 20
+    }
+  ]
+}

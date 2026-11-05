@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "name": "Tap loop",
+  "mode": "simple",
+  "screen": {
+    "w": 1080,
+    "h": 2400,
+    "density": 420
+  },
+  "run": {
+    "loops": 0,
+    "globalTimerMs": 600000,
+    "startDelayMs": 3000,
+    "countdownSec": 3
+  },
+  "steps": [
+    {
+      "type": "tap",
+      "x": 540,
+      "y": 1200,
+      "holdMs": 40,
+      "intervalMs": 100,
+      "jitterPx": 3
+    },
+    {
+      "type": "curve",
+      "points": [
+        [
+          540,
+          1800
+        ],
+        [
+          620,
+          1400
+        ],
+        [
+          540,
+          900
+        ]
+      ],
+      "durationMs": 400,
+      "intervalMs": 500
+    },
+    {
+      "type": "multi",
+      "strokes": [
+        {
+          "from": [
+            400,
+            1200
+          ],
+          "to": [
+            300,
+            1200
+          ]
+        },
+        {
+          "from": [
+            680,
+            1200
+          ],
+          "to": [
+            780,
+            1200
+          ]
+        }
+      ],
+      "durationMs": 300,
+      "intervalMs": 500
+    },
+    {
+      "type": "wait",
+      "ms": 1000
+    }
+  ]
+}
