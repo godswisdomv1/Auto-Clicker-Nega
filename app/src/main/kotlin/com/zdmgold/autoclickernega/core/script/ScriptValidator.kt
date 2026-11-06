@@ -276,7 +276,8 @@ object ScriptValidator {
         }
     }
 
-    private fun runTargets(script: Script): List<String> {
+    /** The ids of the scripts that [script] runs through Run script actions. */
+    fun runTargets(script: Script): List<String> {
         val actions =
             when (val body = script.body) {
                 is ScriptBody.Simple -> body.steps

@@ -94,6 +94,15 @@ jobs:
             sha256sum gradle/wrapper/gradle-wrapper.jar
           } 2>&1 | tee logs/wrapper-checksum.log
 
+      - name: Collect Room schema (information)
+        if: always()
+        continue-on-error: true
+        run: |
+          find app/schemas -name '*.json' 2>/dev/null | while read -r f; do
+            cp "$f" "logs/room-schema-$(basename "$(dirname "$f")")-$(basename "$f")"
+          done
+          ls logs
+
       - name: Publish logs
         if: always()
         env:

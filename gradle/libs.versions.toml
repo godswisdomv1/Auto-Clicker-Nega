@@ -1,7 +1,7 @@
 # Every build dependency and plugin is pinned to an exact version. Nothing floats.
 # Versions were read from the official release notes and release pages on 4 November 2026.
-# Dependencies for later batches (Room, DataStore, coroutines, ads, billing, OCR) are added
-# in the batch that first uses them, each pinned the same way.
+# Dependencies for later batches (ads, billing, OCR) are added in the batch that first uses them,
+# each pinned the same way. Room 2.8.5 is the last stable 2.x line; Room 3 can replace it later.
 # CLI tools run only in CI (see .github/workflows/check.yml): ktlint 1.8.0 and detekt 1.23.8.
 
 [versions]
@@ -10,6 +10,10 @@ kotlin = "2.4.21"
 composeBom = "2026.08.00"
 activityCompose = "1.13.0"
 junit = "4.13.2"
+ksp = "2.3.13"
+room = "2.8.5"
+datastore = "1.2.1"
+coroutines = "1.11.0"
 
 [libraries]
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -17,8 +21,14 @@ androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-animation = { group = "androidx.compose.animation", name = "animation" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

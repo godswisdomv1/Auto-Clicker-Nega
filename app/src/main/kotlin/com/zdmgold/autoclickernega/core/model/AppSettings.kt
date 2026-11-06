@@ -16,6 +16,8 @@ data class AppSettings(
     val searchRate: SearchRate = SearchRate.Auto,
     /** Floating panel opacity, 0.3 to 1.0. */
     val panelOpacity: Float = DEFAULT_PANEL_OPACITY,
+    /** Where the floating panel was last left, or null for the default spot. */
+    val panelPosition: Point? = null,
 ) {
     companion object {
         const val MIN_PANEL_OPACITY = 0.3f
