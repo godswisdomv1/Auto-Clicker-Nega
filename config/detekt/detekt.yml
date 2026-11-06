@@ -46,6 +46,10 @@ style:
     allowedPatterns: ''
   MagicNumber:
     active: true
+    excludes:
+      - '**/test/**'
+      - '**/androidTest/**'
+      - '**/core/vision/**'
     ignorePropertyDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
     ignoreConstantDeclaration: true
