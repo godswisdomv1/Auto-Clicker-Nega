@@ -12,6 +12,7 @@ import com.zdmgold.autoclickernega.core.model.Script
 import com.zdmgold.autoclickernega.core.model.ScriptBody
 import com.zdmgold.autoclickernega.core.model.Target
 import com.zdmgold.autoclickernega.core.model.TimerSince
+import com.zdmgold.autoclickernega.core.ocr.OcrLanguages
 import com.zdmgold.autoclickernega.core.result.Outcome
 
 private class ValidationException(
@@ -203,6 +204,7 @@ object ScriptValidator {
 
             is Condition.Text -> {
                 if (c.text.isEmpty()) invalid(path, "text must not be empty")
+                checkLanguage(c.lang, path)
                 checkRegion(c.region, path)
             }
 
@@ -211,6 +213,7 @@ object ScriptValidator {
             }
 
             is Condition.Number -> {
+                checkLanguage(c.lang, path)
                 checkRegion(c.region, path)
             }
 
@@ -232,6 +235,13 @@ object ScriptValidator {
         path: String,
     ) {
         if (region != null && isBadRegion(region)) invalid(path, "region is empty or negative")
+    }
+
+    private fun checkLanguage(
+        lang: String,
+        path: String,
+    ) {
+        if (!OcrLanguages.isSupported(lang)) invalid(path, "unsupported text language \"$lang\"")
     }
 
     private fun isBadRegion(region: Rect): Boolean = region.isEmpty || region.l < 0 || region.t < 0

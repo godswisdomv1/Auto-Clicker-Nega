@@ -33,6 +33,10 @@ naming:
     constantPattern: '[A-Za-z][_A-Za-z0-9]*'
 
 style:
+  ThrowsCount:
+    active: true
+    max: 5
+    excludeGuardClauses: true
   ReturnCount:
     active: true
     max: 4

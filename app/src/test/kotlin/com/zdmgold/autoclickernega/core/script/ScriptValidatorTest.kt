@@ -187,6 +187,16 @@ class ScriptValidatorTest {
     }
 
     @Test
+    fun textAndNumberConditionsNeedASupportedLanguage() {
+        assertEquals(ImportProblem.InvalidField, problem(smart(event("e", 1, Condition.Text("go", lang = "xx")))))
+        assertEquals(
+            ImportProblem.InvalidField,
+            problem(smart(event("e", 1, Condition.Number(Rect(0, 0, 5, 5), Comparison.Gt, 1.0, lang = "xx")))),
+        )
+        valid(smart(event("e", 1, Condition.Text("go", lang = "ar"))))
+    }
+
+    @Test
     fun basicFieldsAreChecked() {
         assertEquals(ImportProblem.InvalidField, problem(simple(Action.Stop).copy(name = " ")))
         assertEquals(
