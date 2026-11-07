@@ -13,6 +13,8 @@ enum class MissReason {
     CaptureUnavailable,
     LanguagePackMissing,
     NoColorData,
+    TemplateMissing,
+    NoNumber,
 }
 
 /** How a gesture that followed a detection ended. */

@@ -3,6 +3,7 @@ package com.zdmgold.autoclickernega.core.script
 import com.zdmgold.autoclickernega.core.model.Action
 import com.zdmgold.autoclickernega.core.model.Limits
 import com.zdmgold.autoclickernega.core.model.Point
+import com.zdmgold.autoclickernega.core.model.Rect
 import com.zdmgold.autoclickernega.core.model.ScreenSpec
 import com.zdmgold.autoclickernega.core.model.Script
 import com.zdmgold.autoclickernega.core.model.ScriptBody
@@ -35,12 +36,28 @@ object ActionPlanner {
         }
     }
 
+    /**
+     * Plans the actions of one fired event. A tap on the match is aimed at [anchor]; when there is no anchor it is
+     * dropped, so nothing is ever tapped blindly.
+     */
+    fun planActions(
+        actions: List<Action>,
+        from: ScreenSpec,
+        to: ScreenSpec,
+        seed: Long,
+        anchor: Rect?,
+    ): List<PlannedStep> =
+        actions
+            .filterNot { it is Action.Tap && it.at is Target.AtMatch && anchor == null }
+            .mapIndexed { index, action -> planOne(index, action, from, to, Jitter.mix(seed, index), anchor) }
+
     private fun planOne(
         index: Int,
         action: Action,
         from: ScreenSpec,
         to: ScreenSpec,
         seed: Long,
+        anchor: Rect? = null,
     ): PlannedStep =
         when (action) {
             is Action.Tap -> {
@@ -53,7 +70,7 @@ object ActionPlanner {
                         }
 
                         is Target.AtMatch -> {
-                            Target.AtMatch(CoordinateScaler.scaleOffset(t.offset, from, to))
+                            atMatch(t, anchor, action.jitterPx, seed, from, to)
                         }
                     }
                 step(index, action.copy(at = target), action, seed)
@@ -105,6 +122,21 @@ object ActionPlanner {
                 PlannedStep(index, action, 0L)
             }
         }
+
+    private fun atMatch(
+        t: Target.AtMatch,
+        anchor: Rect?,
+        jitterPx: Int,
+        seed: Long,
+        from: ScreenSpec,
+        to: ScreenSpec,
+    ): Target {
+        val offset = CoordinateScaler.scaleOffset(t.offset, from, to)
+        if (anchor == null) return Target.AtMatch(offset)
+        val jitter = Jitter.point(seed, jitterPx)
+        val c = anchor.center
+        return Target.At(clamp(Point(c.x + offset.x + jitter.x, c.y + offset.y + jitter.y), to))
+    }
 
     private fun step(
         index: Int,

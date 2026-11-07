@@ -3,6 +3,7 @@ package com.zdmgold.autoclickernega.core.script
 import com.zdmgold.autoclickernega.core.model.Action
 import com.zdmgold.autoclickernega.core.model.Limits
 import com.zdmgold.autoclickernega.core.model.Point
+import com.zdmgold.autoclickernega.core.model.Rect
 import com.zdmgold.autoclickernega.core.model.ScreenSpec
 import com.zdmgold.autoclickernega.core.model.Stroke
 import com.zdmgold.autoclickernega.core.model.Target
@@ -90,5 +91,42 @@ class ActionPlannerTest {
     @Test
     fun aSmartScriptHasNoSimplePlan() {
         assertTrue(ActionPlanner.plan(TestScripts.smart(TestScripts.event("e", 1, TestScripts.image)), same).isEmpty())
+    }
+
+    @Test
+    fun aTapOnTheMatchIsAimedAtTheAnchorPlusTheOffset() {
+        val anchor = Rect(100, 200, 148, 232)
+        val steps = ActionPlanner.planActions(listOf(Action.Tap(Target.AtMatch(Point(5, -3)))), same, same, 0, anchor)
+        assertEquals(Point(129, 213), tapAt(steps.single()))
+    }
+
+    @Test
+    fun aTapOnTheMatchWithoutAnAnchorIsDroppedAndTheRestKeepsItsOrder() {
+        val steps =
+            ActionPlanner.planActions(
+                listOf(Action.Tap(Target.AtMatch(Point(0, 0))), Action.Wait(50), Action.Stop),
+                same,
+                same,
+                0,
+                null,
+            )
+        assertEquals(listOf(0, 1), steps.map { it.index })
+        assertEquals(listOf(Action.Wait(50), Action.Stop), steps.map { it.action })
+    }
+
+    @Test
+    fun matchOffsetsFollowTheDensityRatioWhenAimingAtAnAnchor() {
+        val anchor = Rect(100, 200, 148, 232)
+        val steps = ActionPlanner.planActions(listOf(Action.Tap(Target.AtMatch(Point(6, -6)))), same, small, 0, anchor)
+        assertEquals(Point(124 + 4, 216 - 4), tapAt(steps.single()))
+    }
+
+    @Test
+    fun jitterAroundAnAnchorIsBounded() {
+        val anchor = Rect(100, 200, 148, 232)
+        val tap = Action.Tap(Target.AtMatch(Point(0, 0)), jitterPx = 4)
+        val seen = (0L..30L).map { tapAt(ActionPlanner.planActions(listOf(tap), same, same, it, anchor).single()) }
+        assertTrue(seen.all { abs(it.x - 124) <= 4 && abs(it.y - 216) <= 4 })
+        assertTrue(seen.toSet().size > 1)
     }
 }
