@@ -50,19 +50,11 @@ class ActionExecutor(
     private suspend fun gesture(g: Action.Gesture): ExecSignal {
         val outcome = gestures.dispatch(g)
         lastOutcome = outcome
-        when (outcome) {
-            GestureOutcome.Rejected -> {
-                rejectedInRow++
-                onRejected(rejectedInRow)
-            }
-
-            GestureOutcome.Completed -> {
-                rejectedInRow = 0
-            }
-
-            else -> {
-                Unit
-            }
+        if (outcome == GestureOutcome.Rejected) {
+            rejectedInRow++
+            onRejected(rejectedInRow)
+        } else if (outcome == GestureOutcome.Completed) {
+            rejectedInRow = 0
         }
         return if (rejectedInRow >= maxRejectedInRow) ExecSignal.Blocked else ExecSignal.Continue
     }

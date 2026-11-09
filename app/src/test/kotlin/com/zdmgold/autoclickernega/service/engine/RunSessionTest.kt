@@ -43,7 +43,7 @@ class RunSessionTest {
     private inner class Rig(
         val scripts: Map<String, Script> = emptyMap(),
         latency: Long = 0,
-        frames: () -> FrameSource = { FakeFrameSource.constant(scene) },
+        frames: (Boolean) -> FrameSource = { FakeFrameSource.constant(scene) },
     ) {
         val clock = FakeClock()
         val gestures = FakeGesturePort(clock, latency)

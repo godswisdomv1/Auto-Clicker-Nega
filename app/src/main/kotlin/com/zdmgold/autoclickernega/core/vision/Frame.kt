@@ -66,6 +66,15 @@ class Frame(
         private const val G_WEIGHT = 151
         private const val B_WEIGHT = 28
         private const val SHIFT = 8
+        private const val RGB_MASK = 0xFFFFFF
+
+        /** The gray level of one 0xAARRGGBB pixel, from 0 to 255. */
+        fun grayOf(argb: Int): Int {
+            val r = (argb shr 16) and BYTE_MASK
+            val g = (argb shr 8) and BYTE_MASK
+            val b = argb and BYTE_MASK
+            return (r * R_WEIGHT + g * G_WEIGHT + b * B_WEIGHT) shr SHIFT
+        }
 
         /** Builds a frame from 0xAARRGGBB pixels. Colour is kept only when [keepColor] is true. */
         fun fromArgb(
@@ -73,16 +82,36 @@ class Frame(
             h: Int,
             argb: IntArray,
             keepColor: Boolean = false,
+        ): Frame =
+            fromRows(w, h, keepColor, ROWS_PER_BAND) { band, startRow, rows ->
+                argb.copyInto(band, 0, startRow * w, (startRow + rows) * w)
+            }
+
+        private const val ROWS_PER_BAND = 64
+
+        /**
+         * Builds a frame by reading the picture a band of rows at a time, so a large screenshot never needs a second
+         * full-size copy of its pixels. [readRows] must fill the first rows * w entries of the band it is given.
+         */
+        fun fromRows(
+            w: Int,
+            h: Int,
+            keepColor: Boolean,
+            rowsPerBand: Int,
+            readRows: (band: IntArray, startRow: Int, rows: Int) -> Unit,
         ): Frame {
             val gray = ByteArray(w * h)
             val color = if (keepColor) IntArray(w * h) else null
-            for (i in gray.indices) {
-                val p = argb[i]
-                val r = (p shr 16) and BYTE_MASK
-                val g = (p shr 8) and BYTE_MASK
-                val b = p and BYTE_MASK
-                gray[i] = ((r * R_WEIGHT + g * G_WEIGHT + b * B_WEIGHT) shr SHIFT).toByte()
-                color?.set(i, p and 0xFFFFFF)
+            val band = IntArray(w * minOf(rowsPerBand, h))
+            var y = 0
+            while (y < h) {
+                val rows = minOf(rowsPerBand, h - y)
+                readRows(band, y, rows)
+                for (i in 0 until w * rows) {
+                    gray[y * w + i] = grayOf(band[i]).toByte()
+                    color?.set(y * w + i, band[i] and RGB_MASK)
+                }
+                y += rows
             }
             return Frame(w, h, gray, color)
         }

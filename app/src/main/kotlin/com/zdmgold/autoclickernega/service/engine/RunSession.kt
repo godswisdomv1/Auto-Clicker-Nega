@@ -27,6 +27,7 @@ import com.zdmgold.autoclickernega.core.run.LoopGuard
 import com.zdmgold.autoclickernega.core.run.RunContext
 import com.zdmgold.autoclickernega.core.script.CoordinateScaler
 import com.zdmgold.autoclickernega.core.script.EventCompiler
+import com.zdmgold.autoclickernega.core.script.usesColor
 import com.zdmgold.autoclickernega.core.vision.DetectionEntry
 import com.zdmgold.autoclickernega.core.vision.DetectionLog
 import com.zdmgold.autoclickernega.core.vision.Frame
@@ -52,7 +53,7 @@ import kotlinx.coroutines.launch
 class RunDeps(
     val clock: Clock,
     val gestures: GesturePort,
-    val frames: () -> FrameSource,
+    val frames: (needsColor: Boolean) -> FrameSource,
     val recognizer: TextRecognizer?,
     val templates: TemplateProvider,
     val resolver: ScriptResolver,
@@ -271,7 +272,7 @@ class RunSession(
         val evaluator = ConditionEvaluator(loadTemplates(script), deps.recognizer)
         val pipeline =
             DetectionPipeline(
-                deps.frames(),
+                deps.frames(script.usesColor()),
                 deps.clock,
                 CadenceController(script.run.searchRate, deps.osMinIntervalMs),
                 deps.panelMask,

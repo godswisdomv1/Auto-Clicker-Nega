@@ -1,4 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Auto Clicker Nega</string>
+
+  <!-- Shown in the system accessibility settings. Plain language, and it matches the in-app disclosure. -->
+  <string name="service_description">Auto Clicker Nega uses this service to perform the taps and swipes you set up, and to capture the part of the screen it needs to find what you chose. It does not read text or content from other apps, and nothing leaves your device.</string>
+
+  <!-- Floating panel -->
+  <string name="panel_start">Start</string>
+  <string name="panel_pause">Pause</string>
+  <string name="panel_resume">Resume</string>
+  <string name="panel_stop">Stop</string>
+  <string name="panel_cancel_wait">Cancel wait</string>
+  <string name="panel_add_tap">Add tap</string>
+  <string name="panel_add_swipe">Add swipe</string>
+  <string name="panel_add_curve">Add curve</string>
+  <string name="panel_add_image">Add image target</string>
+  <string name="panel_collapse">Collapse panel</string>
+  <string name="panel_expand">Expand panel</string>
+  <string name="panel_close">Close panel</string>
+  <string name="panel_drag">Move panel</string>
+  <string name="panel_wait_remaining">Starts in %1$s</string>
+  <string name="panel_countdown">Starting in %1$d</string>
+  <string name="panel_elapsed">Running %1$s</string>
+  <string name="panel_paused">Paused</string>
+  <string name="panel_blocked">Blocked: this app refuses taps</string>
+  <string name="panel_screen_on">The screen stays on while waiting</string>
+
+  <!-- Detection HUD -->
+  <string name="hud_score">Match %1$s</string>
+  <string name="hud_below_confidence">Below the confidence you set</string>
+  <string name="hud_not_stable">Found once, waiting for a second look</string>
+  <string name="hud_region_too_small">Search area is smaller than the target</string>
+  <string name="hud_template_flat">Target has too little detail to match</string>
+  <string name="hud_template_missing">Target image is missing</string>
+  <string name="hud_cant_see">Can\'t see this screen</string>
+  <string name="hud_language_pack">Language pack needed for text</string>
+  <string name="hud_no_color">No colour data for this frame</string>
+  <string name="hud_no_number">No number found</string>
+
+  <!-- Crop tool -->
+  <string name="crop_confirm">Use this area</string>
+  <string name="crop_cancel">Cancel</string>
+  <string name="crop_hint">Drag over what to find</string>
+
+  <!-- Drafts started from the floating panel -->
+  <string name="draft_default_name">New script</string>
 </resources>

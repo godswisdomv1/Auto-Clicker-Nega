@@ -117,4 +117,66 @@ class EngineBridgeTest {
                 EngineBridge.unregister()
             }
         }
+
+    private class FakeOverlay : com.zdmgold.autoclickernega.core.port.OverlayPort {
+        val visible = kotlinx.coroutines.flow.MutableStateFlow(false)
+        val crops =
+            kotlinx.coroutines.flow.MutableSharedFlow<com.zdmgold.autoclickernega.core.port.CropResult>(
+                extraBufferCapacity = 4,
+            )
+        override val panelVisible = visible
+        override val panelCrops = crops
+
+        override fun showPanel(): Outcome<Unit> {
+            visible.value = true
+            return Outcome.Success(Unit)
+        }
+
+        override fun hidePanel(): Outcome<Unit> {
+            visible.value = false
+            return Outcome.Success(Unit)
+        }
+
+        override suspend fun captureCrop(): Outcome<com.zdmgold.autoclickernega.core.port.CropResult?> =
+            Outcome.Success(
+                com.zdmgold.autoclickernega.core.port.CropResult(
+                    com.zdmgold.autoclickernega.core.model
+                        .Rect(1, 2, 3, 4),
+                    byteArrayOf(9),
+                ),
+            )
+    }
+
+    @Test
+    fun withNoOverlayThePanelCommandsFailWithATypedError() =
+        runBlocking {
+            EngineBridge.unregisterOverlay()
+            assertTrue(notEnabled(EngineBridge.showPanel()))
+            assertTrue(notEnabled(EngineBridge.hidePanel()))
+            assertTrue((EngineBridge.captureCrop() as Outcome.Failure).error === AppError.ServiceNotEnabled)
+            assertEquals(false, EngineBridge.panelVisible.value)
+        }
+
+    @Test
+    fun aRegisteredOverlayIsDrivenThroughTheBridge() =
+        runBlocking {
+            val overlay = FakeOverlay()
+            EngineBridge.registerOverlay(overlay)
+            try {
+                assertTrue(EngineBridge.showPanel() is Outcome.Success)
+                assertEquals(true, EngineBridge.panelVisible.value)
+                assertTrue(EngineBridge.hidePanel() is Outcome.Success)
+                assertEquals(false, EngineBridge.panelVisible.value)
+                val crop = (EngineBridge.captureCrop() as Outcome.Success).value!!
+                assertEquals(
+                    com.zdmgold.autoclickernega.core.model
+                        .Rect(1, 2, 3, 4),
+                    crop.box,
+                )
+            } finally {
+                EngineBridge.unregisterOverlay()
+            }
+            assertEquals(false, EngineBridge.panelVisible.value)
+            assertTrue(notEnabled(EngineBridge.showPanel()))
+        }
 }
