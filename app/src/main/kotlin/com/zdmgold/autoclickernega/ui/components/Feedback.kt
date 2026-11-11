@@ -77,7 +77,7 @@ fun ConditionChip(
                     stringResource(
                         R.string.condition_timer,
                         condition.cmp.symbol,
-                        timerValue(condition.since, condition.cmp, condition.ms),
+                        timerValue(condition.since, condition.cmp, condition.ms, currentLocale()),
                     )
             }
 
@@ -97,8 +97,9 @@ private fun timerValue(
     since: TimerSince,
     cmp: Comparison,
     ms: Long,
+    locale: Locale,
 ): String {
-    val seconds = NumberFormat.getInstance().format(ms / MS_PER_SECOND.toDouble())
+    val seconds = NumberFormat.getInstance(locale).format(ms / MS_PER_SECOND.toDouble())
     return if (since is TimerSince.EventFired) "$seconds s (${since.eventId}, ${cmp.symbol})" else "$seconds s"
 }
 
