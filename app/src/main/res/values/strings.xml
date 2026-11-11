@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Auto Clicker Nega</string>
+  <string name="brand_wordmark" translatable="false">Nega</string>
 
   <!-- Shown in the system accessibility settings. Plain language, and it matches the in-app disclosure. -->
   <string name="service_description">Auto Clicker Nega uses this service to perform the taps and swipes you set up, and to capture the part of the screen it needs to find what you chose. It does not read text or content from other apps, and nothing leaves your device.</string>
@@ -45,4 +46,29 @@
 
   <!-- Drafts started from the floating panel -->
   <string name="draft_default_name">New script</string>
+
+  <!-- Shared components -->
+  <string name="action_retry">Try again</string>
+  <string name="action_report">Share report</string>
+  <string name="action_back">Back</string>
+  <string name="action_undo">Undo</string>
+  <string name="error_title">Something went wrong</string>
+  <string name="error_message">The app hit a problem it could not recover from. You can try again, or share a report with the developer.</string>
+  <string name="stepper_decrease">Decrease</string>
+  <string name="stepper_increase">Increase</string>
+  <string name="confidence_label">Confidence</string>
+  <string name="confidence_value">%1$s</string>
+  <string name="confidence_hint_loose">Lower values find look-alikes. Use Safe mode with them.</string>
+  <string name="confidence_hint_balanced">A good balance for most screens.</string>
+  <string name="confidence_hint_strict">Higher values need an almost exact match.</string>
+  <string name="region_full_screen">Whole screen</string>
+  <string name="region_clear">Search the whole screen</string>
+  <string name="region_description">Search area. Drag to draw it, drag a corner to resize.</string>
+  <string name="condition_image">Image %1$s</string>
+  <string name="condition_text">Text \"%1$s\"</string>
+  <string name="condition_color">Colour %1$s</string>
+  <string name="condition_number">Number %1$s %2$s</string>
+  <string name="condition_timer">Time %1$s %2$s</string>
+  <string name="condition_counter">Counter %1$s %2$s %3$d</string>
+  <string name="condition_not">Not: %1$s</string>
 </resources>
