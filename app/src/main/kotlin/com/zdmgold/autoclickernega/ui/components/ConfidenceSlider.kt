@@ -35,7 +35,6 @@ import com.zdmgold.autoclickernega.R
 import com.zdmgold.autoclickernega.core.model.Limits
 import com.zdmgold.autoclickernega.ui.theme.NegaTheme
 import com.zdmgold.autoclickernega.ui.theme.Tokens
-import java.util.Locale
 import kotlin.math.roundToInt
 
 /** A slider from 0.60 to 0.98 that shows its value and says what a low or high setting means. */
@@ -45,7 +44,7 @@ fun ConfidenceSlider(
     onValueChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shown = String.format(Locale.getDefault(), "%.2f", ConfidenceScale.clamp(value))
+    val shown = String.format(currentLocale(), "%.2f", ConfidenceScale.clamp(value))
     val hint =
         when (ConfidenceScale.hint(value)) {
             ConfidenceScale.Hint.Loose -> R.string.confidence_hint_loose

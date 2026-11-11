@@ -43,7 +43,7 @@ fun ConditionChip(
                 AppIcons.ImageTarget to
                     stringResource(
                         R.string.condition_image,
-                        String.format(Locale.getDefault(), "%.2f", condition.confidence),
+                        String.format(currentLocale(), "%.2f", condition.confidence),
                     )
             }
 
@@ -68,7 +68,7 @@ fun ConditionChip(
                     stringResource(
                         R.string.condition_number,
                         condition.cmp.symbol,
-                        NumberFormat.getInstance().format(condition.value),
+                        NumberFormat.getInstance(currentLocale()).format(condition.value),
                     )
             }
 
