@@ -71,4 +71,10 @@
   <string name="condition_timer">Time %1$s %2$s</string>
   <string name="condition_counter">Counter %1$s %2$s %3$d</string>
   <string name="condition_not">Not: %1$s</string>
+
+  <!-- Service status, shown on Home and in onboarding -->
+  <string name="status_service_ready">Ready. The floating panel can open over any app.</string>
+  <string name="status_service_off">Turned off. Enable Auto Clicker Nega in accessibility settings.</string>
+  <string name="status_service_connecting">Turned on but not running. Turn it off and on again in accessibility settings.</string>
+  <string name="action_open_accessibility">Open accessibility settings</string>
 </resources>

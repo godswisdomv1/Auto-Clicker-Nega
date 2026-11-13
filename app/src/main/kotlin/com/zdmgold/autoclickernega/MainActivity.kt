@@ -1,23 +1,17 @@
 package com.zdmgold.autoclickernega
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
-import com.zdmgold.autoclickernega.ui.theme.NegaTheme
+import androidx.appcompat.app.AppCompatActivity
+import com.zdmgold.autoclickernega.ui.NegaRoot
 
-class MainActivity : ComponentActivity() {
+/** The only activity. It is an AppCompat activity so the per-app language works on every supported Android version. */
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            NegaTheme {
-                Box(Modifier.fillMaxSize().background(NegaTheme.colors.bgPrimary))
-            }
-        }
+        val graph = (application as NegaApp).graph
+        setContent { NegaRoot(graph) }
     }
 }
