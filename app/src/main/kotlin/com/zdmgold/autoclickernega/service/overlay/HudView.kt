@@ -19,7 +19,7 @@ class HudModel(
 class HudView(
     context: Context,
     theme: OverlayTheme,
-) : TextView(context) {
+) : AppCompatTextView(context) {
     init {
         setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SP)
         setTextColor(theme.textSecondary)
