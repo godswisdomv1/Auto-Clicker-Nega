@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import com.zdmgold.autoclickernega.R
 import com.zdmgold.autoclickernega.core.vision.MissReason
 import java.util.Locale
