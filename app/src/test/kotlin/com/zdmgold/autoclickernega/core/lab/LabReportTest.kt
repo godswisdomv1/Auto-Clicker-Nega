@@ -23,6 +23,8 @@ class LabReportTest {
         assertTrue(text.contains("best score 0.93"))
         assertTrue(text.contains("Safe 24 ms, Fast 12 ms"))
         assertTrue(text.contains("confidence 0.95: not found"))
+        assertTrue(text.contains("typical script: 96x64 px template in a 696x664 px region, score 1.00"))
+        assertTrue(text.contains("Safe 9 ms, Fast 5 ms"))
         assertTrue(text.contains("detections 93 of 94"))
         assertTrue(text.contains("searches per second 2.0"))
         assertTrue(text.contains("learned minimum gap 300 ms"))

@@ -8,6 +8,15 @@ data class ConfidenceRow(
     val accepted: Boolean,
 )
 
+/** A small template searched for in a region, which is what a typical script does. */
+data class SmallBenchmark(
+    val templateText: String,
+    val regionText: String,
+    val score: Float,
+    val safeMedianMs: Long,
+    val fastMedianMs: Long,
+)
+
 /** The result of matching the reference image against one captured frame. */
 data class MatchRunResult(
     val score: Float,
@@ -15,6 +24,7 @@ data class MatchRunResult(
     val safeMedianMs: Long,
     val fastMedianMs: Long,
     val rows: List<ConfidenceRow>,
+    val small: SmallBenchmark? = null,
 )
 
 /** The result of the repeat test: many captures of one screen, each matched against the reference. */
@@ -64,6 +74,14 @@ object LabReport {
                 appendLine("  time per search: Safe ${match.safeMedianMs} ms, Fast ${match.fastMedianMs} ms (median)")
                 match.rows.forEach {
                     appendLine("  confidence ${score(it.confidence)}: ${if (it.accepted) "found" else "not found"}")
+                }
+                match.small?.let {
+                    appendLine(
+                        "  typical script: ${it.templateText} template in a ${it.regionText} region, score ${score(
+                            it.score,
+                        )}",
+                    )
+                    appendLine("  time per search: Safe ${it.safeMedianMs} ms, Fast ${it.fastMedianMs} ms (median)")
                 }
             }
             if (repeat != null) {

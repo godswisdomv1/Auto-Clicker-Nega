@@ -64,7 +64,7 @@ class DetectionLab(
     private val overlay: OverlayPort,
     private val appVersion: String,
 ) {
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private val mutable = MutableStateFlow(LabState())
     val state: StateFlow<LabState> = mutable.asStateFlow()
 
@@ -160,17 +160,62 @@ class DetectionLab(
                         }
                     val best = safe.second.best
                     val score = best?.score ?: 0f
+                    val small = smallBenchmark(test, ref)
                     MatchRunResult(
                         score = score,
                         boxText = best?.box?.let { "(${it.l}, ${it.t}, ${it.r}, ${it.b})" } ?: "no candidate",
                         safeMedianMs = safe.first,
                         fastMedianMs = fast.first,
                         rows = CONFIDENCES.map { ConfidenceRow(it, best != null && score >= it) },
+                        small = small,
                     )
                 }
             mutable.update { it.copy(match = result) }
             say("Match finished.")
         }
+
+    /**
+     * A typical script: a small template looked for in a region around where it was cut, not the whole screen. The
+     * template is the top-left corner of the reference, 96 by 64 px at most.
+     */
+    private fun smallBenchmark(
+        test: Frame,
+        ref: LabReference,
+    ): SmallBenchmark? {
+        val w = minOf(SMALL_W, ref.frame.w)
+        val h = minOf(SMALL_H, ref.frame.h)
+        val template = ref.frame.crop(Rect(0, 0, w, h))
+        val region =
+            Rect(
+                (ref.box.l - REGION_MARGIN).coerceAtLeast(0),
+                (ref.box.t - REGION_MARGIN).coerceAtLeast(0),
+                (ref.box.l + w + REGION_MARGIN).coerceAtMost(test.w),
+                (ref.box.t + h + REGION_MARGIN).coerceAtMost(test.h),
+            )
+        val safe =
+            timed {
+                NccMatcher.search(
+                    test,
+                    template,
+                    Condition.Image("lab", LOWEST_CONFIDENCE, MatchMode.Safe, region),
+                )
+            }
+        val fast =
+            timed {
+                NccMatcher.search(
+                    test,
+                    template,
+                    Condition.Image("lab", LOWEST_CONFIDENCE, MatchMode.Fast, region),
+                )
+            }
+        return SmallBenchmark(
+            templateText = "${w}x$h px",
+            regionText = "${region.width}x${region.height} px",
+            score = safe.second.best?.score ?: 0f,
+            safeMedianMs = safe.first,
+            fastMedianMs = fast.first,
+        )
+    }
 
     fun runRepeat(wait: Int = COUNTDOWN_SECONDS) =
         launchAction("Repeat test") {
@@ -339,6 +384,9 @@ class DetectionLab(
         private const val RATE_ATTEMPTS = 100
         private const val RATE_SPACING_MS = 100L
         private const val TIMING_RUNS = 5
+        private const val SMALL_W = 96
+        private const val SMALL_H = 64
+        private const val REGION_MARGIN = 300
         private const val COUNTDOWN_SECONDS = 5
         private const val MS_PER_SECOND = 1000L
         private const val NANOS_PER_MS = 1_000_000L
