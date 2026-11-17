@@ -1,0 +1,40 @@
+14 / Physical size: 1080x2400
+Performing Streamed Install
+Success
+PASS  welcome shows
+PASS  continue
+PASS  disclosure shows
+PASS  agree
+PASS  enable step shows
+
+FAIL  service becomes ready
+FAIL  go to home
+FAIL  home shows
+FAIL  open lab
+FAIL  lab shows
+FAIL  capture reference starts
+FAIL  crop overlay appears
+FAIL  confirm crop
+FAIL  reference captured
+FAIL  capture frame
+FAIL  frame captured
+FAIL  match
+FAIL  match finished
+---- report after match ----
+report not found
+FAIL  rate probe
+FAIL  rate probe finished
+---- report after rate probe ----
+report not found
+FAIL  repeat test
+FAIL  repeat test finished
+---- report after repeat test ----
+report not found
+FAIL  home again
+FAIL  open panel
+panel nodes: ['12:29\u202fPM', 'Android System notification: ', 'Wifi signal full.', 'Phone signal full.', 'Battery charging, 100 percent.']
+FAIL  add tap marker
+FAIL  start run
+run nodes: ['12:30\u202fPM', 'Android System notification: ', 'Wifi signal full.', 'Phone signal full.', 'Battery charging, 100 percent.', 'Nega', 'Turn on the service', "In Android's accessibility settings, find Auto Clicker Nega and switch it on. Then come back here.", 'Turned on but not running. Turn it off and on again in accessibility settings.', 'Open accessibility settings', "I'll do this later"]
+FAIL  stop run
+fatal or app error lines: 0
