@@ -83,6 +83,11 @@ jobs:
         continue-on-error: true
         run: ./gradlew --console=plain --stacktrace assembleDebug 2>&1 | tee logs/assemble.log
 
+      - name: compileReleaseKotlin
+        id: release
+        continue-on-error: true
+        run: ./gradlew --console=plain --stacktrace compileReleaseKotlin 2>&1 | tee logs/release.log
+
       - name: Wrapper checksum (information)
         if: always()
         continue-on-error: true
@@ -107,13 +112,13 @@ jobs:
         if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          STATUS: ${{ steps.ktlint.outcome }}/${{ steps.detekt.outcome }}/${{ steps.lint.outcome }}/${{ steps.test.outcome }}/${{ steps.assemble.outcome }}
+          STATUS: ${{ steps.ktlint.outcome }}/${{ steps.detekt.outcome }}/${{ steps.lint.outcome }}/${{ steps.test.outcome }}/${{ steps.assemble.outcome }}/${{ steps.release.outcome }}
         run: scripts/ci_publish_logs.sh logs
 
       - name: Verdict
         if: always()
         run: |
-          echo "ktlint=${{ steps.ktlint.outcome }} detekt=${{ steps.detekt.outcome }} lint=${{ steps.lint.outcome }} test=${{ steps.test.outcome }} assemble=${{ steps.assemble.outcome }}"
-          for o in "${{ steps.ktlint.outcome }}" "${{ steps.detekt.outcome }}" "${{ steps.lint.outcome }}" "${{ steps.test.outcome }}" "${{ steps.assemble.outcome }}"; do
+          echo "ktlint=${{ steps.ktlint.outcome }} detekt=${{ steps.detekt.outcome }} lint=${{ steps.lint.outcome }} test=${{ steps.test.outcome }} assemble=${{ steps.assemble.outcome }} release=${{ steps.release.outcome }}"
+          for o in "${{ steps.ktlint.outcome }}" "${{ steps.detekt.outcome }}" "${{ steps.lint.outcome }}" "${{ steps.test.outcome }}" "${{ steps.assemble.outcome }}" "${{ steps.release.outcome }}"; do
             [ "$o" = "success" ] || exit 1
           done
