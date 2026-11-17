@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Drives the debug APK on a running emulator, the way a person would, and records what happens.
+"""Drives the debug APK on a running emulator and records what happens.
 
-It reads the screen through uiautomator (the accessibility tree), taps labelled controls, takes screenshots and
-copies the Detection lab report out of the screen. Everything lands in the output folder. A failed step is logged
-and the run carries on, so one run shows as much as possible.
+Before the accessibility service is switched on, the harness reads the screen with uiautomator and taps labelled
+controls. uiautomator suspends every other accessibility service while it runs, so once Nega's service is on the
+harness stops using it. From then on it sends debug broadcasts (see DebugControlReceiver), takes screenshots and
+reads the results from logcat. Everything lands in the output folder. A failed step is logged and the run carries
+on, so one run shows as much as possible.
 """
 import os
 import re
@@ -16,6 +18,7 @@ APK, OUT = sys.argv[1], sys.argv[2]
 PKG = "com.zdmgold.autoclickernega.debug"
 SERVICE = f"{PKG}/com.zdmgold.autoclickernega.service.NegaAccessibilityService"
 MAIN = f"{PKG}/com.zdmgold.autoclickernega.MainActivity"
+RECEIVER = f"{PKG}/com.zdmgold.autoclickernega.lab.DebugControlReceiver"
 os.makedirs(OUT, exist_ok=True)
 LOG = open(os.path.join(OUT, "results.txt"), "w", encoding="utf-8")
 SHOTS = 0
@@ -145,6 +148,40 @@ def to_top():
         scroll_up()
 
 
+def bcast(action, *extras):
+    adb("shell", "am", "broadcast", "-n", RECEIVER, "-a", action, *extras)
+
+
+def lab_lines():
+    return adb("logcat", "-d", "-s", "NegaLab:I")
+
+
+def wait_log(text, timeout):
+    end = time.time() + timeout
+    while time.time() < end:
+        if text in lab_lines():
+            return True
+        time.sleep(3)
+    return False
+
+
+def lab_command(label, action, done, timeout, *extras):
+    """Sends a lab command and waits until logcat says it finished. No screen reader is used here."""
+    adb("logcat", "-c")
+    bcast(action, *extras)
+    finished = wait_log(done, timeout)
+    log(f"{'PASS' if finished else 'FAIL'}  {label}")
+    log("\n".join(line.split("NegaLab:")[-1].strip() for line in lab_lines().splitlines() if "NegaLab" in line))
+    return finished
+
+
+TAP_SCRIPT = (
+    '{"schema":1,"name":"emu tap","mode":"simple","screen":{"w":1080,"h":2400,"density":420},'
+    '"run":{"loops":1,"globalTimerMs":0,"startDelayMs":0,"countdownSec":0},'
+    '"steps":[{"type":"tap","x":540,"y":884,"holdMs":40,"intervalMs":100,"jitterPx":0}]}'
+)
+
+
 def main():
     log(adb("shell", "getprop", "ro.build.version.release").strip() + " / " + adb("shell", "wm", "size").strip())
     log(adb("install", "-r", "-g", APK).strip())
@@ -152,7 +189,7 @@ def main():
     adb("logcat", "-c")
     adb("shell", "am", "start", "-n", MAIN)
 
-    # Onboarding.
+    # Screens that need no service: read with uiautomator.
     step("welcome shows", lambda: wait_for("Continue", 40))
     shot("welcome")
     step("continue", lambda: tap("Continue"))
@@ -161,69 +198,59 @@ def main():
     step("agree", lambda: tap("Agree and continue"))
     step("enable step shows", lambda: wait_for("Open accessibility settings"))
     shot("enable_step")
-    log(adb("shell", "settings", "put", "secure", "enabled_accessibility_services", SERVICE).strip())
-    adb("shell", "settings", "put", "secure", "accessibility_enabled", "1")
-    step("service becomes ready", lambda: wait_for("all set", 40, contains=True))
-    shot("ready")
-    step("go to home", lambda: tap("Go to Home"))
+    step("later", lambda: tap("I'll do this later"))
     step("home shows", lambda: wait_for("Open floating panel"))
-    shot("home")
-
-    # Detection lab: a static region (the title bar) is cut and found again at the same place.
+    shot("home_service_off")
     step("open lab", lambda: tap("Detection lab"))
     step("lab shows", lambda: wait_for("Capture reference image"))
-    shot("lab")
-    step("capture reference starts", lambda: tap("Capture reference image"))
-    step("crop overlay appears", lambda: wait_for("Use this area", 30, contains=True))
-    shot("crop_before_drag")
-    adb("shell", "input", "swipe", "100", "70", "700", "250", "600")
-    time.sleep(1)
-    shot("crop_after_drag")
-    step("confirm crop", lambda: tap("Use this area", contains=True))
-    step("reference captured", lambda: lab_message("Reference captured", 30))
-    shot("reference_done")
-    step("capture frame", lambda: tap("Capture test frame", scroll=True))
-    step("frame captured", lambda: lab_message("Test frame captured", 40))
-    to_top()
-    step("match", lambda: tap("Match at each confidence", scroll=True))
-    step("match finished", lambda: lab_message("Match finished", 60))
-    log("---- report after match ----")
-    log(lab_report() or "report not found")
-    shot("after_match")
-    step("rate probe", lambda: tap("Screenshot rate probe", scroll=True))
-    step("rate probe finished", lambda: lab_message("Rate probe finished", 240))
-    log("---- report after rate probe ----")
-    log(lab_report() or "report not found")
-    to_top()
-    step("repeat test", lambda: tap("Repeat test", contains=True, scroll=True))
-    step("repeat test finished", lambda: lab_message("Repeat test finished", 600))
-    log("---- report after repeat test ----")
-    log(lab_report() or "report not found")
-    shot("after_repeat")
+    shot("lab_service_off")
+
+    # Switch the service on. From here on uiautomator is not used, because it would suspend the service.
+    log(adb("shell", "settings", "put", "secure", "enabled_accessibility_services", SERVICE).strip())
+    adb("shell", "settings", "put", "secure", "accessibility_enabled", "1")
+    time.sleep(8)
+    bound = [line.strip() for line in adb("shell", "dumpsys", "accessibility").splitlines() if "zdmgold" in line]
+    log("accessibility dump lines mentioning the app: " + repr(bound[:6]))
+    shot("lab_service_on")
+
+    # Detection lab, headless. The reference is the title bar, which does not move.
+    lab_command(
+        "reference region", "nega.LAB_REFERENCE_BOX", "done: Capture reference region", 60,
+        "--ei", "l", "100", "--ei", "t", "120", "--ei", "r", "700", "--ei", "b", "300",
+    )
+    lab_command("test frame", "nega.LAB_FRAME", "done: Capture test frame", 60)
+    lab_command("match", "nega.LAB_MATCH", "done: Match", 90)
+    shot("lab_after_match")
+    lab_command("rate probe", "nega.LAB_RATE", "done: Capture rate probe", 300)
+    lab_command("repeat test", "nega.LAB_REPEAT", "done: Repeat test", 900)
+    shot("lab_after_repeat")
 
     # The floating panel and a real run over another app (Android Settings).
     adb("shell", "input", "keyevent", "KEYCODE_HOME")
     adb("shell", "am", "start", "-a", "android.settings.SETTINGS")
-    time.sleep(3)
+    time.sleep(4)
     shot("settings_before")
-    adb("shell", "am", "start", "-n", MAIN)
-    step("home again", lambda: wait_for("Open floating panel", 30))
-    step("open panel", lambda: tap("Open floating panel"))
+    adb("logcat", "-c")
+    bcast("nega.PANEL")
     time.sleep(3)
+    log("panel: " + "\n".join(line.split("NegaLab:")[-1].strip() for line in lab_lines().splitlines() if "NegaLab" in line))
     shot("panel_over_settings")
-    log("panel nodes: " + repr([n["desc"] or n["text"] for n in dump() if n["desc"]][:30]))
-    step("add tap marker", lambda: tap("Add tap"))
-    time.sleep(2)
-    shot("marker_added")
-    step("start run", lambda: tap("Start"))
-    time.sleep(1.5)
-    shot("countdown")
-    time.sleep(6)
-    shot("running_after_taps")
-    log("run nodes: " + repr([n["desc"] or n["text"] for n in dump() if n["desc"] or n["text"]][:40]))
-    step("stop run", lambda: tap("Stop", timeout=10))
+    adb("logcat", "-c")
+    bcast("nega.RUN", "--es", "json", "'" + TAP_SCRIPT + "'")
+    time.sleep(4)
+    log("run: " + "\n".join(line.split("NegaLab:")[-1].strip() for line in lab_lines().splitlines() if "NegaLab" in line))
+    shot("after_run_tap")
+
+    # The crop overlay, for its layout: opened by the lab, dragged, then photographed.
+    adb("shell", "am", "start", "-n", MAIN)
+    time.sleep(3)
+    adb("logcat", "-c")
+    bcast("nega.LAB_CROP")
+    time.sleep(4)
+    shot("crop_overlay")
+    adb("shell", "input", "swipe", "150", "700", "650", "1100", "600")
     time.sleep(1)
-    shot("stopped")
+    shot("crop_after_drag")
 
     with open(os.path.join(OUT, "logcat.txt"), "w", encoding="utf-8") as handle:
         handle.write(adb("logcat", "-d", "-v", "time", "*:W"))
