@@ -1,6 +1,7 @@
 package com.zdmgold.autoclickernega.service.engine
 
 import com.zdmgold.autoclickernega.core.error.AppError
+import com.zdmgold.autoclickernega.core.error.CaptureCause
 import com.zdmgold.autoclickernega.core.model.Rect
 import com.zdmgold.autoclickernega.core.port.Clock
 import com.zdmgold.autoclickernega.core.port.FrameSource
@@ -25,10 +26,14 @@ sealed interface FrameEvent {
     ) : FrameEvent
 }
 
+private fun isTooFrequent(error: AppError): Boolean =
+    (error as? AppError.CaptureUnavailable)?.cause == CaptureCause.TooFrequent
+
 /**
  * Pulls frames from a source at the pace the cadence controller sets, hides the app's own panel in each frame
  * before anything can match it, and tells the cadence whether the screen changed. The flow is cold and stops
- * when its collector stops.
+ * when its collector stops. A capture refused for being too frequent is not reported: the pipeline learns the
+ * system's limit, widens its own gap and retries.
  */
 class DetectionPipeline(
     private val source: FrameSource,
@@ -58,8 +63,13 @@ class DetectionPipeline(
                         }
 
                         is Outcome.Failure -> {
-                            previous = null
-                            emit(FrameEvent.Unavailable(captured.error))
+                            if (isTooFrequent(captured.error)) {
+                                // A rate limit is not a screen we cannot see. Slow down and try again, quietly.
+                                cadence.onCaptureTooFrequent()
+                            } else {
+                                previous = null
+                                emit(FrameEvent.Unavailable(captured.error))
+                            }
                             cadence.retryIntervalMs()
                         }
                     }

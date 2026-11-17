@@ -119,4 +119,18 @@ class DetectionPipelineTest {
             assertEquals(3, source.calls)
             assertEquals(0, clock.pending)
         }
+
+    @Test
+    fun aRateLimitedCaptureIsNotReportedAndTheGapGrows() =
+        runBlocking {
+            val limited = Outcome.Failure(AppError.CaptureUnavailable(CaptureCause.TooFrequent))
+            val source = FakeFrameSource { if (it in 1..2) limited else Outcome.Success(a) }
+            val pipeline = DetectionPipeline(source, clock, CadenceController())
+            val job = async { pipeline.frames().take(2).toList() }
+            clock.advanceBy(2_000)
+            val events = job.await()
+            assertTrue(events.all { it is FrameEvent.Captured })
+            // Captured at 0, refused at 200 and 500 (each refusal widens the gap by 100), captured again at 900.
+            assertEquals(listOf(0L, 900L), times(events))
+        }
 }

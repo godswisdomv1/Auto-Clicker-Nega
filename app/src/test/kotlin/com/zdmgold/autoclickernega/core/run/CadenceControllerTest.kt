@@ -67,4 +67,34 @@ class CadenceControllerTest {
         repeat(12) { c.nextIntervalMs(false) }
         assertEquals(200L, c.retryIntervalMs())
     }
+
+    @Test
+    fun aRefusedCaptureWidensTheGapByOneHundredEachTime() {
+        val c = CadenceController()
+        assertEquals(200L, c.baseIntervalMs)
+        c.onCaptureTooFrequent()
+        assertEquals(300L, c.baseIntervalMs)
+        assertEquals(300L, c.retryIntervalMs())
+        c.onCaptureTooFrequent()
+        assertEquals(400L, c.nextIntervalMs(true))
+    }
+
+    @Test
+    fun theLearnedGapStopsAtTwoSeconds() {
+        val c = CadenceController()
+        repeat(40) { c.onCaptureTooFrequent() }
+        assertEquals(2000L, c.baseIntervalMs)
+        assertEquals(2000L, c.osMinIntervalMs)
+    }
+
+    @Test
+    fun theLearnedGapAlsoRaisesFastAndBatterySaver() {
+        val fast = CadenceController(SearchRate.Fast)
+        assertEquals(200L, fast.baseIntervalMs)
+        fast.onCaptureTooFrequent()
+        assertEquals(300L, fast.baseIntervalMs)
+        val saver = CadenceController(SearchRate.BatterySaver)
+        saver.onCaptureTooFrequent()
+        assertEquals(600L, saver.baseIntervalMs)
+    }
 }

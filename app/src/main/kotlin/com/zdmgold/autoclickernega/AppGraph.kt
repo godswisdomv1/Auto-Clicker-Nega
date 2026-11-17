@@ -5,6 +5,7 @@ import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import com.zdmgold.autoclickernega.core.port.CaptureProbe
 import com.zdmgold.autoclickernega.core.port.DraftStore
 import com.zdmgold.autoclickernega.core.port.OverlayPort
 import com.zdmgold.autoclickernega.core.port.PackStore
@@ -79,6 +80,7 @@ class AppGraph(
     val drafts: DraftStore = ScriptSession
     val engine: ServiceBridge = EngineBridge
     val overlay: OverlayPort = EngineBridge
+    val probe: CaptureProbe = EngineBridge
     val accessibility: AccessibilityState by lazy { AccessibilityState(app, EngineBridge.state) }
 
     /** True when the database could not be opened and a fresh one was made. Read after the database is first used. */

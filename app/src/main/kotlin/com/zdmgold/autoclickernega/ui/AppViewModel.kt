@@ -45,6 +45,12 @@ class AppViewModel(
 
     fun back() = mutableStack.update { it.pop() }
 
+    /** The disclosure was agreed to. This is what marks onboarding done, so the link to the settings never comes first. */
+    suspend fun agreeDisclosure() = graph.settings.setOnboardingDone(true)
+
+    /** The disclosure was declined. Home replaces onboarding, which is offered again from the status card. */
+    fun declineOnboarding() = mutableStack.update { it.reset(Route.Home) }
+
     /** Onboarding is done. Home replaces it, so Back never returns to onboarding. */
     fun finishOnboarding() {
         viewModelScope.launch {

@@ -4,12 +4,14 @@ import android.accessibilityservice.AccessibilityService
 import android.content.res.Configuration
 import com.zdmgold.autoclickernega.core.model.Point
 import com.zdmgold.autoclickernega.core.model.ThemeMode
+import com.zdmgold.autoclickernega.core.port.CaptureProbe
 import com.zdmgold.autoclickernega.core.port.RunRequest
 import com.zdmgold.autoclickernega.core.port.ScriptResolver
 import com.zdmgold.autoclickernega.core.port.TemplateProvider
 import com.zdmgold.autoclickernega.core.result.Outcome
 import com.zdmgold.autoclickernega.core.script.ScriptValidator
 import com.zdmgold.autoclickernega.core.vision.DetectionLog
+import com.zdmgold.autoclickernega.core.vision.Frame
 import com.zdmgold.autoclickernega.service.bridge.EngineBridge
 import com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource
 import com.zdmgold.autoclickernega.service.capture.StoreTemplateProvider
@@ -91,6 +93,11 @@ class ServiceRuntime(
         }
         EngineBridge.register(engine)
         EngineBridge.registerOverlay(overlay)
+        EngineBridge.registerProbe(
+            object : CaptureProbe {
+                override suspend fun captureFrame(): Outcome<Frame> = frameSource.next()
+            },
+        )
         screenReceiver.register(service)
     }
 
@@ -99,6 +106,7 @@ class ServiceRuntime(
     }
 
     fun close() {
+        EngineBridge.unregisterProbe()
         EngineBridge.unregisterOverlay()
         EngineBridge.unregister()
         screenReceiver.unregister(service)

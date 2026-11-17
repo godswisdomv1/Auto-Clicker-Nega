@@ -77,4 +77,81 @@
   <string name="status_service_off">Turned off. Enable Auto Clicker Nega in accessibility settings.</string>
   <string name="status_service_connecting">Turned on but not running. Turn it off and on again in accessibility settings.</string>
   <string name="action_open_accessibility">Open accessibility settings</string>
+
+  <!-- Onboarding -->
+  <string name="onboarding_welcome_title">Tap, swipe and wait on autopilot</string>
+  <string name="onboarding_welcome_body">Nega taps and swipes for you, and can watch the screen and act when it sees an image, text or colour you chose. It works over any app and needs no root.</string>
+  <string name="action_continue">Continue</string>
+  <string name="disclosure_title">Before you turn this on</string>
+  <string name="disclosure_body">Auto Clicker Nega uses Android\'s accessibility service for two things you ask for: tapping and swiping on the screen, and capturing the screen so it can find the image, text or colour you chose.\n\nCaptured pictures are used on this phone only. They are never saved or sent anywhere. The service does not read the contents of other apps, and nothing leaves your device.\n\nYou can turn the service off at any time in Android\'s accessibility settings.</string>
+  <string name="disclosure_agree">Agree and continue</string>
+  <string name="disclosure_decline">Not now</string>
+  <string name="onboarding_enable_title">Turn on the service</string>
+  <string name="onboarding_enable_body">In Android\'s accessibility settings, find Auto Clicker Nega and switch it on. Then come back here.</string>
+  <string name="onboarding_later">I\'ll do this later</string>
+  <string name="onboarding_ready_title">You\'re all set</string>
+  <string name="onboarding_ready_body">The service is running. Open the floating panel from Home to place your first tap.</string>
+  <string name="onboarding_go_home">Go to Home</string>
+
+  <!-- Home -->
+  <string name="home_status_title">Accessibility service</string>
+  <string name="home_turn_on">Turn on</string>
+  <string name="home_panel_open">Open floating panel</string>
+  <string name="home_panel_close">Close floating panel</string>
+  <string name="home_panel_sub">Place taps and targets over any app</string>
+  <string name="home_quick_title">Quick scenario</string>
+  <string name="home_quick_sub">A working automation in under a minute</string>
+  <string name="home_lab_title">Detection lab</string>
+  <string name="home_lab_sub">Measure detection and capture speed on this phone</string>
+  <string name="home_scripts_header">Your scripts</string>
+  <string name="home_empty_title">No scripts yet</string>
+  <string name="home_empty_message">Open the floating panel and place a tap to make your first one.</string>
+  <string name="home_search_hint">Search scripts</string>
+  <string name="home_sort_recent">Recent</string>
+  <string name="home_sort_name">Name</string>
+  <string name="home_no_matches">Nothing matches your search</string>
+  <string name="home_import_title">Import a script</string>
+  <string name="home_import_sub">From a .json or .nega file</string>
+  <string name="home_settings">Settings</string>
+  <string name="script_run">Run %1$s</string>
+  <plurals name="script_steps">
+    <item quantity="one">%1$d step · Simple</item>
+    <item quantity="other">%1$d steps · Simple</item>
+  </plurals>
+  <plurals name="script_events">
+    <item quantity="one">%1$d event · Smart</item>
+    <item quantity="other">%1$d events · Smart</item>
+  </plurals>
+  <string name="run_waiting">Starts in %1$s</string>
+  <string name="run_countdown">Starting in %1$d</string>
+  <string name="run_running">Running</string>
+  <string name="run_paused">Paused</string>
+  <string name="run_stop">Stop</string>
+  <string name="action_ok">OK</string>
+  <string name="msg_service_needed">Turn on the accessibility service first.</string>
+  <string name="msg_imported">Imported %1$s</string>
+  <string name="pending_title">Not available yet</string>
+  <string name="pending_message">This part of the app is still being built.</string>
+
+  <!-- What went wrong, one line per error class -->
+  <string name="error_service_off">The accessibility service is off. Turn it on first.</string>
+  <string name="error_service_killed">Android stopped the service. Turn it off and on again in accessibility settings.</string>
+  <string name="error_wait_cancelled">The wait was cancelled.</string>
+  <string name="error_gesture_rejected">The app underneath refused the taps. Some apps and secure screens block them.</string>
+  <string name="error_capture">The screen cannot be captured right now.</string>
+  <string name="error_nothing_found">Nothing was found on the screen.</string>
+  <string name="error_language_pack">Text detection needs a language pack that is not ready.</string>
+  <string name="error_run_gate">This run could not start. Try again.</string>
+  <string name="error_storage">The change could not be saved. Try again.</string>
+  <string name="error_import_bad_json">That file is not a script this app can read.</string>
+  <string name="error_import_bad_bundle">That bundle is damaged or not a .nega file.</string>
+  <string name="error_import_hash">A picture in that bundle does not match its checksum.</string>
+  <string name="error_import_too_large">That file is too large.</string>
+  <string name="error_import_too_many">That script has too many steps, events or pictures.</string>
+  <string name="error_import_invalid">That script has a value the app cannot use.</string>
+  <string name="error_import_cycle">That script runs itself in a loop.</string>
+  <string name="error_import_too_deep">That script runs other scripts too many levels deep.</string>
+  <string name="error_schema_new">Made by a newer version of the app.</string>
+  <string name="error_sdk">A service the app relies on is not available.</string>
+  <string name="error_unexpected">Something went wrong.</string>
 </resources>

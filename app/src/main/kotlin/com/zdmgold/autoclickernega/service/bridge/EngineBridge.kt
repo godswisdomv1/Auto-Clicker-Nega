@@ -3,11 +3,13 @@ package com.zdmgold.autoclickernega.service.bridge
 import com.zdmgold.autoclickernega.core.error.AppError
 import com.zdmgold.autoclickernega.core.model.EngineEvent
 import com.zdmgold.autoclickernega.core.model.EngineState
+import com.zdmgold.autoclickernega.core.port.CaptureProbe
 import com.zdmgold.autoclickernega.core.port.CropResult
 import com.zdmgold.autoclickernega.core.port.OverlayPort
 import com.zdmgold.autoclickernega.core.port.RunRequest
 import com.zdmgold.autoclickernega.core.port.ServiceBridge
 import com.zdmgold.autoclickernega.core.result.Outcome
+import com.zdmgold.autoclickernega.core.vision.Frame
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -25,7 +27,7 @@ import kotlinx.coroutines.launch
  * connects and unregisters when it unbinds. With no service bound the state is ServiceLost, and every command
  * returns a typed error instead of failing silently. The UI uses this and nothing else from the service layer.
  */
-object EngineBridge : ServiceBridge, OverlayPort {
+object EngineBridge : ServiceBridge, OverlayPort, CaptureProbe {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Unconfined)
     private val _state = MutableStateFlow<EngineState>(EngineState.ServiceLost)
     private val _events = MutableSharedFlow<EngineEvent>(extraBufferCapacity = EVENT_BUFFER)
@@ -34,6 +36,7 @@ object EngineBridge : ServiceBridge, OverlayPort {
     private val _panelCrops = MutableSharedFlow<CropResult>(extraBufferCapacity = EVENT_BUFFER)
     private var host: ServiceBridge? = null
     private var overlay: OverlayPort? = null
+    private var probe: CaptureProbe? = null
     private var overlayJobs = emptyList<Job>()
     private var jobs = emptyList<Job>()
 
@@ -85,6 +88,20 @@ object EngineBridge : ServiceBridge, OverlayPort {
         overlay = null
         _panelVisible.value = false
     }
+
+    /** Called by the service on connect, with the capture the Detection lab measures. */
+    @Synchronized
+    fun registerProbe(port: CaptureProbe) {
+        probe = port
+    }
+
+    @Synchronized
+    fun unregisterProbe() {
+        probe = null
+    }
+
+    override suspend fun captureFrame(): Outcome<Frame> =
+        probe?.captureFrame() ?: Outcome.Failure(AppError.ServiceNotEnabled)
 
     override fun showPanel(): Outcome<Unit> = withOverlay { it.showPanel() }
 

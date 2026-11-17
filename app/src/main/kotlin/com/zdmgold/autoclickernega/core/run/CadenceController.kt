@@ -9,9 +9,25 @@ import com.zdmgold.autoclickernega.core.model.SearchRate
  */
 class CadenceController(
     private val rate: SearchRate = SearchRate.Auto,
-    private val osMinIntervalMs: Long = DEFAULT_OS_MIN_INTERVAL_MS,
+    osMinIntervalMs: Long = DEFAULT_OS_MIN_INTERVAL_MS,
 ) {
     private var unchanged = 0
+
+    /** The shortest gap the system accepts between captures. It starts as given and only ever grows, see [onCaptureTooFrequent]. */
+    var osMinIntervalMs: Long = osMinIntervalMs
+        private set
+
+    /** The wait between searches on a screen that keeps changing. The Detection lab shows it. */
+    val baseIntervalMs: Long get() = base()
+
+    /**
+     * The system refused a capture because the last one was too recent. The limit differs between devices and
+     * Android versions, so the controller learns it: each refusal widens the minimum gap by 100 ms, up to
+     * [MAX_LEARNED_MS]. It never shrinks again during a run, so a device settles on a rate it accepts.
+     */
+    fun onCaptureTooFrequent() {
+        osMinIntervalMs = minOf(MAX_LEARNED_MS, osMinIntervalMs + LEARN_STEP_MS)
+    }
 
     /** Call once per captured frame with whether the screen changed since the previous one. Returns the wait before the next search. */
     fun nextIntervalMs(changed: Boolean): Long {
@@ -49,6 +65,8 @@ class CadenceController(
 
     companion object {
         const val DEFAULT_OS_MIN_INTERVAL_MS = 200L
+        const val MAX_LEARNED_MS = 2000L
+        private const val LEARN_STEP_MS = 100L
         private const val BASE_MS = 200L
         private const val FAST_FLOOR_MS = 100L
         private const val FIRST_STEP_MS = 500L
