@@ -11,6 +11,7 @@ import com.zdmgold.autoclickernega.core.lab.LabStats
 import com.zdmgold.autoclickernega.core.lab.MatchRunResult
 import com.zdmgold.autoclickernega.core.lab.RateResult
 import com.zdmgold.autoclickernega.core.lab.RepeatResult
+import com.zdmgold.autoclickernega.core.lab.SmallBenchmark
 import com.zdmgold.autoclickernega.core.model.Condition
 import com.zdmgold.autoclickernega.core.model.MatchMode
 import com.zdmgold.autoclickernega.core.model.Rect
