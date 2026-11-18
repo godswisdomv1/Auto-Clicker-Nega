@@ -195,9 +195,23 @@ private class CropView(
         val x = event.x
         val y = event.y
         when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> drag = begin(x, y)
-            MotionEvent.ACTION_MOVE -> drag?.let { move(it, x, y) }
-            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> drag = null
+            MotionEvent.ACTION_DOWN -> {
+                drag = begin(x, y)
+            }
+
+            MotionEvent.ACTION_MOVE -> {
+                drag?.let { move(it, x, y) }
+            }
+
+            MotionEvent.ACTION_UP -> {
+                // The finger may travel a little after the last move event, so the lift position counts too.
+                drag?.let { move(it, x, y) }
+                drag = null
+            }
+
+            MotionEvent.ACTION_CANCEL -> {
+                drag = null
+            }
         }
         return true
     }
