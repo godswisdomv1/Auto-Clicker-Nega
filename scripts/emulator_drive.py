@@ -243,15 +243,28 @@ def main():
     log("run: " + [line for line in lab_lines().splitlines() if "run:" in line][-1])
     shot("after_run_tap")
 
-    # The crop overlay, for its layout: opened by the lab, dragged, then photographed.
+    # The crop overlay: opened by the lab, dragged over part of Home, confirmed with the check button at the bottom
+    # right (56 dp wide, 24 dp from the right edge, 48 dp from the bottom, at 2.625 px per dp), then the same
+    # screen is captured and matched. The reference must be found where it was cut.
     adb("shell", "am", "start", "-n", MAIN)
-    time.sleep(3)
+    time.sleep(4)
+    shot("home_before_crop")
+    before = lab_lines()
     bcast("nega.LAB_CROP")
     time.sleep(4)
     shot("crop_overlay")
     adb("shell", "input", "swipe", "150", "700", "650", "1100", "600")
     time.sleep(1)
     shot("crop_after_drag")
+    adb("shell", "input", "tap", "943", "2200")
+    time.sleep(3)
+    shot("crop_after_confirm")
+    finished = wait_log("done: Capture reference |", 30, before.count("done: Capture reference |"))
+    log(f"{'PASS' if finished else 'FAIL'}  crop confirmed")
+    after = lab_lines()
+    log("\n".join(line.split("NegaLab:")[-1].strip() for line in after[len(before):].splitlines() if "NegaLab" in line))
+    lab_command("test frame after crop", "nega.LAB_FRAME", "done: Capture test frame", 60)
+    lab_command("match after crop", "nega.LAB_MATCH", "done: Match", 90)
 
     with open(os.path.join(OUT, "logcat.txt"), "w", encoding="utf-8") as handle:
         handle.write(adb("logcat", "-d", "-b", "all", "-v", "time", "*:W"))
@@ -262,4 +275,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:  # noqa: BLE001 - keep the error in the published results
+        import traceback
+
+        log("HARNESS ERROR\n" + traceback.format_exc())
+        sys.exit(1)

@@ -249,18 +249,19 @@ class DetectionLab(
                         captured++
                         val found =
                             withContext(Dispatchers.Default) {
-                                timed {
+                                val searchBegan = System.nanoTime()
+                                val searched =
                                     NccMatcher.search(
                                         result.value,
                                         ref.frame,
                                         Condition.Image("lab", CONFIDENCE, MatchMode.Safe),
                                     )
-                                }
+                                (System.nanoTime() - searchBegan) / NANOS_PER_MS to searched
                             }
                         matchMs += found.first
                         totalMs += (System.nanoTime() - began) / NANOS_PER_MS
                         if (found.second.accepted != null) detections++
-                        delay(cadence.nextIntervalMs(changed = false))
+                        delay(cadence.nextIntervalMs(changed = true))
                     }
                 }
             }
