@@ -22,6 +22,7 @@ import com.zdmgold.autoclickernega.core.run.CadenceController
 import com.zdmgold.autoclickernega.core.vision.Frame
 import com.zdmgold.autoclickernega.core.vision.NccMatcher
 import com.zdmgold.autoclickernega.service.capture.BitmapToFrame
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -328,6 +329,14 @@ class DetectionLab(
             scope.launch {
                 try {
                     block()
+                } catch (cancelled: CancellationException) {
+                    throw cancelled
+                } catch (
+                    @Suppress("TooGenericExceptionCaught") failure: Throwable,
+                ) {
+                    // A lab run must never take the app down: say what happened, and keep the stack in logcat.
+                    Log.e(TAG, "lab action failed: $name", failure)
+                    say("Failed: ${failure::class.java.simpleName} ${failure.message ?: ""}".trim())
                 } finally {
                     mutable.update { it.copy(busy = null, countdown = null, progress = null) }
                     log(name)

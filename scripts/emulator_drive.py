@@ -156,10 +156,10 @@ def lab_lines():
     return adb("logcat", "-d", "-s", "NegaLab:I")
 
 
-def wait_log(text, timeout):
+def wait_log(text, timeout, already=0):
     end = time.time() + timeout
     while time.time() < end:
-        if text in lab_lines():
+        if lab_lines().count(text) > already:
             return True
         time.sleep(3)
     return False
@@ -167,11 +167,15 @@ def wait_log(text, timeout):
 
 def lab_command(label, action, done, timeout, *extras):
     """Sends a lab command and waits until logcat says it finished. No screen reader is used here."""
-    adb("logcat", "-c")
+    before = lab_lines()
+    already = before.count(done)
     bcast(action, *extras)
-    finished = wait_log(done, timeout)
+    finished = wait_log(done, timeout, already)
     log(f"{'PASS' if finished else 'FAIL'}  {label}")
-    log("\n".join(line.split("NegaLab:")[-1].strip() for line in lab_lines().splitlines() if "NegaLab" in line))
+    after = lab_lines()
+    new = after[len(before):] if after.startswith(before) else after
+    log("\n".join(line.split("NegaLab:")[-1].strip() for line in new.splitlines() if "NegaLab" in line))
+    adb("logcat", "-d", "-b", "crash")
     return finished
 
 
@@ -230,21 +234,18 @@ def main():
     adb("shell", "am", "start", "-a", "android.settings.SETTINGS")
     time.sleep(4)
     shot("settings_before")
-    adb("logcat", "-c")
     bcast("nega.PANEL")
     time.sleep(3)
-    log("panel: " + "\n".join(line.split("NegaLab:")[-1].strip() for line in lab_lines().splitlines() if "NegaLab" in line))
+    log("panel: " + [line for line in lab_lines().splitlines() if "panel:" in line][-1])
     shot("panel_over_settings")
-    adb("logcat", "-c")
     bcast("nega.RUN", "--es", "json", "'" + TAP_SCRIPT + "'")
     time.sleep(4)
-    log("run: " + "\n".join(line.split("NegaLab:")[-1].strip() for line in lab_lines().splitlines() if "NegaLab" in line))
+    log("run: " + [line for line in lab_lines().splitlines() if "run:" in line][-1])
     shot("after_run_tap")
 
     # The crop overlay, for its layout: opened by the lab, dragged, then photographed.
     adb("shell", "am", "start", "-n", MAIN)
     time.sleep(3)
-    adb("logcat", "-c")
     bcast("nega.LAB_CROP")
     time.sleep(4)
     shot("crop_overlay")
@@ -253,8 +254,8 @@ def main():
     shot("crop_after_drag")
 
     with open(os.path.join(OUT, "logcat.txt"), "w", encoding="utf-8") as handle:
-        handle.write(adb("logcat", "-d", "-v", "time", "*:W"))
-    crashes = [line for line in adb("logcat", "-d", "*:E").splitlines() if "FATAL" in line or PKG in line]
+        handle.write(adb("logcat", "-d", "-b", "all", "-v", "time", "*:W"))
+    crashes = [line for line in adb("logcat", "-d", "-b", "all", "*:E").splitlines() if "FATAL" in line or PKG in line or "Lab" in line]
     log(f"fatal or app error lines: {len(crashes)}")
     for line in crashes[:30]:
         log(line)
