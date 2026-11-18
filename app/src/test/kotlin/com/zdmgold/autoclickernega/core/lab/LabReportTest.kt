@@ -12,6 +12,7 @@ class LabReportTest {
             24,
             12,
             listOf(ConfidenceRow(0.85f, true), ConfidenceRow(0.95f, false)),
+            SmallBenchmark("96x64 px", "696x664 px", 1.0f, 9, 5),
         )
     private val repeat = RepeatResult(100, 94, 6, 0, 93, 0.85f, listOf(20, 30, 40), listOf(250, 300, 500), 47_000, 300)
     private val rate = RateResult(100, 12, 88, listOf(1000, 1002, 1100), 100)
