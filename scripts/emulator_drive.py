@@ -224,9 +224,11 @@ def main():
     )
     lab_command("test frame", "nega.LAB_FRAME", "done: Capture test frame", 60)
     lab_command("match", "nega.LAB_MATCH", "done: Match", 90)
+    lab_command("leak probe 1", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_match")
     lab_command("rate probe", "nega.LAB_RATE", "done: Capture rate probe", 300)
     lab_command("repeat test", "nega.LAB_REPEAT", "done: Repeat test", 900)
+    lab_command("leak probe 2", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_repeat")
 
     # The quick test on a screen that stays still (Android Settings): no crop, the lab picks its own patch.

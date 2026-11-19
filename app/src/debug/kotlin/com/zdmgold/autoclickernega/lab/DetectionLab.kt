@@ -351,6 +351,47 @@ class DetectionLab(
         (box.b + REGION_MARGIN).coerceAtMost(frameH),
     )
 
+    /**
+     * Finds what holds memory. After a forced collection it reads the Java heap, then again after 40 captures
+     * that are thrown away, then after 40 searches on one captured frame. Heap that stays up afterwards is held.
+     */
+    fun runLeakProbe() =
+        launchAction("Leak probe") {
+            val base = usedMb()
+            repeat(LEAK_ROUNDS) {
+                probe.captureFrame()
+                delay(LEAK_GAP_MS)
+            }
+            val afterCaptures = usedMb()
+            val frame =
+                (probe.captureFrame() as? Outcome.Success)?.value
+                    ?: return@launchAction say("No frame for the leak probe.")
+            val box = TemplatePicker.pick(frame, SMALL_W, SMALL_H, verticalMarginPx = BAR_MARGIN_PX)
+            val template = box?.let { frame.crop(it) } ?: return@launchAction say("No patch for the leak probe.")
+            withContext(Dispatchers.Default) {
+                repeat(LEAK_ROUNDS) {
+                    NccMatcher.search(
+                        frame,
+                        template,
+                        Condition.Image("lab", CONFIDENCE, MatchMode.Safe, regionAround(box, frame.w, frame.h)),
+                    )
+                }
+            }
+            val afterSearches = usedMb()
+            say(
+                "leak probe heap MB after a forced collection: start $base, after $LEAK_ROUNDS captures $afterCaptures, after $LEAK_ROUNDS searches $afterSearches",
+            )
+        }
+
+    @Suppress("ExplicitGarbageCollectionCall")
+    private suspend fun usedMb(): Long {
+        System.gc()
+        delay(GC_SETTLE_MS)
+        System.gc()
+        val runtime = Runtime.getRuntime()
+        return (runtime.totalMemory() - runtime.freeMemory()) / BYTES_PER_MB
+    }
+
     fun runRateProbe(wait: Int = COUNTDOWN_SECONDS) =
         launchAction("Capture rate probe") {
             countdown(wait)
@@ -468,6 +509,9 @@ class DetectionLab(
         private const val REGION_MARGIN = 300
         private const val BAR_MARGIN_PX = 150
         private const val HEAP_SAMPLE_EVERY = 10
+        private const val LEAK_ROUNDS = 40
+        private const val LEAK_GAP_MS = 400L
+        private const val GC_SETTLE_MS = 500L
         private const val CUT_TOLERANCE_PX = 12
         private const val BYTES_PER_MB = 1_048_576L
         private const val COUNTDOWN_SECONDS = 5

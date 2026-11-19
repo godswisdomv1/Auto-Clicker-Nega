@@ -38,6 +38,10 @@ class DebugControlReceiver : BroadcastReceiver() {
                 )
             }
 
+            LAB_LEAK -> {
+                lab.runLeakProbe()
+            }
+
             LAB_QUICK -> {
                 lab.runQuickTest(wait = 0)
             }
@@ -99,6 +103,7 @@ class DebugControlReceiver : BroadcastReceiver() {
 
     private companion object {
         const val LAB_REFERENCE_BOX = "nega.LAB_REFERENCE_BOX"
+        const val LAB_LEAK = "nega.LAB_LEAK"
         const val LAB_QUICK = "nega.LAB_QUICK"
         const val LAB_CROP = "nega.LAB_CROP"
         const val LAB_FRAME = "nega.LAB_FRAME"
