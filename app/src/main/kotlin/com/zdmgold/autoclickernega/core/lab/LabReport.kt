@@ -39,6 +39,8 @@ data class RepeatResult(
     val captureToMatchMs: List<Long>,
     val elapsedMs: Long,
     val learnedMinGapMs: Long,
+    val heapMb: List<Long> = emptyList(),
+    val heapLimitMb: Long = 0,
 )
 
 /** The result of asking for screenshots as fast as the lab can, to find what the system accepts. */
@@ -103,6 +105,13 @@ object LabReport {
                 )
                 appendLine("  searches per second ${perSecond(repeat.captured, repeat.elapsedMs)}")
                 appendLine("  learned minimum gap ${repeat.learnedMinGapMs} ms")
+                if (repeat.heapMb.isNotEmpty()) {
+                    appendLine(
+                        "  Java heap MB every 10 attempts (limit ${repeat.heapLimitMb}): ${repeat.heapMb.joinToString(
+                            " ",
+                        )}",
+                    )
+                }
             }
             if (rate != null) {
                 appendLine()

@@ -263,8 +263,11 @@ class DetectionLab(
         var refused = 0
         var other = 0
         var detections = 0
+        val heap = mutableListOf<Long>()
+        val runtime = Runtime.getRuntime()
         val startedAt = System.nanoTime()
         repeat(REPEAT_ATTEMPTS) { attempt ->
+            if (attempt % HEAP_SAMPLE_EVERY == 0) heap += (runtime.totalMemory() - runtime.freeMemory()) / BYTES_PER_MB
             progress("Repeat ${attempt + 1} of $REPEAT_ATTEMPTS")
             val began = System.nanoTime()
             val interval: Long
@@ -316,6 +319,8 @@ class DetectionLab(
                 captureToMatchMs = totalMs,
                 elapsedMs = elapsed,
                 learnedMinGapMs = cadence.osMinIntervalMs,
+                heapMb = heap,
+                heapLimitMb = runtime.maxMemory() / BYTES_PER_MB,
             )
         mutable.update { it.copy(repeat = result, progress = null) }
         say("Repeat test finished.")
@@ -449,6 +454,8 @@ class DetectionLab(
         private const val SMALL_H = 64
         private const val REGION_MARGIN = 300
         private const val BAR_MARGIN_PX = 150
+        private const val HEAP_SAMPLE_EVERY = 10
+        private const val BYTES_PER_MB = 1_048_576L
         private const val COUNTDOWN_SECONDS = 5
         private const val MS_PER_SECOND = 1000L
         private const val NANOS_PER_MS = 1_000_000L

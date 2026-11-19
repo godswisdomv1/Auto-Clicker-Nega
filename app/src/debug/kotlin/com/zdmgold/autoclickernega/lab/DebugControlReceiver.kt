@@ -38,6 +38,10 @@ class DebugControlReceiver : BroadcastReceiver() {
                 )
             }
 
+            LAB_QUICK -> {
+                lab.runQuickTest(wait = 0)
+            }
+
             LAB_CROP -> {
                 lab.captureReference(wait = 0)
             }
