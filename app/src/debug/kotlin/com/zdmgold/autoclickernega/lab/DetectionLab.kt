@@ -264,6 +264,8 @@ class DetectionLab(
         var other = 0
         var detections = 0
         val heap = mutableListOf<Long>()
+        val scores = mutableListOf<Float>()
+        var atCut = 0
         val runtime = Runtime.getRuntime()
         val startedAt = System.nanoTime()
         repeat(REPEAT_ATTEMPTS) { attempt ->
@@ -300,6 +302,9 @@ class DetectionLab(
                     matchMs += found.first
                     totalMs += (System.nanoTime() - began) / NANOS_PER_MS
                     if (found.second.accepted != null) detections++
+                    val best = found.second.best
+                    scores += best?.score ?: 0f
+                    if (best != null && isNear(best.box, ref.box)) atCut++
                     interval = cadence.nextIntervalMs(changed = true)
                 }
             }
@@ -320,11 +325,19 @@ class DetectionLab(
                 elapsedMs = elapsed,
                 learnedMinGapMs = cadence.osMinIntervalMs,
                 heapMb = heap,
+                scores = scores,
+                atCutPosition = atCut,
                 heapLimitMb = runtime.maxMemory() / BYTES_PER_MB,
             )
         mutable.update { it.copy(repeat = result, progress = null) }
         say("Repeat test finished.")
     }
+
+    /** True when two boxes start within [CUT_TOLERANCE_PX] of each other, so a match is where the reference was cut. */
+    private fun isNear(
+        a: Rect,
+        b: Rect,
+    ) = kotlin.math.abs(a.l - b.l) <= CUT_TOLERANCE_PX && kotlin.math.abs(a.t - b.t) <= CUT_TOLERANCE_PX
 
     /** The search region of a script: the area around where the target was cut, not the whole screen. */
     private fun regionAround(
@@ -455,6 +468,7 @@ class DetectionLab(
         private const val REGION_MARGIN = 300
         private const val BAR_MARGIN_PX = 150
         private const val HEAP_SAMPLE_EVERY = 10
+        private const val CUT_TOLERANCE_PX = 12
         private const val BYTES_PER_MB = 1_048_576L
         private const val COUNTDOWN_SECONDS = 5
         private const val MS_PER_SECOND = 1000L

@@ -41,6 +41,8 @@ data class RepeatResult(
     val learnedMinGapMs: Long,
     val heapMb: List<Long> = emptyList(),
     val heapLimitMb: Long = 0,
+    val scores: List<Float> = emptyList(),
+    val atCutPosition: Int = 0,
 )
 
 /** The result of asking for screenshots as fast as the lab can, to find what the system accepts. */
@@ -105,6 +107,7 @@ object LabReport {
                 )
                 appendLine("  searches per second ${perSecond(repeat.captured, repeat.elapsedMs)}")
                 appendLine("  learned minimum gap ${repeat.learnedMinGapMs} ms")
+                appendScores(repeat)
                 if (repeat.heapMb.isNotEmpty()) {
                     appendLine(
                         "  Java heap MB every 10 attempts (limit ${repeat.heapLimitMb}): ${repeat.heapMb.joinToString(
@@ -127,6 +130,22 @@ object LabReport {
             }
         }
 
+    private fun StringBuilder.appendScores(repeat: RepeatResult) {
+        if (repeat.scores.isEmpty()) return
+        val sorted = repeat.scores.sorted()
+        appendLine(
+            "  best score per frame: first ${score(repeat.scores.first())}, min ${score(sorted.first())}, " +
+                "median ${score(sorted[sorted.size / 2])}, max ${score(sorted.last())}",
+        )
+        appendLine(
+            "  best match at the place the reference was cut: ${repeat.atCutPosition} of ${repeat.scores.size} frames",
+        )
+        appendLine(
+            "  frames scoring below ${score(repeat.confidence)}: ${repeat.scores.count { it < repeat.confidence }}",
+        )
+        appendLine("  first scores: ${repeat.scores.take(FIRST_SCORES).joinToString(" ") { score(it) }}")
+    }
+
     private fun score(value: Float) = String.format(Locale.ROOT, "%.2f", value)
 
     private fun perSecond(
@@ -135,5 +154,6 @@ object LabReport {
     ): String = if (elapsedMs <= 0) "0" else String.format(Locale.ROOT, "%.1f", count * MS_PER_SECOND / elapsedMs)
 
     private const val P95 = 95
+    private const val FIRST_SCORES = 12
     private const val MS_PER_SECOND = 1000.0
 }
