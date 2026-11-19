@@ -12,6 +12,7 @@ import com.zdmgold.autoclickernega.core.lab.MatchRunResult
 import com.zdmgold.autoclickernega.core.lab.RateResult
 import com.zdmgold.autoclickernega.core.lab.RepeatResult
 import com.zdmgold.autoclickernega.core.lab.SmallBenchmark
+import com.zdmgold.autoclickernega.core.lab.TemplatePicker
 import com.zdmgold.autoclickernega.core.model.Condition
 import com.zdmgold.autoclickernega.core.model.MatchMode
 import com.zdmgold.autoclickernega.core.model.Rect
@@ -223,65 +224,114 @@ class DetectionLab(
         launchAction("Repeat test") {
             val ref = mutable.value.reference ?: return@launchAction say("Capture a reference image first.")
             countdown(wait)
-            val cadence = CadenceController()
-            val matchMs = mutableListOf<Long>()
-            val totalMs = mutableListOf<Long>()
-            var captured = 0
-            var refused = 0
-            var other = 0
-            var detections = 0
-            val startedAt = System.nanoTime()
-            repeat(REPEAT_ATTEMPTS) { attempt ->
-                progress("Repeat ${attempt + 1} of $REPEAT_ATTEMPTS")
-                val began = System.nanoTime()
-                when (val result = probe.captureFrame()) {
-                    is Outcome.Failure -> {
-                        if (isTooFrequent(result.error)) {
-                            refused++
-                            cadence.onCaptureTooFrequent()
-                        } else {
-                            other++
-                        }
-                        delay(cadence.retryIntervalMs())
-                    }
+            repeatBody(ref)
+        }
 
-                    is Outcome.Success -> {
-                        captured++
-                        val found =
-                            withContext(Dispatchers.Default) {
-                                val searchBegan = System.nanoTime()
-                                val searched =
-                                    NccMatcher.search(
-                                        result.value,
-                                        ref.frame,
-                                        Condition.Image("lab", CONFIDENCE, MatchMode.Safe),
-                                    )
-                                (System.nanoTime() - searchBegan) / NANOS_PER_MS to searched
-                            }
-                        matchMs += found.first
-                        totalMs += (System.nanoTime() - began) / NANOS_PER_MS
-                        if (found.second.accepted != null) detections++
-                        delay(cadence.nextIntervalMs(changed = true))
+    /**
+     * One tap, no cropping: after the countdown the lab picks the most detailed 96 by 64 px patch of the screen
+     * as the reference, then looks for it in 100 fresh captures. The screen must stay still during the test.
+     */
+    fun runQuickTest(wait: Int = COUNTDOWN_SECONDS) =
+        launchAction("Quick test") {
+            countdown(wait)
+            val captured =
+                when (val first = probe.captureFrame()) {
+                    is Outcome.Failure -> return@launchAction say(describe(first.error))
+                    is Outcome.Success -> first.value
+                }
+            val box =
+                TemplatePicker.pick(captured, SMALL_W, SMALL_H, verticalMarginPx = BAR_MARGIN_PX)
+                    ?: return@launchAction say("The screen is too small for a test patch.")
+            val ref = LabReference(captured.crop(box), box)
+            mutable.update {
+                it.copy(
+                    reference = ref,
+                    frameText = "${captured.w}x${captured.h} px",
+                    match = null,
+                    repeat = null,
+                )
+            }
+            repeatBody(ref)
+        }
+
+    /** 100 captures of the current screen, each searched for [ref] in a region around where it was cut. */
+    private suspend fun repeatBody(ref: LabReference) {
+        val cadence = CadenceController()
+        val matchMs = mutableListOf<Long>()
+        val totalMs = mutableListOf<Long>()
+        var captured = 0
+        var refused = 0
+        var other = 0
+        var detections = 0
+        val startedAt = System.nanoTime()
+        repeat(REPEAT_ATTEMPTS) { attempt ->
+            progress("Repeat ${attempt + 1} of $REPEAT_ATTEMPTS")
+            val began = System.nanoTime()
+            val interval: Long
+            when (val result = probe.captureFrame()) {
+                is Outcome.Failure -> {
+                    if (isTooFrequent(result.error)) {
+                        refused++
+                        cadence.onCaptureTooFrequent()
+                    } else {
+                        other++
                     }
+                    interval = cadence.retryIntervalMs()
+                }
+
+                is Outcome.Success -> {
+                    captured++
+                    val frame = result.value
+                    val region = regionAround(ref.box, frame.w, frame.h)
+                    val found =
+                        withContext(Dispatchers.Default) {
+                            val searchBegan = System.nanoTime()
+                            val searched =
+                                NccMatcher.search(
+                                    frame,
+                                    ref.frame,
+                                    Condition.Image("lab", CONFIDENCE, MatchMode.Safe, region),
+                                )
+                            (System.nanoTime() - searchBegan) / NANOS_PER_MS to searched
+                        }
+                    matchMs += found.first
+                    totalMs += (System.nanoTime() - began) / NANOS_PER_MS
+                    if (found.second.accepted != null) detections++
+                    interval = cadence.nextIntervalMs(changed = true)
                 }
             }
-            val elapsed = (System.nanoTime() - startedAt) / NANOS_PER_MS
-            val result =
-                RepeatResult(
-                    attempts = REPEAT_ATTEMPTS,
-                    captured = captured,
-                    refused = refused,
-                    otherFailures = other,
-                    detections = detections,
-                    confidence = CONFIDENCE,
-                    matchMs = matchMs,
-                    captureToMatchMs = totalMs,
-                    elapsedMs = elapsed,
-                    learnedMinGapMs = cadence.osMinIntervalMs,
-                )
-            mutable.update { it.copy(repeat = result, progress = null) }
-            say("Repeat test finished.")
+            // Start to start, like the engine: the wait is what is left of the interval, not a new interval.
+            delay((interval - (System.nanoTime() - began) / NANOS_PER_MS).coerceAtLeast(0))
         }
+        val elapsed = (System.nanoTime() - startedAt) / NANOS_PER_MS
+        val result =
+            RepeatResult(
+                attempts = REPEAT_ATTEMPTS,
+                captured = captured,
+                refused = refused,
+                otherFailures = other,
+                detections = detections,
+                confidence = CONFIDENCE,
+                matchMs = matchMs,
+                captureToMatchMs = totalMs,
+                elapsedMs = elapsed,
+                learnedMinGapMs = cadence.osMinIntervalMs,
+            )
+        mutable.update { it.copy(repeat = result, progress = null) }
+        say("Repeat test finished.")
+    }
+
+    /** The search region of a script: the area around where the target was cut, not the whole screen. */
+    private fun regionAround(
+        box: Rect,
+        frameW: Int,
+        frameH: Int,
+    ) = Rect(
+        (box.l - REGION_MARGIN).coerceAtLeast(0),
+        (box.t - REGION_MARGIN).coerceAtLeast(0),
+        (box.r + REGION_MARGIN).coerceAtMost(frameW),
+        (box.b + REGION_MARGIN).coerceAtMost(frameH),
+    )
 
     fun runRateProbe(wait: Int = COUNTDOWN_SECONDS) =
         launchAction("Capture rate probe") {
@@ -398,6 +448,7 @@ class DetectionLab(
         private const val SMALL_W = 96
         private const val SMALL_H = 64
         private const val REGION_MARGIN = 300
+        private const val BAR_MARGIN_PX = 150
         private const val COUNTDOWN_SECONDS = 5
         private const val MS_PER_SECOND = 1000L
         private const val NANOS_PER_MS = 1_000_000L

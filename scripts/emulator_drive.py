@@ -229,6 +229,12 @@ def main():
     lab_command("repeat test", "nega.LAB_REPEAT", "done: Repeat test", 900)
     shot("lab_after_repeat")
 
+    # The quick test on a screen that stays still (Android Settings): no crop, the lab picks its own patch.
+    adb("shell", "input", "keyevent", "KEYCODE_HOME")
+    adb("shell", "am", "start", "-a", "android.settings.SETTINGS")
+    time.sleep(4)
+    lab_command("quick test on Settings", "nega.LAB_QUICK", "done: Quick test", 300)
+
     # The floating panel and a real run over another app (Android Settings).
     adb("shell", "input", "keyevent", "KEYCODE_HOME")
     adb("shell", "am", "start", "-a", "android.settings.SETTINGS")

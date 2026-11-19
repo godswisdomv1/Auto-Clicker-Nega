@@ -42,7 +42,14 @@ fun DetectionLabScreen(
             verticalArrangement = Arrangement.spacedBy(Tokens.Spacing.s),
         ) {
             Status(state)
-            SectionHeader("1. Capture")
+            SectionHeader("Quick test")
+            NegaText(
+                "Tap, then switch to a screen that stays still. After 5 seconds the lab picks a detailed patch " +
+                    "of it and looks for that patch 100 times.",
+                color = NegaTheme.colors.textSecondary,
+            )
+            PrimaryButton("Quick test (100 captures)", viewModel::runQuickTest, Modifier.fillMaxWidth(), enabled = idle)
+            SectionHeader("Manual: 1. Capture")
             PrimaryButton(
                 "Capture reference image",
                 viewModel::captureReference,
@@ -50,12 +57,12 @@ fun DetectionLabScreen(
                 enabled = idle,
             )
             PrimaryButton("Capture test frame", viewModel::captureFrame, Modifier.fillMaxWidth(), enabled = idle)
-            SectionHeader("2. Measure")
+            SectionHeader("Manual: 2. Measure")
             SecondaryButton("Match at each confidence", viewModel::runMatch, Modifier.fillMaxWidth(), enabled = idle)
             SecondaryButton("Repeat test (100 captures)", viewModel::runRepeat, Modifier.fillMaxWidth(), enabled = idle)
             SecondaryButton("Screenshot rate probe", viewModel::runRateProbe, Modifier.fillMaxWidth(), enabled = idle)
             if (!idle) SecondaryButton("Cancel", viewModel::cancel, Modifier.fillMaxWidth(), destructive = true)
-            SectionHeader("3. Report")
+            SectionHeader("Report")
             SecondaryButton(
                 "Share report",
                 {

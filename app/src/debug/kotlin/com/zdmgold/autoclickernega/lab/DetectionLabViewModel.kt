@@ -12,6 +12,8 @@ class DetectionLabViewModel(
 ) : ViewModel() {
     val state: StateFlow<LabState> get() = lab.state
 
+    fun runQuickTest() = lab.runQuickTest()
+
     fun captureReference() = lab.captureReference()
 
     fun captureFrame() = lab.captureFrame()
