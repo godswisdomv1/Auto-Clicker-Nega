@@ -264,12 +264,14 @@ class DetectionLab(
         var other = 0
         var detections = 0
         val heap = mutableListOf<Long>()
+        val alive = mutableListOf<Int>()
+        val seen = mutableListOf<java.lang.ref.WeakReference<Frame>>()
         val scores = mutableListOf<Float>()
         var atCut = 0
         val runtime = Runtime.getRuntime()
         val startedAt = System.nanoTime()
         repeat(REPEAT_ATTEMPTS) { attempt ->
-            if (attempt % HEAP_SAMPLE_EVERY == 0) heap += (runtime.totalMemory() - runtime.freeMemory()) / BYTES_PER_MB
+            if (attempt % HEAP_SAMPLE_EVERY == 0) sampleHeap(heap, alive, seen)
             progress("Repeat ${attempt + 1} of $REPEAT_ATTEMPTS")
             val began = System.nanoTime()
             val interval: Long
@@ -287,6 +289,7 @@ class DetectionLab(
                 is Outcome.Success -> {
                     captured++
                     val frame = result.value
+                    seen += java.lang.ref.WeakReference(frame)
                     val region = regionAround(ref.box, frame.w, frame.h)
                     val found =
                         withContext(Dispatchers.Default) {
@@ -325,6 +328,7 @@ class DetectionLab(
                 elapsedMs = elapsed,
                 learnedMinGapMs = cadence.osMinIntervalMs,
                 heapMb = heap,
+                framesAlive = alive,
                 scores = scores,
                 atCutPosition = atCut,
                 heapLimitMb = runtime.maxMemory() / BYTES_PER_MB,
@@ -338,6 +342,16 @@ class DetectionLab(
         a: Rect,
         b: Rect,
     ) = kotlin.math.abs(a.l - b.l) <= CUT_TOLERANCE_PX && kotlin.math.abs(a.t - b.t) <= CUT_TOLERANCE_PX
+
+    /** After a forced collection, so what is left is what is really held, and how many captured frames survive. */
+    private suspend fun sampleHeap(
+        heap: MutableList<Long>,
+        alive: MutableList<Int>,
+        seen: List<java.lang.ref.WeakReference<Frame>>,
+    ) {
+        heap += usedMb()
+        alive += seen.count { it.get() != null }
+    }
 
     /** The search region of a script: the area around where the target was cut, not the whole screen. */
     private fun regionAround(

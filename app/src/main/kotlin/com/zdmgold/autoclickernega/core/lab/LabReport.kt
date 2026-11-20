@@ -42,6 +42,7 @@ data class RepeatResult(
     val heapMb: List<Long> = emptyList(),
     val heapLimitMb: Long = 0,
     val scores: List<Float> = emptyList(),
+    val framesAlive: List<Int> = emptyList(),
     val atCutPosition: Int = 0,
 )
 
