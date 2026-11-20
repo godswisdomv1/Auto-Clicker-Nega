@@ -186,6 +186,35 @@ TAP_SCRIPT = (
 )
 
 
+def heap_dump_during_repeat():
+    """Starts the repeat test, takes a heap dump 28 seconds in, and prints what fills the heap."""
+    before = lab_lines()
+    already = before.count("done: Repeat test")
+    bcast("nega.LAB_REPEAT")
+    time.sleep(28)
+    pid = adb("shell", "pidof", PKG).strip()
+    log(f"app pid {pid}")
+    adb("shell", "touch", "/data/local/tmp/h.hprof")
+    adb("shell", "chmod", "666", "/data/local/tmp/h.hprof")
+    adb("shell", "am", "dumpheap", pid, "/data/local/tmp/h.hprof")
+    last = -1
+    for _ in range(40):
+        time.sleep(3)
+        size = adb("shell", "stat", "-c", "%s", "/data/local/tmp/h.hprof").strip()
+        if size == last and size not in ("", "0"):
+            break
+        last = size
+    adb("pull", "/data/local/tmp/h.hprof", "/tmp/h.hprof")
+    result = subprocess.run(
+        ["python3", "scripts/hprof_histogram.py", "/tmp/h.hprof", "14"], capture_output=True, text=True, timeout=900
+    )
+    log("heap dump size " + str(last) + "\n" + result.stdout + result.stderr[-600:])
+    finished = wait_log("done: Repeat test", 900, already)
+    log(f"{'PASS' if finished else 'FAIL'}  repeat test")
+    after = lab_lines()
+    log("\n".join(line.split("NegaLab:")[-1].strip() for line in after[len(before):].splitlines() if "NegaLab" in line))
+
+
 def main():
     log(adb("shell", "getprop", "ro.build.version.release").strip() + " / " + adb("shell", "wm", "size").strip())
     log(adb("install", "-r", "-g", APK).strip())
@@ -227,7 +256,7 @@ def main():
     lab_command("leak probe 1", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_match")
     lab_command("rate probe", "nega.LAB_RATE", "done: Capture rate probe", 300)
-    lab_command("repeat test", "nega.LAB_REPEAT", "done: Repeat test", 900)
+    heap_dump_during_repeat()
     lab_command("leak probe 2", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_repeat")
 
