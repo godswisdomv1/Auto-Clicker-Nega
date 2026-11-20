@@ -1,0 +1,302 @@
+14 / Physical size: 1080x2400
+Performing Streamed Install
+Success
+PASS  welcome shows
+PASS  continue
+PASS  disclosure shows
+PASS  agree
+PASS  enable step shows
+PASS  later
+PASS  home shows
+PASS  open lab
+PASS  lab shows
+
+accessibility dump lines mentioning the app: ['Enabled services:{{com.zdmgold.autoclickernega.debug/com.zdmgold.autoclickernega.service.NegaAccessibilityService}}', '[com.android.systemui][com.google.android.apps.nexuslauncher][com.google.android.googlequicksearchbox][com.google.android.contacts][com.google.android.youtube][com.google.android.apps.youtube.music][com.google.android.as][com.zdmgold.autoclickernega.debug][com.google.android.googlequicksearchbox][com.google.android.apps.nexuslauncher][com.google.android.apps.wellbeing][com.google.android.inputmethod.latin][com.google.android.apps.nexuslauncher]}]']
+PASS  reference region
+11-20 06:55:54.948  2692  2692 I NegaLab : done: Capture reference region | Reference captured.
+11-20 06:55:54.954  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:55:54.955  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:55:54.955  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:55:54.955  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:55:54.955  2692  2692 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-20 06:55:54.955  2692  2692 I NegaLab :
+PASS  test frame
+11-20 06:55:59.601  2692  2692 I NegaLab : done: Capture test frame | Test frame captured.
+11-20 06:55:59.601  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:55:59.601  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:55:59.601  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:55:59.601  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:55:59.601  2692  2692 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-20 06:55:59.601  2692  2692 I NegaLab :
+PASS  match
+11-20 06:56:07.097  2692  2692 I NegaLab : done: Match | Match finished.
+11-20 06:56:07.099  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:56:07.099  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:56:07.099  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:56:07.099  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:56:07.099  2692  2692 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-20 06:56:07.099  2692  2692 I NegaLab :
+11-20 06:56:07.099  2692  2692 I NegaLab : Single frame match
+11-20 06:56:07.099  2692  2692 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-20 06:56:07.099  2692  2692 I NegaLab :   time per search: Safe 377 ms, Fast 242 ms (median)
+11-20 06:56:07.099  2692  2692 I NegaLab :   confidence 0.60: found
+11-20 06:56:07.099  2692  2692 I NegaLab :   confidence 0.70: found
+11-20 06:56:07.099  2692  2692 I NegaLab :   confidence 0.80: found
+11-20 06:56:07.099  2692  2692 I NegaLab :   confidence 0.85: found
+11-20 06:56:07.099  2692  2692 I NegaLab :   confidence 0.90: found
+11-20 06:56:07.100  2692  2692 I NegaLab :   confidence 0.95: found
+11-20 06:56:07.100  2692  2692 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-20 06:56:07.100  2692  2692 I NegaLab :   time per search: Safe 32 ms, Fast 31 ms (median)
+11-20 06:56:07.100  2692  2692 I NegaLab :
+PASS  leak probe 1
+11-20 06:56:35.182  2692  2692 I NegaLab : done: Leak probe | leak probe heap MB after a forced collection: start 18, after 40 captures 11, after 40 searches 21
+11-20 06:56:35.183  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:56:35.183  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:56:35.183  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:56:35.183  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:56:35.183  2692  2692 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-20 06:56:35.183  2692  2692 I NegaLab :
+11-20 06:56:35.183  2692  2692 I NegaLab : Single frame match
+11-20 06:56:35.183  2692  2692 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-20 06:56:35.183  2692  2692 I NegaLab :   time per search: Safe 377 ms, Fast 242 ms (median)
+11-20 06:56:35.183  2692  2692 I NegaLab :   confidence 0.60: found
+11-20 06:56:35.183  2692  2692 I NegaLab :   confidence 0.70: found
+11-20 06:56:35.183  2692  2692 I NegaLab :   confidence 0.80: found
+11-20 06:56:35.183  2692  2692 I NegaLab :   confidence 0.85: found
+11-20 06:56:35.183  2692  2692 I NegaLab :   confidence 0.90: found
+11-20 06:56:35.183  2692  2692 I NegaLab :   confidence 0.95: found
+11-20 06:56:35.183  2692  2692 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-20 06:56:35.183  2692  2692 I NegaLab :   time per search: Safe 32 ms, Fast 31 ms (median)
+11-20 06:56:35.183  2692  2692 I NegaLab :
+PASS  rate probe
+11-20 06:56:51.826  2692  2692 I NegaLab : done: Capture rate probe | Rate probe finished.
+11-20 06:56:51.827  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:56:51.827  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:56:51.827  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:56:51.827  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:56:51.827  2692  2692 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-20 06:56:51.827  2692  2692 I NegaLab :
+11-20 06:56:51.827  2692  2692 I NegaLab : Single frame match
+11-20 06:56:51.827  2692  2692 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-20 06:56:51.827  2692  2692 I NegaLab :   time per search: Safe 377 ms, Fast 242 ms (median)
+11-20 06:56:51.827  2692  2692 I NegaLab :   confidence 0.60: found
+11-20 06:56:51.827  2692  2692 I NegaLab :   confidence 0.70: found
+11-20 06:56:51.827  2692  2692 I NegaLab :   confidence 0.80: found
+11-20 06:56:51.827  2692  2692 I NegaLab :   confidence 0.85: found
+11-20 06:56:51.827  2692  2692 I NegaLab :   confidence 0.90: found
+11-20 06:56:51.827  2692  2692 I NegaLab :   confidence 0.95: found
+11-20 06:56:51.827  2692  2692 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-20 06:56:51.827  2692  2692 I NegaLab :   time per search: Safe 32 ms, Fast 31 ms (median)
+11-20 06:56:51.827  2692  2692 I NegaLab :
+11-20 06:56:51.827  2692  2692 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-20 06:56:51.827  2692  2692 I NegaLab :   requests 100, accepted 38, refused 62
+11-20 06:56:51.827  2692  2692 I NegaLab :   gap between accepted captures ms: min 312, median 396
+11-20 06:56:51.827  2692  2692 I NegaLab :
+app pid 2692
+heap dump size 84491614
+primitive arrays by total bytes (type, length, how many, MB):
+  byte[2592000] x11 = 27.2 MB
+  double[108000] x4 = 3.3 MB
+  byte[600000] x4 = 2.3 MB
+  int[69120] x4 = 1.1 MB
+  double[27000] x4 = 0.8 MB
+  int[64] x2910 = 0.7 MB
+  long[9576] x8 = 0.6 MB
+  byte[150000] x4 = 0.6 MB
+  int[119292] x1 = 0.5 MB
+  byte[100] x4763 = 0.5 MB
+  byte[419751] x1 = 0.4 MB
+  byte[417307] x1 = 0.4 MB
+  byte[108] x3862 = 0.4 MB
+  byte[411647] x1 = 0.4 MB
+instances by class (how many, bytes of fields):
+  java.lang.String x89530 = 1749 KB
+  java.util.HashMap$Node x33852 = 793 KB
+  java.util.LinkedHashMap$LinkedHashMapEntry x4320 = 135 KB
+  android.icu.impl.ICUResourceBundleReader$ResourceCache$Level x3270 = 89 KB
+  android.util.SparseArray x4336 = 89 KB
+  androidx.emoji2.text.TypefaceEmojiRasterizer x3717 = 73 KB
+  androidx.emoji2.text.MetadataRepo$Node x4235 = 66 KB
+  java.util.ArrayList x3115 = 61 KB
+  java.util.concurrent.ConcurrentHashMap$Node x2386 = 56 KB
+  android.icu.util.CaseInsensitiveString x2605 = 51 KB
+  java.lang.Integer x4174 = 49 KB
+  android.icu.impl.ICUResourceBundleReader$Table16 x2027 = 48 KB
+  java.util.HashMap x1201 = 47 KB
+  android.icu.impl.locale.LSR x1627 = 44 KB
+object arrays by class (total elements):
+  java.lang.Object[] elements 355743
+  java.util.HashMap$Node[] elements 80476
+  java.lang.String[] elements 13777
+  java.util.concurrent.ConcurrentHashMap$Node[] elements 7112
+  androidx.compose.ui.node.LayoutNode[] elements 6784
+
+PASS  repeat test
+11-20 06:57:35.225  2692  2692 I NegaLab : done: Repeat test | Repeat test finished.
+11-20 06:57:35.231  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:57:35.231  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:57:35.231  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:57:35.231  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:57:35.231  2692  2692 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-20 06:57:35.231  2692  2692 I NegaLab :
+11-20 06:57:35.231  2692  2692 I NegaLab : Single frame match
+11-20 06:57:35.231  2692  2692 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-20 06:57:35.231  2692  2692 I NegaLab :   time per search: Safe 377 ms, Fast 242 ms (median)
+11-20 06:57:35.231  2692  2692 I NegaLab :   confidence 0.60: found
+11-20 06:57:35.231  2692  2692 I NegaLab :   confidence 0.70: found
+11-20 06:57:35.231  2692  2692 I NegaLab :   confidence 0.80: found
+11-20 06:57:35.231  2692  2692 I NegaLab :   confidence 0.85: found
+11-20 06:57:35.231  2692  2692 I NegaLab :   confidence 0.90: found
+11-20 06:57:35.231  2692  2692 I NegaLab :   confidence 0.95: found
+11-20 06:57:35.231  2692  2692 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-20 06:57:35.231  2692  2692 I NegaLab :   time per search: Safe 32 ms, Fast 31 ms (median)
+11-20 06:57:35.232  2692  2692 I NegaLab :
+11-20 06:57:35.232  2692  2692 I NegaLab : Repeat test at confidence 0.85
+11-20 06:57:35.232  2692  2692 I NegaLab :   attempts 100, captured 98, refused for rate 2
+11-20 06:57:35.232  2692  2692 I NegaLab :   other capture failures 0
+11-20 06:57:35.232  2692  2692 I NegaLab :   detections 98 of 98 captured frames
+11-20 06:57:35.232  2692  2692 I NegaLab :   match time ms: median 145, p95 307
+11-20 06:57:35.232  2692  2692 I NegaLab :   capture to result ms: median 240, p95 455
+11-20 06:57:35.232  2692  2692 I NegaLab :   searches per second 2.3
+11-20 06:57:35.232  2692  2692 I NegaLab :   learned minimum gap 400 ms
+11-20 06:57:35.232  2692  2692 I NegaLab :   best score per frame: first 1.00, min 1.00, median 1.00, max 1.00
+11-20 06:57:35.232  2692  2692 I NegaLab :   best match at the place the reference was cut: 98 of 98 frames
+11-20 06:57:35.232  2692  2692 I NegaLab :   frames scoring below 0.85: 0
+11-20 06:57:35.232  2692  2692 I NegaLab :   first scores: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+11-20 06:57:35.232  2692  2692 I NegaLab :   Java heap MB every 10 attempts (limit 192): 76 95 127 142 174 39 66 39 66 91
+11-20 06:57:35.232  2692  2692 I NegaLab :
+11-20 06:57:35.232  2692  2692 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-20 06:57:35.232  2692  2692 I NegaLab :   requests 100, accepted 38, refused 62
+11-20 06:57:35.232  2692  2692 I NegaLab :   gap between accepted captures ms: min 312, median 396
+11-20 06:57:35.232  2692  2692 I NegaLab :
+PASS  leak probe 2
+11-20 06:57:53.502  2692  2692 E NegaLab : lab action failed: Leak probe
+11-20 06:57:53.502  2692  2692 E NegaLab : java.lang.OutOfMemoryError: Failed to allocate a 2592016 byte allocation with 2350704 free bytes and 2295KB until OOM, target footprint 201326592, growth limit 201326592
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.Frame$Companion.fromRows(Frame.kt:103)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.BitmapToFrame.convert(BitmapToFrame.kt:15)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.toFrame(ScreenshotFrameSource.kt:80)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.access$toFrame(ScreenshotFrameSource.kt:24)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource$next$2.invokeSuspend(ScreenshotFrameSource.kt:33)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:807)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+11-20 06:57:53.503  2692  2692 I NegaLab : done: Leak probe | Failed: OutOfMemoryError Failed to allocate a 2592016 byte allocation with 2350704 free bytes and 2295KB until OOM, target footprint 201326592, growth limit 201326592
+11-20 06:57:53.508  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:57:53.508  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:57:53.508  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:57:53.508  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:57:53.508  2692  2692 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-20 06:57:53.508  2692  2692 I NegaLab :
+11-20 06:57:53.508  2692  2692 I NegaLab : Single frame match
+11-20 06:57:53.508  2692  2692 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-20 06:57:53.508  2692  2692 I NegaLab :   time per search: Safe 377 ms, Fast 242 ms (median)
+11-20 06:57:53.508  2692  2692 I NegaLab :   confidence 0.60: found
+11-20 06:57:53.508  2692  2692 I NegaLab :   confidence 0.70: found
+11-20 06:57:53.508  2692  2692 I NegaLab :   confidence 0.80: found
+11-20 06:57:53.508  2692  2692 I NegaLab :   confidence 0.85: found
+11-20 06:57:53.508  2692  2692 I NegaLab :   confidence 0.90: found
+11-20 06:57:53.508  2692  2692 I NegaLab :   confidence 0.95: found
+11-20 06:57:53.508  2692  2692 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-20 06:57:53.508  2692  2692 I NegaLab :   time per search: Safe 32 ms, Fast 31 ms (median)
+11-20 06:57:53.508  2692  2692 I NegaLab :
+11-20 06:57:53.508  2692  2692 I NegaLab : Repeat test at confidence 0.85
+11-20 06:57:53.508  2692  2692 I NegaLab :   attempts 100, captured 98, refused for rate 2
+11-20 06:57:53.508  2692  2692 I NegaLab :   other capture failures 0
+11-20 06:57:53.508  2692  2692 I NegaLab :   detections 98 of 98 captured frames
+11-20 06:57:53.508  2692  2692 I NegaLab :   match time ms: median 145, p95 307
+11-20 06:57:53.508  2692  2692 I NegaLab :   capture to result ms: median 240, p95 455
+11-20 06:57:53.508  2692  2692 I NegaLab :   searches per second 2.3
+11-20 06:57:53.508  2692  2692 I NegaLab :   learned minimum gap 400 ms
+11-20 06:57:53.508  2692  2692 I NegaLab :   best score per frame: first 1.00, min 1.00, median 1.00, max 1.00
+11-20 06:57:53.508  2692  2692 I NegaLab :   best match at the place the reference was cut: 98 of 98 frames
+11-20 06:57:53.508  2692  2692 I NegaLab :   frames scoring below 0.85: 0
+11-20 06:57:53.508  2692  2692 I NegaLab :   first scores: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+11-20 06:57:53.508  2692  2692 I NegaLab :   Java heap MB every 10 attempts (limit 192): 76 95 127 142 174 39 66 39 66 91
+11-20 06:57:53.508  2692  2692 I NegaLab :
+11-20 06:57:53.508  2692  2692 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-20 06:57:53.508  2692  2692 I NegaLab :   requests 100, accepted 38, refused 62
+11-20 06:57:53.508  2692  2692 I NegaLab :   gap between accepted captures ms: min 312, median 396
+11-20 06:57:53.508  2692  2692 I NegaLab :
+PASS  quick test on Settings
+11-20 06:58:30.396  2692  2692 E NegaLab : lab action failed: Quick test
+11-20 06:58:30.396  2692  2692 E NegaLab : java.lang.OutOfMemoryError: OutOfMemoryError thrown while trying to throw an exception; no stack trace available
+11-20 06:58:30.396  2692  2692 I NegaLab : done: Quick test | Failed: OutOfMemoryError OutOfMemoryError thrown while trying to throw an exception; no stack trace available
+11-20 06:58:30.397  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:58:30.397  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:58:30.397  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:58:30.397  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:58:30.397  2692  2692 I NegaLab : Reference image: 96x64 px, cut at (128, 444)
+11-20 06:58:30.397  2692  2692 I NegaLab :
+11-20 06:58:30.397  2692  2692 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-20 06:58:30.397  2692  2692 I NegaLab :   requests 100, accepted 38, refused 62
+11-20 06:58:30.397  2692  2692 I NegaLab :   gap between accepted captures ms: min 312, median 396
+11-20 06:58:30.397  2692  2692 I NegaLab :
+panel: 11-20 06:58:36.483  2692  2692 I NegaLab : panel: Success(value=kotlin.Unit)
+run: 11-20 06:58:39.885  2692  2741 I NegaLab : run: Success(value=kotlin.Unit)
+PASS  crop confirmed
+11-20 06:58:55.026  2692  2692 I NegaLab : done: Capture reference | Reference captured.
+11-20 06:58:55.030  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:58:55.030  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:58:55.030  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:58:55.030  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:58:55.030  2692  2692 I NegaLab : Reference image: 500x400 px, cut at (150, 700)
+11-20 06:58:55.030  2692  2692 I NegaLab :
+11-20 06:58:55.031  2692  2692 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-20 06:58:55.031  2692  2692 I NegaLab :   requests 100, accepted 38, refused 62
+11-20 06:58:55.031  2692  2692 I NegaLab :   gap between accepted captures ms: min 312, median 396
+11-20 06:58:55.031  2692  2692 I NegaLab :
+PASS  test frame after crop
+11-20 06:58:58.600  2692  2692 I NegaLab : done: Capture test frame | Test frame captured.
+11-20 06:58:58.601  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:58:58.601  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:58:58.601  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:58:58.601  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:58:58.601  2692  2692 I NegaLab : Reference image: 500x400 px, cut at (150, 700)
+11-20 06:58:58.601  2692  2692 I NegaLab :
+11-20 06:58:58.602  2692  2692 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-20 06:58:58.602  2692  2692 I NegaLab :   requests 100, accepted 38, refused 62
+11-20 06:58:58.602  2692  2692 I NegaLab :   gap between accepted captures ms: min 312, median 396
+11-20 06:58:58.602  2692  2692 I NegaLab :
+PASS  match after crop
+11-20 06:59:03.599  2692  2692 I NegaLab : done: Match | Match finished.
+11-20 06:59:03.600  2692  2692 I NegaLab : Nega Detection lab report
+11-20 06:59:03.601  2692  2692 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-20 06:59:03.601  2692  2692 I NegaLab : Android: Android 14 (API 34)
+11-20 06:59:03.601  2692  2692 I NegaLab : App: 0.1.0-debug
+11-20 06:59:03.601  2692  2692 I NegaLab : Reference image: 500x400 px, cut at (150, 700)
+11-20 06:59:03.601  2692  2692 I NegaLab :
+11-20 06:59:03.601  2692  2692 I NegaLab : Single frame match
+11-20 06:59:03.601  2692  2692 I NegaLab :   best score 1.00 at (150, 700, 650, 1100)
+11-20 06:59:03.601  2692  2692 I NegaLab :   time per search: Safe 519 ms, Fast 340 ms (median)
+11-20 06:59:03.601  2692  2692 I NegaLab :   confidence 0.60: found
+11-20 06:59:03.601  2692  2692 I NegaLab :   confidence 0.70: found
+11-20 06:59:03.601  2692  2692 I NegaLab :   confidence 0.80: found
+11-20 06:59:03.601  2692  2692 I NegaLab :   confidence 0.85: found
+11-20 06:59:03.601  2692  2692 I NegaLab :   confidence 0.90: found
+11-20 06:59:03.601  2692  2692 I NegaLab :   confidence 0.95: found
+11-20 06:59:03.601  2692  2692 I NegaLab :   typical script: 96x64 px template in a 546x664 px region, score 1.00
+11-20 06:59:03.601  2692  2692 I NegaLab :   time per search: Safe 42 ms, Fast 36 ms (median)
+11-20 06:59:03.601  2692  2692 I NegaLab :
+11-20 06:59:03.601  2692  2692 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-20 06:59:03.601  2692  2692 I NegaLab :   requests 100, accepted 38, refused 62
+11-20 06:59:03.601  2692  2692 I NegaLab :   gap between accepted captures ms: min 312, median 396
+11-20 06:59:03.601  2692  2692 I NegaLab :
+fatal or app error lines: 15
+11-20 06:57:53.502  2692  2692 E NegaLab : lab action failed: Leak probe
+11-20 06:57:53.502  2692  2692 E NegaLab : java.lang.OutOfMemoryError: Failed to allocate a 2592016 byte allocation with 2350704 free bytes and 2295KB until OOM, target footprint 201326592, growth limit 201326592
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.Frame$Companion.fromRows(Frame.kt:103)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.BitmapToFrame.convert(BitmapToFrame.kt:15)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.toFrame(ScreenshotFrameSource.kt:80)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.access$toFrame(ScreenshotFrameSource.kt:24)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource$next$2.invokeSuspend(ScreenshotFrameSource.kt:33)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:807)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+11-20 06:57:53.502  2692  2692 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+11-20 06:58:30.396  2692  2692 E NegaLab : lab action failed: Quick test
+11-20 06:58:30.396  2692  2692 E NegaLab : java.lang.OutOfMemoryError: OutOfMemoryError thrown while trying to throw an exception; no stack trace available
