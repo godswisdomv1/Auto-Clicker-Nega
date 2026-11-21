@@ -191,7 +191,7 @@ def heap_dump_during_repeat():
     before = lab_lines()
     already = before.count("done: Repeat test")
     bcast("nega.LAB_REPEAT")
-    time.sleep(28)
+    time.sleep(20)
     pid = adb("shell", "pidof", PKG).strip()
     log(f"app pid {pid}")
     adb("shell", "touch", "/data/local/tmp/h.hprof")
@@ -206,7 +206,7 @@ def heap_dump_during_repeat():
         last = size
     adb("pull", "/data/local/tmp/h.hprof", "/tmp/h.hprof")
     result = subprocess.run(
-        ["python3", "scripts/hprof_histogram.py", "/tmp/h.hprof", "14"], capture_output=True, text=True, timeout=900
+        ["python3", "scripts/hprof_referrers.py", "/tmp/h.hprof", "2592000", "8"], capture_output=True, text=True, timeout=1500
     )
     log("heap dump size " + str(last) + "\n" + result.stdout + result.stderr[-600:])
     finished = wait_log("done: Repeat test", 900, already)
@@ -228,7 +228,7 @@ def background_repeat():
         "--ei", "l", "100", "--ei", "t", "120", "--ei", "r", "700", "--ei", "b", "300",
     )
     lab_command("background frame", "nega.LAB_FRAME", "done: Capture test frame", 60)
-    lab_command("background repeat", "nega.LAB_REPEAT", "done: Repeat test", 600)
+    heap_dump_during_repeat()
 
 
 def main():
@@ -272,7 +272,6 @@ def main():
     lab_command("leak probe 1", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_match")
     lab_command("rate probe", "nega.LAB_RATE", "done: Capture rate probe", 300)
-    lab_command("repeat test, lab screen in front", "nega.LAB_REPEAT", "done: Repeat test", 600)
     background_repeat()
     lab_command("leak probe 2", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_repeat")
