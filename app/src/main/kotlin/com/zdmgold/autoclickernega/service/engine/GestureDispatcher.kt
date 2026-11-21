@@ -8,10 +8,10 @@ import android.os.Looper
 import com.zdmgold.autoclickernega.core.model.Action
 import com.zdmgold.autoclickernega.core.model.Target
 import com.zdmgold.autoclickernega.core.port.GesturePort
+import com.zdmgold.autoclickernega.core.run.OneShot
 import com.zdmgold.autoclickernega.core.vision.GestureOutcome
 import com.zdmgold.autoclickernega.service.ShapePaths
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resume
 
 /**
  * Performs gestures through the accessibility service. A gesture the system will not take is Rejected, and ten of
@@ -25,18 +25,20 @@ class GestureDispatcher(
     override suspend fun dispatch(g: Action.Gesture): GestureOutcome {
         val description = GestureShapes.describe(g) ?: return GestureOutcome.Rejected
         return suspendCancellableCoroutine { cont ->
+            // The system keeps the callback after it is called, so it holds the continuation only through OneShot.
+            val waiting = OneShot(cont)
             val callback =
                 object : AccessibilityService.GestureResultCallback() {
                     override fun onCompleted(gestureDescription: GestureDescription?) {
-                        if (cont.isActive) cont.resume(GestureOutcome.Completed)
+                        waiting.resume(GestureOutcome.Completed)
                     }
 
                     override fun onCancelled(gestureDescription: GestureDescription?) {
-                        if (cont.isActive) cont.resume(GestureOutcome.Cancelled)
+                        waiting.resume(GestureOutcome.Cancelled)
                     }
                 }
             val accepted = service.dispatchGesture(description, callback, handler)
-            if (!accepted && cont.isActive) cont.resume(GestureOutcome.Rejected)
+            if (!accepted) waiting.resume(GestureOutcome.Rejected)
         }
     }
 }

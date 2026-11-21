@@ -7,6 +7,7 @@ import com.zdmgold.autoclickernega.core.error.AppError
 import com.zdmgold.autoclickernega.core.error.CaptureCause
 import com.zdmgold.autoclickernega.core.port.FrameSource
 import com.zdmgold.autoclickernega.core.result.Outcome
+import com.zdmgold.autoclickernega.core.run.OneShot
 import com.zdmgold.autoclickernega.core.vision.Frame
 import com.zdmgold.autoclickernega.core.vision.FrameSanity
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,6 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import kotlin.coroutines.resume
 
 /**
  * Captures the screen through the accessibility screenshot API, with no notification and no consent dialog. A
@@ -36,23 +36,20 @@ class ScreenshotFrameSource(
     /** The screen as a software bitmap. The caller owns it and must recycle it. Used by the crop tool. */
     suspend fun captureBitmap(): Outcome<Bitmap> =
         suspendCancellableCoroutine { cont ->
+            // The system keeps this callback after it is called, so it holds the continuation only through OneShot.
+            val waiting = OneShot(cont)
             service.takeScreenshot(
                 Display.DEFAULT_DISPLAY,
                 executor,
                 object : AccessibilityService.TakeScreenshotCallback {
                     override fun onSuccess(result: AccessibilityService.ScreenshotResult) {
                         val bitmap = copyToSoftware(result)
-                        if (!cont.isActive) {
-                            bitmap?.recycle()
-                            return
-                        }
-                        cont.resume(
-                            if (bitmap != null) Outcome.Success(bitmap) else failure(CaptureCause.Internal),
-                        )
+                        val outcome = if (bitmap != null) Outcome.Success(bitmap) else failure(CaptureCause.Internal)
+                        if (!waiting.resume(outcome)) bitmap?.recycle()
                     }
 
                     override fun onFailure(errorCode: Int) {
-                        if (cont.isActive) cont.resume(failure(CaptureErrors.cause(errorCode)))
+                        waiting.resume(failure(CaptureErrors.cause(errorCode)))
                     }
                 },
             )
