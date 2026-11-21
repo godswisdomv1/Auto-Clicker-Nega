@@ -1,0 +1,297 @@
+14 / Physical size: 1080x2400
+Performing Streamed Install
+Success
+PASS  welcome shows
+PASS  continue
+PASS  disclosure shows
+PASS  agree
+PASS  enable step shows
+PASS  later
+PASS  home shows
+PASS  open lab
+PASS  lab shows
+
+accessibility dump lines mentioning the app: ['Enabled services:{{com.zdmgold.autoclickernega.debug/com.zdmgold.autoclickernega.service.NegaAccessibilityService}}', '[com.google.android.apps.nexuslauncher][com.android.systemui][com.google.android.apps.youtube.music][com.zdmgold.autoclickernega.debug][com.google.android.apps.nexuslauncher][com.google.android.apps.nexuslauncher][com.google.android.inputmethod.latin][com.google.android.youtube][com.google.android.apps.wellbeing][com.google.android.contacts][com.google.android.apps.nexuslauncher][com.google.android.as][com.google.android.googlequicksearchbox][com.google.android.googlequicksearchbox]}]']
+PASS  reference region
+11-21 03:39:14.732  2530  2530 I NegaLab : done: Capture reference region | Reference captured.
+11-21 03:39:14.735  2530  2530 I NegaLab : Nega Detection lab report
+11-21 03:39:14.735  2530  2530 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:39:14.735  2530  2530 I NegaLab : Android: Android 14 (API 34)
+11-21 03:39:14.735  2530  2530 I NegaLab : App: 0.1.0-debug
+11-21 03:39:14.735  2530  2530 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:39:14.735  2530  2530 I NegaLab :
+PASS  test frame
+11-21 03:39:17.987  2530  2530 I NegaLab : done: Capture test frame | Test frame captured.
+11-21 03:39:17.988  2530  2530 I NegaLab : Nega Detection lab report
+11-21 03:39:17.988  2530  2530 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:39:17.988  2530  2530 I NegaLab : Android: Android 14 (API 34)
+11-21 03:39:17.988  2530  2530 I NegaLab : App: 0.1.0-debug
+11-21 03:39:17.988  2530  2530 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:39:17.988  2530  2530 I NegaLab :
+PASS  match
+11-21 03:39:24.513  2530  2530 I NegaLab : done: Match | Match finished.
+11-21 03:39:24.515  2530  2530 I NegaLab : Nega Detection lab report
+11-21 03:39:24.515  2530  2530 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:39:24.515  2530  2530 I NegaLab : Android: Android 14 (API 34)
+11-21 03:39:24.515  2530  2530 I NegaLab : App: 0.1.0-debug
+11-21 03:39:24.515  2530  2530 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:39:24.515  2530  2530 I NegaLab :
+11-21 03:39:24.515  2530  2530 I NegaLab : Single frame match
+11-21 03:39:24.515  2530  2530 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-21 03:39:24.515  2530  2530 I NegaLab :   time per search: Safe 299 ms, Fast 133 ms (median)
+11-21 03:39:24.515  2530  2530 I NegaLab :   confidence 0.60: found
+11-21 03:39:24.515  2530  2530 I NegaLab :   confidence 0.70: found
+11-21 03:39:24.515  2530  2530 I NegaLab :   confidence 0.80: found
+11-21 03:39:24.515  2530  2530 I NegaLab :   confidence 0.85: found
+11-21 03:39:24.515  2530  2530 I NegaLab :   confidence 0.90: found
+11-21 03:39:24.515  2530  2530 I NegaLab :   confidence 0.95: found
+11-21 03:39:24.515  2530  2530 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-21 03:39:24.515  2530  2530 I NegaLab :   time per search: Safe 18 ms, Fast 14 ms (median)
+11-21 03:39:24.515  2530  2530 I NegaLab :
+PASS  leak probe 1
+11-21 03:39:46.658  2530  2530 I NegaLab : done: Leak probe | leak probe heap MB after a forced collection: start 17, after 40 captures 60, after 40 searches 68
+11-21 03:39:46.659  2530  2530 I NegaLab : Nega Detection lab report
+11-21 03:39:46.659  2530  2530 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:39:46.659  2530  2530 I NegaLab : Android: Android 14 (API 34)
+11-21 03:39:46.659  2530  2530 I NegaLab : App: 0.1.0-debug
+11-21 03:39:46.659  2530  2530 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:39:46.659  2530  2530 I NegaLab :
+11-21 03:39:46.659  2530  2530 I NegaLab : Single frame match
+11-21 03:39:46.659  2530  2530 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-21 03:39:46.659  2530  2530 I NegaLab :   time per search: Safe 299 ms, Fast 133 ms (median)
+11-21 03:39:46.659  2530  2530 I NegaLab :   confidence 0.60: found
+11-21 03:39:46.659  2530  2530 I NegaLab :   confidence 0.70: found
+11-21 03:39:46.659  2530  2530 I NegaLab :   confidence 0.80: found
+11-21 03:39:46.659  2530  2530 I NegaLab :   confidence 0.85: found
+11-21 03:39:46.659  2530  2530 I NegaLab :   confidence 0.90: found
+11-21 03:39:46.659  2530  2530 I NegaLab :   confidence 0.95: found
+11-21 03:39:46.659  2530  2530 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-21 03:39:46.659  2530  2530 I NegaLab :   time per search: Safe 18 ms, Fast 14 ms (median)
+11-21 03:39:46.659  2530  2530 I NegaLab :
+PASS  rate probe
+11-21 03:40:00.684  2530  2530 I NegaLab : done: Capture rate probe | Rate probe finished.
+11-21 03:40:00.686  2530  2530 I NegaLab : Nega Detection lab report
+11-21 03:40:00.686  2530  2530 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:40:00.686  2530  2530 I NegaLab : Android: Android 14 (API 34)
+11-21 03:40:00.686  2530  2530 I NegaLab : App: 0.1.0-debug
+11-21 03:40:00.686  2530  2530 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:40:00.686  2530  2530 I NegaLab :
+11-21 03:40:00.686  2530  2530 I NegaLab : Single frame match
+11-21 03:40:00.686  2530  2530 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-21 03:40:00.686  2530  2530 I NegaLab :   time per search: Safe 299 ms, Fast 133 ms (median)
+11-21 03:40:00.686  2530  2530 I NegaLab :   confidence 0.60: found
+11-21 03:40:00.686  2530  2530 I NegaLab :   confidence 0.70: found
+11-21 03:40:00.686  2530  2530 I NegaLab :   confidence 0.80: found
+11-21 03:40:00.686  2530  2530 I NegaLab :   confidence 0.85: found
+11-21 03:40:00.686  2530  2530 I NegaLab :   confidence 0.90: found
+11-21 03:40:00.686  2530  2530 I NegaLab :   confidence 0.95: found
+11-21 03:40:00.686  2530  2530 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-21 03:40:00.686  2530  2530 I NegaLab :   time per search: Safe 18 ms, Fast 14 ms (median)
+11-21 03:40:00.686  2530  2530 I NegaLab :
+11-21 03:40:00.686  2530  2530 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-21 03:40:00.686  2530  2530 I NegaLab :   requests 100, accepted 34, refused 66
+11-21 03:40:00.686  2530  2530 I NegaLab :   gap between accepted captures ms: min 322, median 377
+11-21 03:40:00.686  2530  2530 I NegaLab :
+PASS  repeat test, lab screen in front
+11-21 03:40:03.902  2530  2530 I NegaLab : sample after 0 frames: heap 31 MB, frames alive 0
+11-21 03:40:08.017  2530  2530 I NegaLab : sample after 8 frames: heap 53 MB, frames alive 8
+11-21 03:40:12.532  2530  2530 I NegaLab : sample after 18 frames: heap 78 MB, frames alive 18
+11-21 03:40:17.046  2530  2530 I NegaLab : sample after 28 frames: heap 100 MB, frames alive 26
+11-21 03:40:21.558  2530  2530 I NegaLab : sample after 38 frames: heap 39 MB, frames alive 10
+11-21 03:40:26.072  2530  2530 I NegaLab : sample after 48 frames: heap 66 MB, frames alive 20
+11-21 03:40:30.581  2530  2530 I NegaLab : sample after 58 frames: heap 91 MB, frames alive 30
+11-21 03:40:35.093  2530  2530 I NegaLab : sample after 68 frames: heap 120 MB, frames alive 40
+11-21 03:40:39.605  2530  2530 I NegaLab : sample after 78 frames: heap 39 MB, frames alive 8
+11-21 03:40:44.116  2530  2530 I NegaLab : sample after 88 frames: heap 66 MB, frames alive 18
+11-21 03:40:48.128  2530  2530 I NegaLab : done: Repeat test | Repeat test finished.
+11-21 03:40:48.131  2530  2530 I NegaLab : Nega Detection lab report
+11-21 03:40:48.131  2530  2530 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:40:48.131  2530  2530 I NegaLab : Android: Android 14 (API 34)
+11-21 03:40:48.131  2530  2530 I NegaLab : App: 0.1.0-debug
+11-21 03:40:48.131  2530  2530 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:40:48.131  2530  2530 I NegaLab :
+11-21 03:40:48.131  2530  2530 I NegaLab : Single frame match
+11-21 03:40:48.131  2530  2530 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-21 03:40:48.131  2530  2530 I NegaLab :   time per search: Safe 299 ms, Fast 133 ms (median)
+11-21 03:40:48.131  2530  2530 I NegaLab :   confidence 0.60: found
+11-21 03:40:48.131  2530  2530 I NegaLab :   confidence 0.70: found
+11-21 03:40:48.131  2530  2530 I NegaLab :   confidence 0.80: found
+11-21 03:40:48.131  2530  2530 I NegaLab :   confidence 0.85: found
+11-21 03:40:48.131  2530  2530 I NegaLab :   confidence 0.90: found
+11-21 03:40:48.131  2530  2530 I NegaLab :   confidence 0.95: found
+11-21 03:40:48.131  2530  2530 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-21 03:40:48.131  2530  2530 I NegaLab :   time per search: Safe 18 ms, Fast 14 ms (median)
+11-21 03:40:48.131  2530  2530 I NegaLab :
+11-21 03:40:48.132  2530  2530 I NegaLab : Repeat test at confidence 0.85
+11-21 03:40:48.132  2530  2530 I NegaLab :   attempts 100, captured 98, refused for rate 2
+11-21 03:40:48.132  2530  2530 I NegaLab :   other capture failures 0
+11-21 03:40:48.132  2530  2530 I NegaLab :   detections 98 of 98 captured frames
+11-21 03:40:48.132  2530  2530 I NegaLab :   match time ms: median 86, p95 109
+11-21 03:40:48.132  2530  2530 I NegaLab :   capture to result ms: median 152, p95 212
+11-21 03:40:48.132  2530  2530 I NegaLab :   searches per second 2.2
+11-21 03:40:48.132  2530  2530 I NegaLab :   learned minimum gap 400 ms
+11-21 03:40:48.132  2530  2530 I NegaLab :   best score per frame: first 1.00, min 1.00, median 1.00, max 1.00
+11-21 03:40:48.132  2530  2530 I NegaLab :   best match at the place the reference was cut: 98 of 98 frames
+11-21 03:40:48.132  2530  2530 I NegaLab :   frames scoring below 0.85: 0
+11-21 03:40:48.132  2530  2530 I NegaLab :   first scores: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+11-21 03:40:48.132  2530  2530 I NegaLab :   Java heap MB every 10 attempts (limit 192): 31 53 78 100 39 66 91 120 39 66
+11-21 03:40:48.132  2530  2530 I NegaLab :
+11-21 03:40:48.132  2530  2530 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-21 03:40:48.132  2530  2530 I NegaLab :   requests 100, accepted 34, refused 66
+11-21 03:40:48.132  2530  2530 I NegaLab :   gap between accepted captures ms: min 322, median 377
+11-21 03:40:48.132  2530  2530 I NegaLab :
+---- experiment: repeat test with the app in the background ----
+PASS  background reference
+11-21 03:41:00.539  6427  6427 I NegaLab : done: Capture reference region | Reference captured.
+11-21 03:41:00.542  6427  6427 I NegaLab : Nega Detection lab report
+11-21 03:41:00.542  6427  6427 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:41:00.542  6427  6427 I NegaLab : Android: Android 14 (API 34)
+11-21 03:41:00.542  6427  6427 I NegaLab : App: debug
+11-21 03:41:00.542  6427  6427 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:41:00.542  6427  6427 I NegaLab :
+PASS  background frame
+11-21 03:41:03.740  6427  6427 I NegaLab : done: Capture test frame | Test frame captured.
+11-21 03:41:03.740  6427  6427 I NegaLab : Nega Detection lab report
+11-21 03:41:03.740  6427  6427 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:41:03.740  6427  6427 I NegaLab : Android: Android 14 (API 34)
+11-21 03:41:03.740  6427  6427 I NegaLab : App: debug
+11-21 03:41:03.740  6427  6427 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:41:03.740  6427  6427 I NegaLab :
+PASS  background repeat
+11-21 03:41:04.379  6427  6427 I NegaLab : sample after 0 frames: heap 8 MB, frames alive 0
+11-21 03:41:08.489  6427  6427 I NegaLab : sample after 8 frames: heap 34 MB, frames alive 8
+11-21 03:41:12.999  6427  6427 I NegaLab : sample after 18 frames: heap 63 MB, frames alive 18
+11-21 03:41:17.505  6427  6427 I NegaLab : sample after 28 frames: heap 88 MB, frames alive 28
+11-21 03:41:22.018  6427  6427 I NegaLab : sample after 38 frames: heap 113 MB, frames alive 38
+11-21 03:41:26.529  6427  6427 I NegaLab : sample after 48 frames: heap 128 MB, frames alive 48
+11-21 03:41:31.041  6427  6427 I NegaLab : sample after 58 frames: heap 160 MB, frames alive 58
+11-21 03:41:35.552  6427  6427 I NegaLab : sample after 68 frames: heap 182 MB, frames alive 68
+11-21 03:41:37.630  6427  6427 E NegaLab : lab action failed: Repeat test
+11-21 03:41:37.630  6427  6427 E NegaLab : java.lang.OutOfMemoryError: Failed to allocate a 864016 byte allocation with 532944 free bytes and 520KB until OOM, target footprint 201326592, growth limit 201326592
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.NccMatcher.prepare(NccMatcher.kt:89)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.NccMatcher.search(NccMatcher.kt:43)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.lab.DetectionLab$repeatBody$2$found$1.invokeSuspend(DetectionLab.kt:298)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:807)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+11-21 03:41:37.631  6427  6427 I NegaLab : done: Repeat test | Failed: OutOfMemoryError Failed to allocate a 864016 byte allocation with 532944 free bytes and 520KB until OOM, target footprint 201326592, growth limit 201326592
+11-21 03:41:37.631  6427  6427 I NegaLab : Nega Detection lab report
+11-21 03:41:37.631  6427  6427 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:41:37.631  6427  6427 I NegaLab : Android: Android 14 (API 34)
+11-21 03:41:37.631  6427  6427 I NegaLab : App: debug
+11-21 03:41:37.631  6427  6427 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:41:37.631  6427  6427 I NegaLab :
+PASS  leak probe 2
+11-21 03:41:38.508  6427  6427 E NegaLab : lab action failed: Leak probe
+11-21 03:41:38.508  6427  6427 E NegaLab : java.lang.OutOfMemoryError: Failed to allocate a 2592016 byte allocation with 1370936 free bytes and 1338KB until OOM, target footprint 201326592, growth limit 201326592
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.Frame$Companion.fromRows(Frame.kt:103)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.BitmapToFrame.convert(BitmapToFrame.kt:15)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.toFrame(ScreenshotFrameSource.kt:80)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.access$toFrame(ScreenshotFrameSource.kt:24)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource$next$2.invokeSuspend(ScreenshotFrameSource.kt:33)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:807)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+11-21 03:41:38.508  6427  6427 I NegaLab : done: Leak probe | Failed: OutOfMemoryError Failed to allocate a 2592016 byte allocation with 1370936 free bytes and 1338KB until OOM, target footprint 201326592, growth limit 201326592
+11-21 03:41:38.508  6427  6427 I NegaLab : Nega Detection lab report
+11-21 03:41:38.508  6427  6427 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:41:38.508  6427  6427 I NegaLab : Android: Android 14 (API 34)
+11-21 03:41:38.508  6427  6427 I NegaLab : App: debug
+11-21 03:41:38.508  6427  6427 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:41:38.508  6427  6427 I NegaLab :
+PASS  quick test on Settings
+11-21 03:41:45.936  6427  6427 E NegaLab : lab action failed: Quick test
+11-21 03:41:45.936  6427  6427 E NegaLab : java.lang.OutOfMemoryError: Failed to allocate a 2592016 byte allocation with 1351744 free bytes and 1320KB until OOM, target footprint 201326592, growth limit 201326592
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.Frame$Companion.fromRows(Frame.kt:103)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.BitmapToFrame.convert(BitmapToFrame.kt:15)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.toFrame(ScreenshotFrameSource.kt:80)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.access$toFrame(ScreenshotFrameSource.kt:24)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource$next$2.invokeSuspend(ScreenshotFrameSource.kt:33)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:807)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+11-21 03:41:45.941  6427  6427 I NegaLab : done: Quick test | Failed: OutOfMemoryError Failed to allocate a 2592016 byte allocation with 1351744 free bytes and 1320KB until OOM, target footprint 201326592, growth limit 201326592
+11-21 03:41:45.941  6427  6427 I NegaLab : Nega Detection lab report
+11-21 03:41:45.941  6427  6427 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:41:45.941  6427  6427 I NegaLab : Android: Android 14 (API 34)
+11-21 03:41:45.941  6427  6427 I NegaLab : App: debug
+11-21 03:41:45.941  6427  6427 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-21 03:41:45.941  6427  6427 I NegaLab :
+panel: 11-21 03:41:50.465  6427  6427 I NegaLab : panel: Success(value=kotlin.Unit)
+run: 11-21 03:41:53.742  6427  6485 I NegaLab : run: Success(value=kotlin.Unit)
+PASS  crop confirmed
+11-21 03:42:08.444  6427  6427 I NegaLab : done: Capture reference | Reference captured.
+11-21 03:42:08.445  6427  6427 I NegaLab : Nega Detection lab report
+11-21 03:42:08.445  6427  6427 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:42:08.445  6427  6427 I NegaLab : Android: Android 14 (API 34)
+11-21 03:42:08.445  6427  6427 I NegaLab : App: debug
+11-21 03:42:08.445  6427  6427 I NegaLab : Reference image: 500x400 px, cut at (150, 700)
+11-21 03:42:08.445  6427  6427 I NegaLab :
+PASS  test frame after crop
+11-21 03:42:11.799  6427  6427 I NegaLab : done: Capture test frame | Test frame captured.
+11-21 03:42:11.800  6427  6427 I NegaLab : Nega Detection lab report
+11-21 03:42:11.800  6427  6427 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:42:11.800  6427  6427 I NegaLab : Android: Android 14 (API 34)
+11-21 03:42:11.800  6427  6427 I NegaLab : App: debug
+11-21 03:42:11.800  6427  6427 I NegaLab : Reference image: 500x400 px, cut at (150, 700)
+11-21 03:42:11.800  6427  6427 I NegaLab :
+PASS  match after crop
+11-21 03:42:14.567  6427  6427 I NegaLab : done: Match | Match finished.
+11-21 03:42:14.568  6427  6427 I NegaLab : Nega Detection lab report
+11-21 03:42:14.568  6427  6427 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-21 03:42:14.568  6427  6427 I NegaLab : Android: Android 14 (API 34)
+11-21 03:42:14.568  6427  6427 I NegaLab : App: debug
+11-21 03:42:14.568  6427  6427 I NegaLab : Reference image: 500x400 px, cut at (150, 700)
+11-21 03:42:14.568  6427  6427 I NegaLab :
+11-21 03:42:14.568  6427  6427 I NegaLab : Single frame match
+11-21 03:42:14.568  6427  6427 I NegaLab :   best score 1.00 at (150, 700, 650, 1100)
+11-21 03:42:14.568  6427  6427 I NegaLab :   time per search: Safe 286 ms, Fast 190 ms (median)
+11-21 03:42:14.568  6427  6427 I NegaLab :   confidence 0.60: found
+11-21 03:42:14.568  6427  6427 I NegaLab :   confidence 0.70: found
+11-21 03:42:14.568  6427  6427 I NegaLab :   confidence 0.80: found
+11-21 03:42:14.568  6427  6427 I NegaLab :   confidence 0.85: found
+11-21 03:42:14.569  6427  6427 I NegaLab :   confidence 0.90: found
+11-21 03:42:14.569  6427  6427 I NegaLab :   confidence 0.95: found
+11-21 03:42:14.569  6427  6427 I NegaLab :   typical script: 96x64 px template in a 546x664 px region, score 1.00
+11-21 03:42:14.569  6427  6427 I NegaLab :   time per search: Safe 23 ms, Fast 20 ms (median)
+11-21 03:42:14.569  6427  6427 I NegaLab :
+fatal or app error lines: 37
+11-21 03:41:37.630  6427  6427 E NegaLab : lab action failed: Repeat test
+11-21 03:41:37.630  6427  6427 E NegaLab : java.lang.OutOfMemoryError: Failed to allocate a 864016 byte allocation with 532944 free bytes and 520KB until OOM, target footprint 201326592, growth limit 201326592
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.NccMatcher.prepare(NccMatcher.kt:89)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.NccMatcher.search(NccMatcher.kt:43)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.lab.DetectionLab$repeatBody$2$found$1.invokeSuspend(DetectionLab.kt:298)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:807)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+11-21 03:41:37.630  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+11-21 03:41:38.508  6427  6427 E NegaLab : lab action failed: Leak probe
+11-21 03:41:38.508  6427  6427 E NegaLab : java.lang.OutOfMemoryError: Failed to allocate a 2592016 byte allocation with 1370936 free bytes and 1338KB until OOM, target footprint 201326592, growth limit 201326592
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.Frame$Companion.fromRows(Frame.kt:103)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.BitmapToFrame.convert(BitmapToFrame.kt:15)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.toFrame(ScreenshotFrameSource.kt:80)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.access$toFrame(ScreenshotFrameSource.kt:24)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource$next$2.invokeSuspend(ScreenshotFrameSource.kt:33)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:807)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+11-21 03:41:38.508  6427  6427 E NegaLab : 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+11-21 03:41:45.936  6427  6427 E NegaLab : lab action failed: Quick test
+11-21 03:41:45.936  6427  6427 E NegaLab : java.lang.OutOfMemoryError: Failed to allocate a 2592016 byte allocation with 1351744 free bytes and 1320KB until OOM, target footprint 201326592, growth limit 201326592
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.core.vision.Frame$Companion.fromRows(Frame.kt:103)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.BitmapToFrame.convert(BitmapToFrame.kt:15)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.toFrame(ScreenshotFrameSource.kt:80)
+11-21 03:41:45.936  6427  6427 E NegaLab : 	at com.zdmgold.autoclickernega.service.capture.ScreenshotFrameSource.access$toFrame(ScreenshotFrameSource.kt:24)
