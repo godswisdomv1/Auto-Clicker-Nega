@@ -29,7 +29,7 @@
 > Task :app:processDebugJavaRes
 > Task :app:processDebugUnitTestJavaRes
 > Task :app:testDebugUnitTest FROM-CACHE
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/test-1794916896918.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/test-1795270460614.json
 
 BUILD SUCCESSFUL in 1s
 26 actionable tasks: 3 executed, 4 from cache, 19 up-to-date
