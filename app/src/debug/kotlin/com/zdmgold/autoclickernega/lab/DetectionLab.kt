@@ -351,6 +351,7 @@ class DetectionLab(
     ) {
         heap += usedMb()
         alive += seen.count { it.get() != null }
+        Log.i(TAG, "sample after ${seen.size} frames: heap ${heap.last()} MB, frames alive ${alive.last()}")
     }
 
     /** The search region of a script: the area around where the target was cut, not the whole screen. */

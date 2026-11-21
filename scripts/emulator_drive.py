@@ -215,6 +215,22 @@ def heap_dump_during_repeat():
     log("\n".join(line.split("NegaLab:")[-1].strip() for line in after[len(before):].splitlines() if "NegaLab" in line))
 
 
+def background_repeat():
+    """The same repeat test with the app in the background, in a fresh process, so no screen is redrawing."""
+    log("---- experiment: repeat test with the app in the background ----")
+    adb("shell", "am", "force-stop", PKG)
+    adb("shell", "settings", "put", "secure", "enabled_accessibility_services", SERVICE)
+    adb("shell", "settings", "put", "secure", "accessibility_enabled", "1")
+    time.sleep(10)
+    adb("shell", "input", "keyevent", "KEYCODE_HOME")
+    lab_command(
+        "background reference", "nega.LAB_REFERENCE_BOX", "done: Capture reference region", 60,
+        "--ei", "l", "100", "--ei", "t", "120", "--ei", "r", "700", "--ei", "b", "300",
+    )
+    lab_command("background frame", "nega.LAB_FRAME", "done: Capture test frame", 60)
+    lab_command("background repeat", "nega.LAB_REPEAT", "done: Repeat test", 600)
+
+
 def main():
     log(adb("shell", "getprop", "ro.build.version.release").strip() + " / " + adb("shell", "wm", "size").strip())
     log(adb("install", "-r", "-g", APK).strip())
@@ -256,7 +272,8 @@ def main():
     lab_command("leak probe 1", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_match")
     lab_command("rate probe", "nega.LAB_RATE", "done: Capture rate probe", 300)
-    heap_dump_during_repeat()
+    lab_command("repeat test, lab screen in front", "nega.LAB_REPEAT", "done: Repeat test", 600)
+    background_repeat()
     lab_command("leak probe 2", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_repeat")
 
@@ -273,11 +290,11 @@ def main():
     shot("settings_before")
     bcast("nega.PANEL")
     time.sleep(3)
-    log("panel: " + [line for line in lab_lines().splitlines() if "panel:" in line][-1])
+    log("panel: " + "; ".join(line for line in lab_lines().splitlines() if "panel:" in line)[-300:])
     shot("panel_over_settings")
     bcast("nega.RUN", "--es", "json", "'" + TAP_SCRIPT + "'")
     time.sleep(4)
-    log("run: " + [line for line in lab_lines().splitlines() if "run:" in line][-1])
+    log("run: " + "; ".join(line for line in lab_lines().splitlines() if "run:" in line)[-300:])
     shot("after_run_tap")
 
     # The crop overlay: opened by the lab, dragged over part of Home, confirmed with the check button at the bottom
