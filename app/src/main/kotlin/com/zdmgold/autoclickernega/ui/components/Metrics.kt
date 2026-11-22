@@ -27,4 +27,5 @@ object Metrics {
     val minusHeight = 2.dp
     val dialogMaxWidth = 360.dp
     val focusBorder = 1.5.dp
+    val sheetMaxHeight = 560.dp
 }

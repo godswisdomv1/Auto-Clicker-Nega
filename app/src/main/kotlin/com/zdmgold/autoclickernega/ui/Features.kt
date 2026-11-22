@@ -5,7 +5,7 @@ package com.zdmgold.autoclickernega.ui
  * end. Each later batch switches its own flag on in the same commit that adds the screen.
  */
 object Features {
-    const val EDITOR: Boolean = false
+    const val EDITOR: Boolean = true
     const val QUICK_SCENARIO: Boolean = false
     const val SETTINGS: Boolean = false
 }

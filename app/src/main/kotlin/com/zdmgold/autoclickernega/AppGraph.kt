@@ -5,6 +5,7 @@ import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import com.zdmgold.autoclickernega.core.model.Script
 import com.zdmgold.autoclickernega.core.port.CaptureProbe
 import com.zdmgold.autoclickernega.core.port.DraftStore
 import com.zdmgold.autoclickernega.core.port.OverlayPort
@@ -36,6 +37,7 @@ import com.zdmgold.autoclickernega.service.bridge.EngineBridge
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.io.File
 import java.time.LocalDate
@@ -78,6 +80,9 @@ class AppGraph(
     val errors = ErrorLog()
     val locale = LocaleManager()
     val drafts: DraftStore = ScriptSession
+
+    /** The script most recently deleted from the editor, so Home can offer to undo it. */
+    val deletedScript = MutableStateFlow<Script?>(null)
     val engine: ServiceBridge = EngineBridge
     val overlay: OverlayPort = EngineBridge
     val probe: CaptureProbe = EngineBridge

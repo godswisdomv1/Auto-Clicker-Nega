@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -19,6 +20,8 @@ import com.zdmgold.autoclickernega.ui.components.EmptyState
 import com.zdmgold.autoclickernega.ui.components.NavBar
 import com.zdmgold.autoclickernega.ui.components.NavBarBack
 import com.zdmgold.autoclickernega.ui.components.NegaScreen
+import com.zdmgold.autoclickernega.ui.editor.EditorScreen
+import com.zdmgold.autoclickernega.ui.editor.EditorViewModel
 import com.zdmgold.autoclickernega.ui.home.HomeScreen
 import com.zdmgold.autoclickernega.ui.home.HomeViewModel
 import com.zdmgold.autoclickernega.ui.icons.AppIcons

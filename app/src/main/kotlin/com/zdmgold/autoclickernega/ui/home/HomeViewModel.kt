@@ -8,6 +8,8 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.zdmgold.autoclickernega.AppGraph
 import com.zdmgold.autoclickernega.core.error.AppError
 import com.zdmgold.autoclickernega.core.model.ScreenSpec
+import com.zdmgold.autoclickernega.core.model.Script
+import com.zdmgold.autoclickernega.core.port.DraftStore
 import com.zdmgold.autoclickernega.core.port.OverlayPort
 import com.zdmgold.autoclickernega.core.port.RunRequest
 import com.zdmgold.autoclickernega.core.port.ScriptStore
@@ -16,6 +18,7 @@ import com.zdmgold.autoclickernega.core.port.TemplateStore
 import com.zdmgold.autoclickernega.core.result.Outcome
 import com.zdmgold.autoclickernega.core.script.LibraryImporter
 import com.zdmgold.autoclickernega.data.ScriptFileGateway
+import com.zdmgold.autoclickernega.ui.editor.SimpleEditing
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -35,6 +38,8 @@ class HomeViewModel(
     private val engine: ServiceBridge,
     private val overlay: OverlayPort,
     private val screen: () -> ScreenSpec,
+    private val drafts: DraftStore,
+    private val deleted: MutableStateFlow<Script?>,
 ) : ViewModel() {
     private data class Controls(
         val query: String = "",
@@ -45,7 +50,12 @@ class HomeViewModel(
     private val controls = MutableStateFlow(Controls())
 
     val state: StateFlow<HomeUiState> =
-        combine(scripts.scripts, controls, engine.state, overlay.panelVisible) { all, c, engineState, panel ->
+        combine(
+            scripts.scripts,
+            controls,
+            combine(engine.state, overlay.panelVisible) { engineState, panel -> engineState to panel },
+            combine(drafts.draft, deleted) { draft, gone -> draft to gone },
+        ) { all, c, (engineState, panel), (draft, gone) ->
             HomeUiState(
                 loaded = true,
                 scripts = HomeModel.visible(all, c.query, c.sort),
@@ -55,8 +65,24 @@ class HomeViewModel(
                 engine = engineState,
                 panelVisible = panel,
                 message = c.message,
+                panelScriptSteps = draft?.let { SimpleEditing.steps(it).size } ?: 0,
+                deletedName = gone?.name,
             )
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), HomeUiState())
+
+    /** Puts back the script that was just deleted in the editor. */
+    fun undoDelete() {
+        val script = deleted.value ?: return
+        viewModelScope.launch {
+            val result = scripts.restore(script)
+            deleted.value = null
+            if (result is Outcome.Failure) fail(result.error)
+        }
+    }
+
+    fun dismissDeleted() {
+        deleted.value = null
+    }
 
     fun setQuery(query: String) = controls.update { it.copy(query = query) }
 
@@ -126,7 +152,16 @@ class HomeViewModel(
             screen: () -> ScreenSpec,
         ) = viewModelFactory {
             initializer {
-                HomeViewModel(graph.scripts, graph.templates, graph.files, graph.engine, graph.overlay, screen)
+                HomeViewModel(
+                    graph.scripts,
+                    graph.templates,
+                    graph.files,
+                    graph.engine,
+                    graph.overlay,
+                    screen,
+                    graph.drafts,
+                    graph.deletedScript,
+                )
             }
         }
     }

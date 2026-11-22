@@ -29,6 +29,8 @@ data class HomeUiState(
     val engine: EngineState = EngineState.ServiceLost,
     val panelVisible: Boolean = false,
     val message: HomeMessage? = null,
+    val panelScriptSteps: Int = 0,
+    val deletedName: String? = null,
 ) {
     /** Search and sort appear once the library is long enough to need them. */
     val showSearch: Boolean get() = HomeModel.showSearch(totalCount)

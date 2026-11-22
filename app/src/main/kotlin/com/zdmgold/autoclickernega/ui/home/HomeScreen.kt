@@ -84,6 +84,15 @@ fun HomeScreen(
             state.message?.let { message ->
                 item(key = "message") { MessageBanner(message, viewModel::dismissMessage) }
             }
+            state.deletedName?.let { name ->
+                item(key = "deleted") {
+                    UndoBanner(
+                        stringResource(R.string.msg_deleted, name),
+                        stringResource(R.string.action_undo),
+                        viewModel::undoDelete,
+                    )
+                }
+            }
             item(key = "status") { StatusCard(app, onOpen) }
             if (state.runActive) item(key = "run") { RunCard(state.engine, viewModel::stop) }
             item(key = "panel") {
@@ -92,6 +101,27 @@ fun HomeScreen(
                         viewModel.closePanel()
                     } else if (viewModel.openPanel()) {
                         context.findActivity()?.moveTaskToBack(true)
+                    }
+                }
+            }
+            if (Features.EDITOR) {
+                item(key = "new") {
+                    val fromPanel = state.panelScriptSteps > 0
+                    NegaCard(Modifier.fillMaxWidth()) {
+                        NegaRow(
+                            title =
+                                stringResource(
+                                    if (fromPanel) R.string.home_panel_script else R.string.home_new_script,
+                                ),
+                            subtitle =
+                                if (fromPanel) {
+                                    stringResource(R.string.home_panel_script_steps, state.panelScriptSteps)
+                                } else {
+                                    stringResource(R.string.home_new_script_sub)
+                                },
+                            icon = if (fromPanel) AppIcons.Edit else AppIcons.Add,
+                            onClick = { onOpen(Route.Editor(null)) },
+                        )
                     }
                 }
             }
@@ -294,7 +324,7 @@ private fun ScriptRow(
             title = script.name,
             subtitle = subtitle,
             icon = if (script.mode == ScriptMode.Smart) AppIcons.Branch else AppIcons.Tap,
-            onClick = if (Features.EDITOR) onOpen else null,
+            onClick = if (Features.EDITOR && script.mode == ScriptMode.Simple) onOpen else null,
             trailing = {
                 ChipIconButton(AppIcons.Play, stringResource(R.string.script_run, script.name), onRun)
             },
