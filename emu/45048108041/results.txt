@@ -1,0 +1,178 @@
+14 / Physical size: 1080x2400
+Performing Streamed Install
+Success
+PASS  welcome shows
+PASS  continue
+PASS  disclosure shows
+PASS  agree
+PASS  enable step shows
+PASS  later
+PASS  home shows
+PASS  new script row
+FAIL  editor shows
+FAIL  add step 1
+FAIL  kind sheet
+FAIL  pick tap
+FAIL  tap step listed
+FAIL  add step 2
+FAIL  kind sheet again
+FAIL  pick wait
+FAIL  wait step listed
+FAIL  open the start-in sheet
+FAIL  start-in sheet shows
+FAIL  save
+FAIL  saved banner
+FAIL  back to home
+FAIL  script listed on home
+PASS  open lab
+PASS  lab shows
+
+accessibility dump lines mentioning the app: ['Enabled services:{{com.zdmgold.autoclickernega.debug/com.zdmgold.autoclickernega.service.NegaAccessibilityService}}', '[com.google.android.apps.youtube.music][com.android.systemui][com.google.android.contacts][com.google.android.youtube][com.google.android.googlequicksearchbox][com.google.android.inputmethod.latin][com.google.android.googlequicksearchbox][com.google.android.apps.nexuslauncher][com.google.android.apps.nexuslauncher][com.google.android.apps.nexuslauncher][com.google.android.as][com.google.android.apps.nexuslauncher][com.google.android.apps.nexuslauncher][com.zdmgold.autoclickernega.debug]}]']
+PASS  reference region
+11-22 17:24:20.193  3055  3055 I NegaLab : done: Capture reference region | Reference captured.
+11-22 17:24:20.196  3055  3055 I NegaLab : Nega Detection lab report
+11-22 17:24:20.196  3055  3055 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:24:20.196  3055  3055 I NegaLab : Android: Android 14 (API 34)
+11-22 17:24:20.196  3055  3055 I NegaLab : App: 0.1.0-debug
+11-22 17:24:20.196  3055  3055 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-22 17:24:20.196  3055  3055 I NegaLab :
+PASS  test frame
+11-22 17:24:20.702  3055  3055 I NegaLab : done: Capture test frame | Test frame captured.
+11-22 17:24:20.703  3055  3055 I NegaLab : Nega Detection lab report
+11-22 17:24:20.703  3055  3055 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:24:20.703  3055  3055 I NegaLab : Android: Android 14 (API 34)
+11-22 17:24:20.703  3055  3055 I NegaLab : App: 0.1.0-debug
+11-22 17:24:20.703  3055  3055 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-22 17:24:20.703  3055  3055 I NegaLab :
+PASS  match
+11-22 17:24:22.767  3055  3055 I NegaLab : done: Match | Match finished.
+11-22 17:24:22.768  3055  3055 I NegaLab : Nega Detection lab report
+11-22 17:24:22.768  3055  3055 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:24:22.768  3055  3055 I NegaLab : Android: Android 14 (API 34)
+11-22 17:24:22.768  3055  3055 I NegaLab : App: 0.1.0-debug
+11-22 17:24:22.768  3055  3055 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-22 17:24:22.768  3055  3055 I NegaLab :
+11-22 17:24:22.768  3055  3055 I NegaLab : Single frame match
+11-22 17:24:22.768  3055  3055 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-22 17:24:22.768  3055  3055 I NegaLab :   time per search: Safe 170 ms, Fast 111 ms (median)
+11-22 17:24:22.768  3055  3055 I NegaLab :   confidence 0.60: found
+11-22 17:24:22.768  3055  3055 I NegaLab :   confidence 0.70: found
+11-22 17:24:22.768  3055  3055 I NegaLab :   confidence 0.80: found
+11-22 17:24:22.769  3055  3055 I NegaLab :   confidence 0.85: found
+11-22 17:24:22.769  3055  3055 I NegaLab :   confidence 0.90: found
+11-22 17:24:22.769  3055  3055 I NegaLab :   confidence 0.95: found
+11-22 17:24:22.769  3055  3055 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-22 17:24:22.769  3055  3055 I NegaLab :   time per search: Safe 15 ms, Fast 12 ms (median)
+11-22 17:24:22.769  3055  3055 I NegaLab :
+PASS  leak probe 1
+11-22 17:24:45.928  3055  3055 I NegaLab : done: Leak probe | leak probe heap MB after a forced collection: start 18, after 40 captures 14, after 40 searches 22
+11-22 17:24:45.929  3055  3055 I NegaLab : Nega Detection lab report
+11-22 17:24:45.929  3055  3055 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:24:45.929  3055  3055 I NegaLab : Android: Android 14 (API 34)
+11-22 17:24:45.929  3055  3055 I NegaLab : App: 0.1.0-debug
+11-22 17:24:45.929  3055  3055 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-22 17:24:45.929  3055  3055 I NegaLab :
+11-22 17:24:45.929  3055  3055 I NegaLab : Single frame match
+11-22 17:24:45.929  3055  3055 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-22 17:24:45.929  3055  3055 I NegaLab :   time per search: Safe 170 ms, Fast 111 ms (median)
+11-22 17:24:45.929  3055  3055 I NegaLab :   confidence 0.60: found
+11-22 17:24:45.929  3055  3055 I NegaLab :   confidence 0.70: found
+11-22 17:24:45.929  3055  3055 I NegaLab :   confidence 0.80: found
+11-22 17:24:45.929  3055  3055 I NegaLab :   confidence 0.85: found
+11-22 17:24:45.929  3055  3055 I NegaLab :   confidence 0.90: found
+11-22 17:24:45.929  3055  3055 I NegaLab :   confidence 0.95: found
+11-22 17:24:45.929  3055  3055 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-22 17:24:45.929  3055  3055 I NegaLab :   time per search: Safe 15 ms, Fast 12 ms (median)
+11-22 17:24:45.929  3055  3055 I NegaLab :
+PASS  rate probe
+11-22 17:25:00.412  3055  3055 I NegaLab : done: Capture rate probe | Rate probe finished.
+11-22 17:25:00.413  3055  3055 I NegaLab : Nega Detection lab report
+11-22 17:25:00.413  3055  3055 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:25:00.413  3055  3055 I NegaLab : Android: Android 14 (API 34)
+11-22 17:25:00.413  3055  3055 I NegaLab : App: 0.1.0-debug
+11-22 17:25:00.413  3055  3055 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-22 17:25:00.413  3055  3055 I NegaLab :
+11-22 17:25:00.413  3055  3055 I NegaLab : Single frame match
+11-22 17:25:00.413  3055  3055 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-22 17:25:00.413  3055  3055 I NegaLab :   time per search: Safe 170 ms, Fast 111 ms (median)
+11-22 17:25:00.413  3055  3055 I NegaLab :   confidence 0.60: found
+11-22 17:25:00.413  3055  3055 I NegaLab :   confidence 0.70: found
+11-22 17:25:00.413  3055  3055 I NegaLab :   confidence 0.80: found
+11-22 17:25:00.414  3055  3055 I NegaLab :   confidence 0.85: found
+11-22 17:25:00.414  3055  3055 I NegaLab :   confidence 0.90: found
+11-22 17:25:00.414  3055  3055 I NegaLab :   confidence 0.95: found
+11-22 17:25:00.414  3055  3055 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-22 17:25:00.414  3055  3055 I NegaLab :   time per search: Safe 15 ms, Fast 12 ms (median)
+11-22 17:25:00.414  3055  3055 I NegaLab :
+11-22 17:25:00.414  3055  3055 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-22 17:25:00.414  3055  3055 I NegaLab :   requests 100, accepted 34, refused 66
+11-22 17:25:00.414  3055  3055 I NegaLab :   gap between accepted captures ms: min 276, median 388
+11-22 17:25:00.414  3055  3055 I NegaLab :
+---- experiment: repeat test with the app in the background ----
+PASS  background reference
+11-22 17:25:14.190  9440  9440 I NegaLab : done: Capture reference region | Turn on the accessibility service first.
+11-22 17:25:14.193  9440  9440 I NegaLab : Nega Detection lab report
+11-22 17:25:14.193  9440  9440 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:25:14.193  9440  9440 I NegaLab : Android: Android 14 (API 34)
+11-22 17:25:14.193  9440  9440 I NegaLab : App: debug
+11-22 17:25:14.193  9440  9440 I NegaLab : Reference image: none captured
+11-22 17:25:14.193  9440  9440 I NegaLab :
+PASS  background frame
+11-22 17:25:14.552  9440  9440 I NegaLab : done: Capture test frame | Turn on the accessibility service first.
+11-22 17:25:14.552  9440  9440 I NegaLab : Nega Detection lab report
+11-22 17:25:14.552  9440  9440 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:25:14.552  9440  9440 I NegaLab : Android: Android 14 (API 34)
+11-22 17:25:14.552  9440  9440 I NegaLab : App: debug
+11-22 17:25:14.552  9440  9440 I NegaLab : Reference image: none captured
+11-22 17:25:14.552  9440  9440 I NegaLab :
+app pid 9440
+heap dump size 39069278
+0 byte[2592000] arrays, 181275 instances, 250197 roots
+level 1: 0 holders
+   of which GC roots: 0
+
+PASS  repeat test
+11-22 17:25:14.913  9440  9440 I NegaLab : done: Repeat test | Capture a reference image first.
+11-22 17:25:14.913  9440  9440 I NegaLab : Nega Detection lab report
+11-22 17:25:14.913  9440  9440 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:25:14.913  9440  9440 I NegaLab : Android: Android 14 (API 34)
+11-22 17:25:14.913  9440  9440 I NegaLab : App: debug
+11-22 17:25:14.913  9440  9440 I NegaLab : Reference image: none captured
+11-22 17:25:14.913  9440  9440 I NegaLab :
+FAIL  leak probe 2
+
+FAIL  quick test on Settings
+11-22 17:27:56.895  9440  9440 I NegaLab : done: Leak probe | No frame for the leak probe.
+11-22 17:27:56.896  9440  9440 I NegaLab : Nega Detection lab report
+11-22 17:27:56.896  9440  9440 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:27:56.896  9440  9440 I NegaLab : Android: Android 14 (API 34)
+11-22 17:27:56.896  9440  9440 I NegaLab : App: debug
+11-22 17:27:56.896  9440  9440 I NegaLab : Reference image: none captured
+11-22 17:27:56.896  9440  9440 I NegaLab :
+panel: 11-22 17:32:56.062  9440  9440 I NegaLab : panel: Failure(error=ServiceNotEnabled)
+run: 11-22 17:32:59.410  9440  9457 I NegaLab : run: Failure(error=ServiceNotEnabled)
+PASS  crop confirmed
+11-22 17:33:08.139  9440  9440 I NegaLab : done: Capture reference | Turn on the accessibility service first.
+11-22 17:33:08.139  9440  9440 I NegaLab : Nega Detection lab report
+11-22 17:33:08.139  9440  9440 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:33:08.139  9440  9440 I NegaLab : Android: Android 14 (API 34)
+11-22 17:33:08.139  9440  9440 I NegaLab : App: debug
+11-22 17:33:08.139  9440  9440 I NegaLab : Reference image: none captured
+11-22 17:33:08.139  9440  9440 I NegaLab :
+PASS  test frame after crop
+11-22 17:33:17.779  9440  9440 I NegaLab : done: Capture test frame | Turn on the accessibility service first.
+11-22 17:33:17.779  9440  9440 I NegaLab : Nega Detection lab report
+11-22 17:33:17.779  9440  9440 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:33:17.779  9440  9440 I NegaLab : Android: Android 14 (API 34)
+11-22 17:33:17.779  9440  9440 I NegaLab : App: debug
+11-22 17:33:17.779  9440  9440 I NegaLab : Reference image: none captured
+11-22 17:33:17.779  9440  9440 I NegaLab :
+PASS  match after crop
+11-22 17:33:18.139  9440  9440 I NegaLab : done: Match | Capture a reference image first.
+11-22 17:33:18.139  9440  9440 I NegaLab : Nega Detection lab report
+11-22 17:33:18.139  9440  9440 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-22 17:33:18.139  9440  9440 I NegaLab : Android: Android 14 (API 34)
+11-22 17:33:18.139  9440  9440 I NegaLab : App: debug
+11-22 17:33:18.139  9440  9440 I NegaLab : Reference image: none captured
+11-22 17:33:18.139  9440  9440 I NegaLab :
+fatal or app error lines: 0
