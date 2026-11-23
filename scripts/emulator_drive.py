@@ -297,7 +297,7 @@ def main():
     lab_command("leak probe 1", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_match")
     lab_command("rate probe", "nega.LAB_RATE", "done: Capture rate probe", 300)
-    background_repeat()
+    lab_command("repeat test", "nega.LAB_REPEAT", "done: Repeat test", 900)
     lab_command("leak probe 2", "nega.LAB_LEAK", "done: Leak probe", 120)
     shot("lab_after_repeat")
 

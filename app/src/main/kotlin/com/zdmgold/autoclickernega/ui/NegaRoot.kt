@@ -73,11 +73,23 @@ private fun RouteContent(
             HomeScreen(model, state, vm::navigate)
         }
 
+        is Route.Editor -> {
+            val screen = remember { DisplayInfo.screenSpec(context) }
+            val defaultName = stringResource(R.string.editor_default_name)
+            val model: EditorViewModel =
+                viewModel(
+                    key = "editor-${route.scriptId}",
+                    factory = EditorViewModel.factory(graph, screen, route.scriptId, defaultName),
+                )
+            EditorScreen(model, screen, onClose = vm::back)
+        }
+
         Route.Lab -> {
             LabEntry.Screen(graph, vm::back)
         }
 
-        else -> {
+        // Screens that are not built yet. Listing them keeps this table exhaustive, so a new route cannot fall through.
+        Route.Settings, Route.QuickScenario, Route.Help, Route.About, Route.Paywall -> {
             PendingScreen(vm::back)
         }
     }
