@@ -8,13 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
 import com.zdmgold.autoclickernega.R
-import com.zdmgold.autoclickernega.core.format.formatDuration
 import com.zdmgold.autoclickernega.core.model.Action
 import com.zdmgold.autoclickernega.core.model.Target
 import com.zdmgold.autoclickernega.ui.components.ChipIconButton
 import com.zdmgold.autoclickernega.ui.components.NegaCard
 import com.zdmgold.autoclickernega.ui.components.NegaRow
-import com.zdmgold.autoclickernega.ui.components.currentLocale
 import com.zdmgold.autoclickernega.ui.icons.AppIcons
 import com.zdmgold.autoclickernega.ui.theme.Tokens
 
@@ -31,9 +29,8 @@ fun StepKind.iconRes(): Int =
 
 /** The one-line name of a step, such as "Tap at 540, 1200". */
 @Composable
-fun stepTitle(step: Action): String {
-    val locale = currentLocale()
-    return when (step) {
+fun stepTitle(step: Action): String =
+    when (step) {
         is Action.Tap -> {
             when (val at = step.at) {
                 is Target.At -> stringResource(R.string.step_tap, at.p.x, at.p.y)
@@ -54,14 +51,13 @@ fun stepTitle(step: Action): String {
         }
 
         is Action.Wait -> {
-            stringResource(R.string.step_wait, formatDuration(step.ms, locale))
+            stringResource(R.string.step_wait, spanText(step.ms))
         }
 
         is Action.CounterOp, is Action.RunScript, Action.Stop -> {
             ""
         }
     }
-}
 
 /** The second line of a step: how long it takes and how often it repeats. */
 @Composable

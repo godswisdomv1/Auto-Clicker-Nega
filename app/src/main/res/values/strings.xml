@@ -217,7 +217,14 @@
   <string name="run_settings_header">Run settings</string>
   <string name="run_loops">Repeat</string>
   <string name="run_loops_forever">Forever</string>
-  <string name="run_loops_times">%1$d times</string>
+  <plurals name="run_loops_times">
+    <item quantity="one">%1$d time</item>
+    <item quantity="other">%1$d times</item>
+  </plurals>
+  <string name="span_h">%1$d h</string>
+  <string name="span_min">%1$d min</string>
+  <string name="span_s">%1$d s</string>
+  <string name="span_ms">%1$d ms</string>
   <string name="run_timer">Stop after</string>
   <string name="run_timer_off">No limit</string>
   <string name="run_timer_minutes">%1$d min</string>

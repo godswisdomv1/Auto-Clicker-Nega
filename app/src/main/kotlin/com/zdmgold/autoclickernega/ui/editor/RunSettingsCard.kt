@@ -4,27 +4,26 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.zdmgold.autoclickernega.R
-import com.zdmgold.autoclickernega.core.format.formatDuration
 import com.zdmgold.autoclickernega.core.model.RunConfig
 import com.zdmgold.autoclickernega.core.model.SearchRate
 import com.zdmgold.autoclickernega.core.run.StartWaitPolicy
+import com.zdmgold.autoclickernega.ui.components.Metrics
 import com.zdmgold.autoclickernega.ui.components.NegaCard
 import com.zdmgold.autoclickernega.ui.components.NegaRow
 import com.zdmgold.autoclickernega.ui.components.NegaSheet
 import com.zdmgold.autoclickernega.ui.components.NegaText
 import com.zdmgold.autoclickernega.ui.components.Segmented
 import com.zdmgold.autoclickernega.ui.components.Stepper
-import com.zdmgold.autoclickernega.ui.components.currentLocale
 import com.zdmgold.autoclickernega.ui.icons.AppIcons
 import com.zdmgold.autoclickernega.ui.theme.NegaTheme
 import com.zdmgold.autoclickernega.ui.theme.Tokens
@@ -34,17 +33,17 @@ import com.zdmgold.autoclickernega.ui.theme.Tokens
 fun RunSettingsCard(
     run: RunConfig,
     onChange: ((RunConfig) -> RunConfig) -> Unit,
+    onOpenStartWait: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var pickingWait by remember { mutableStateOf(false) }
-    val locale = currentLocale()
+    val resources = LocalContext.current.resources
     NegaCard(modifier.fillMaxWidth()) {
         Column(Modifier.padding(Tokens.Spacing.m), verticalArrangement = Arrangement.spacedBy(Tokens.Spacing.m)) {
             LabelledStepper(
                 label = stringResource(R.string.run_loops),
                 value = run.loops,
                 range = 0..RunSettingsEditing.MAX_LOOPS,
-                format = { if (it == 0) "" else stringResource(R.string.run_loops_times, it) },
+                format = { resources.getQuantityString(R.plurals.run_loops_times, it, it) },
                 zero = stringResource(R.string.run_loops_forever),
                 onValue = { v -> onChange { RunSettingsEditing.loops(it, v) } },
             )
@@ -72,10 +71,10 @@ fun RunSettingsCard(
                     ) {
                         stringResource(R.string.run_start_now)
                     } else {
-                        formatDuration(run.startDelayMs, locale)
+                        spanText(run.startDelayMs)
                     },
                 icon = AppIcons.Timer,
-                onClick = { pickingWait = true },
+                onClick = onOpenStartWait,
             )
             if (RunSettingsEditing.needsPlugIn(run)) {
                 NegaText(
@@ -102,12 +101,6 @@ fun RunSettingsCard(
             )
         }
     }
-    StartWaitSheet(
-        visible = pickingWait,
-        run = run,
-        onPick = { ms -> onChange { RunSettingsEditing.startWait(it, ms) } },
-        onDismiss = { pickingWait = false },
-    )
 }
 
 @Composable
@@ -132,16 +125,18 @@ private fun LabelledStepper(
 
 /** The presets from one minute to twelve hours, and a custom entry in minutes up to the cap. */
 @Composable
-private fun StartWaitSheet(
+fun StartWaitSheet(
     visible: Boolean,
     run: RunConfig,
     onPick: (Long) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val locale = currentLocale()
     NegaSheet(visible = visible, onDismiss = onDismiss) {
         Column(
-            Modifier.padding(horizontal = Tokens.Spacing.m),
+            Modifier
+                .padding(horizontal = Tokens.Spacing.m)
+                .heightIn(max = Metrics.sheetMaxHeight)
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(Tokens.Spacing.s),
         ) {
             NegaText(stringResource(R.string.run_start_in), style = NegaTheme.typography.title1)
@@ -153,7 +148,7 @@ private fun StartWaitSheet(
             )
             StartWaitPolicy.presetsMs.forEach { ms ->
                 NegaRow(
-                    title = formatDuration(ms, locale),
+                    title = spanText(ms),
                     icon = if (run.startDelayMs == ms) AppIcons.Check else null,
                     onClick = { onPick(ms) },
                     showChevron = false,

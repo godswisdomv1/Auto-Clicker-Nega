@@ -59,6 +59,7 @@ fun EditorScreen(
     BackHandler { viewModel.onBack() }
     var openStep by remember { mutableStateOf<Int?>(null) }
     var choosingKind by remember { mutableStateOf(false) }
+    var pickingWait by remember { mutableStateOf(false) }
     val script = state.script
 
     Column(Modifier.fillMaxSize()) {
@@ -76,14 +77,14 @@ fun EditorScreen(
             return@Column
         }
         val steps = SimpleEditing.steps(script)
+        state.message?.let { message ->
+            Column(Modifier.padding(horizontal = Tokens.Spacing.m)) { EditorBanner(message, viewModel::dismissMessage) }
+        }
         LazyColumn(
             modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(horizontal = Tokens.Spacing.m, vertical = Tokens.Spacing.s),
             verticalArrangement = Arrangement.spacedBy(Tokens.Spacing.s),
         ) {
-            state.message?.let { message ->
-                item(key = "message") { EditorBanner(message, viewModel::dismissMessage) }
-            }
             item(key = "name") {
                 NegaTextField(
                     value = script.name,
@@ -92,7 +93,9 @@ fun EditorScreen(
                     label = stringResource(R.string.editor_name),
                 )
             }
-            item(key = "run") { RunSettingsCard(script.run, viewModel::setRun) }
+            item(
+                key = "run",
+            ) { RunSettingsCard(script.run, viewModel::setRun, onOpenStartWait = { pickingWait = true }) }
             item(key = "header") { SectionHeader(stringResource(R.string.editor_steps_header)) }
             if (steps.isEmpty()) {
                 item(key = "empty") {
@@ -141,6 +144,14 @@ fun EditorScreen(
         SaveBar(state, onSave = viewModel::save)
     }
 
+    StartWaitSheet(
+        visible = pickingWait,
+        run =
+            script?.run ?: com.zdmgold.autoclickernega.core.model
+                .RunConfig(),
+        onPick = { ms -> viewModel.setRun { RunSettingsEditing.startWait(it, ms) } },
+        onDismiss = { pickingWait = false },
+    )
     KindSheet(
         visible = choosingKind,
         onPick = { kind ->
