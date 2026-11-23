@@ -8,8 +8,8 @@ Starting a Gradle Daemon (subsequent builds will be faster)
 > Task :app:generateDebugRFile FROM-CACHE
 > Task :app:javaPreCompileDebug FROM-CACHE
 > Task :app:mapDebugSourceSetPaths
-> Task :app:compileDebugNavigationResources FROM-CACHE
 > Task :app:checkDebugAarMetadata
+> Task :app:compileDebugNavigationResources FROM-CACHE
 > Task :app:mergeDebugResources FROM-CACHE
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug FROM-CACHE
@@ -21,7 +21,10 @@ Starting a Gradle Daemon (subsequent builds will be faster)
 > Task :app:extractProguardFiles
 > Task :app:preDebugUnitTestBuild UP-TO-DATE
 > Task :app:kspDebugKotlin
+
 > Task :app:compileDebugKotlin
+w: file:///home/runner/work/Auto-Clicker-Nega/Auto-Clicker-Nega/app/src/main/kotlin/com/zdmgold/autoclickernega/ui/editor/StepForms.kt:55:17 Expression is unused.
+
 > Task :app:compileDebugJavaWithJavac NO-SOURCE
 > Task :app:bundleDebugClassesToCompileJar
 > Task :app:generateDebugLintReportModel
@@ -36,8 +39,10 @@ Wrote HTML report to file:///home/runner/work/Auto-Clicker-Nega/Auto-Clicker-Neg
 Wrote SARIF report to file:///home/runner/work/Auto-Clicker-Nega/Auto-Clicker-Nega/app/build/reports/lint-results-debug.sarif
 
 > Task :app:lintDebug
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/lint-1794992936785.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/lint-1795411487562.json
 
-BUILD SUCCESSFUL in 1m 47s
+[Incubating] Problems report is available at: file:///home/runner/work/Auto-Clicker-Nega/Auto-Clicker-Nega/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 1m 32s
 28 actionable tasks: 15 executed, 13 from cache
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.6.1/userguide/configuration_cache_enabling.html
