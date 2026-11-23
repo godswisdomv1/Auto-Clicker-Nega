@@ -1,0 +1,283 @@
+14 / Physical size: 1080x2400
+Performing Streamed Install
+Success
+PASS  welcome shows
+PASS  continue
+PASS  disclosure shows
+PASS  agree
+PASS  enable step shows
+PASS  later
+PASS  home shows
+PASS  new script row
+PASS  editor shows
+PASS  add step 1
+PASS  kind sheet
+PASS  pick tap
+PASS  tap step listed
+PASS  add step 2
+PASS  kind sheet again
+PASS  pick wait
+FAIL  wait step listed
+PASS  open the start-in sheet
+PASS  start-in sheet shows
+PASS  save
+FAIL  saved banner
+PASS  back to home
+PASS  script listed on home
+PASS  open lab
+PASS  lab shows
+
+accessibility dump lines mentioning the app: ['Enabled services:{{com.zdmgold.autoclickernega.debug/com.zdmgold.autoclickernega.service.NegaAccessibilityService}}', '[com.google.android.inputmethod.latin][com.google.android.as][com.google.android.googlequicksearchbox][com.google.android.apps.nexuslauncher][com.google.android.contacts][com.android.systemui][com.google.android.apps.nexuslauncher][com.google.android.apps.youtube.music][com.google.android.googlequicksearchbox][com.google.android.youtube][com.google.android.apps.nexuslauncher][com.google.android.apps.wellbeing][com.zdmgold.autoclickernega.debug]}]']
+PASS  reference region
+11-23 13:03:26.752  2418  2418 I NegaLab : done: Capture reference region | Reference captured.
+11-23 13:03:26.755  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:03:26.756  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:03:26.756  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:03:26.756  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:03:26.756  2418  2418 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-23 13:03:26.756  2418  2418 I NegaLab :
+PASS  test frame
+11-23 13:03:27.283  2418  2418 I NegaLab : done: Capture test frame | Test frame captured.
+11-23 13:03:27.283  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:03:27.283  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:03:27.283  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:03:27.283  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:03:27.283  2418  2418 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-23 13:03:27.283  2418  2418 I NegaLab :
+PASS  match
+11-23 13:03:30.035  2418  2418 I NegaLab : done: Match | Match finished.
+11-23 13:03:30.037  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:03:30.037  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:03:30.037  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:03:30.037  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:03:30.037  2418  2418 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-23 13:03:30.037  2418  2418 I NegaLab :
+11-23 13:03:30.037  2418  2418 I NegaLab : Single frame match
+11-23 13:03:30.037  2418  2418 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-23 13:03:30.037  2418  2418 I NegaLab :   time per search: Safe 231 ms, Fast 154 ms (median)
+11-23 13:03:30.037  2418  2418 I NegaLab :   confidence 0.60: found
+11-23 13:03:30.037  2418  2418 I NegaLab :   confidence 0.70: found
+11-23 13:03:30.037  2418  2418 I NegaLab :   confidence 0.80: found
+11-23 13:03:30.037  2418  2418 I NegaLab :   confidence 0.85: found
+11-23 13:03:30.037  2418  2418 I NegaLab :   confidence 0.90: found
+11-23 13:03:30.037  2418  2418 I NegaLab :   confidence 0.95: found
+11-23 13:03:30.037  2418  2418 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-23 13:03:30.037  2418  2418 I NegaLab :   time per search: Safe 20 ms, Fast 16 ms (median)
+11-23 13:03:30.037  2418  2418 I NegaLab :
+PASS  leak probe 1
+11-23 13:03:53.524  2418  2418 I NegaLab : done: Leak probe | leak probe heap MB after a forced collection: start 18, after 40 captures 15, after 40 searches 20
+11-23 13:03:53.526  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:03:53.526  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:03:53.526  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:03:53.526  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:03:53.526  2418  2418 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-23 13:03:53.526  2418  2418 I NegaLab :
+11-23 13:03:53.526  2418  2418 I NegaLab : Single frame match
+11-23 13:03:53.526  2418  2418 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-23 13:03:53.526  2418  2418 I NegaLab :   time per search: Safe 231 ms, Fast 154 ms (median)
+11-23 13:03:53.526  2418  2418 I NegaLab :   confidence 0.60: found
+11-23 13:03:53.526  2418  2418 I NegaLab :   confidence 0.70: found
+11-23 13:03:53.526  2418  2418 I NegaLab :   confidence 0.80: found
+11-23 13:03:53.526  2418  2418 I NegaLab :   confidence 0.85: found
+11-23 13:03:53.526  2418  2418 I NegaLab :   confidence 0.90: found
+11-23 13:03:53.526  2418  2418 I NegaLab :   confidence 0.95: found
+11-23 13:03:53.526  2418  2418 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-23 13:03:53.526  2418  2418 I NegaLab :   time per search: Safe 20 ms, Fast 16 ms (median)
+11-23 13:03:53.526  2418  2418 I NegaLab :
+PASS  rate probe
+11-23 13:04:08.299  2418  2418 I NegaLab : done: Capture rate probe | Rate probe finished.
+11-23 13:04:08.301  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:04:08.301  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:04:08.301  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:04:08.301  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:04:08.301  2418  2418 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-23 13:04:08.301  2418  2418 I NegaLab :
+11-23 13:04:08.301  2418  2418 I NegaLab : Single frame match
+11-23 13:04:08.301  2418  2418 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-23 13:04:08.301  2418  2418 I NegaLab :   time per search: Safe 231 ms, Fast 154 ms (median)
+11-23 13:04:08.301  2418  2418 I NegaLab :   confidence 0.60: found
+11-23 13:04:08.301  2418  2418 I NegaLab :   confidence 0.70: found
+11-23 13:04:08.301  2418  2418 I NegaLab :   confidence 0.80: found
+11-23 13:04:08.301  2418  2418 I NegaLab :   confidence 0.85: found
+11-23 13:04:08.301  2418  2418 I NegaLab :   confidence 0.90: found
+11-23 13:04:08.301  2418  2418 I NegaLab :   confidence 0.95: found
+11-23 13:04:08.301  2418  2418 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-23 13:04:08.301  2418  2418 I NegaLab :   time per search: Safe 20 ms, Fast 16 ms (median)
+11-23 13:04:08.301  2418  2418 I NegaLab :
+11-23 13:04:08.301  2418  2418 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-23 13:04:08.301  2418  2418 I NegaLab :   requests 100, accepted 35, refused 65
+11-23 13:04:08.302  2418  2418 I NegaLab :   gap between accepted captures ms: min 300, median 413
+11-23 13:04:08.302  2418  2418 I NegaLab :
+PASS  repeat test
+11-23 13:04:11.307  2418  2418 I NegaLab : sample after 0 frames: heap 16 MB, frames alive 0
+11-23 13:04:15.479  2418  2418 I NegaLab : sample after 8 frames: heap 14 MB, frames alive 1
+11-23 13:04:19.994  2418  2418 I NegaLab : sample after 18 frames: heap 17 MB, frames alive 2
+11-23 13:04:24.509  2418  2418 I NegaLab : sample after 28 frames: heap 19 MB, frames alive 2
+11-23 13:04:29.023  2418  2418 I NegaLab : sample after 38 frames: heap 19 MB, frames alive 2
+11-23 13:04:33.539  2418  2418 I NegaLab : sample after 48 frames: heap 14 MB, frames alive 1
+11-23 13:04:38.051  2418  2418 I NegaLab : sample after 58 frames: heap 24 MB, frames alive 3
+11-23 13:04:42.569  2418  2418 I NegaLab : sample after 68 frames: heap 19 MB, frames alive 2
+11-23 13:04:47.086  2418  2418 I NegaLab : sample after 78 frames: heap 14 MB, frames alive 1
+11-23 13:04:51.601  2418  2418 I NegaLab : sample after 88 frames: heap 24 MB, frames alive 3
+11-23 13:04:55.615  2418  2418 I NegaLab : done: Repeat test | Repeat test finished.
+11-23 13:04:55.620  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:04:55.620  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:04:55.620  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:04:55.621  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:04:55.621  2418  2418 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-23 13:04:55.621  2418  2418 I NegaLab :
+11-23 13:04:55.621  2418  2418 I NegaLab : Single frame match
+11-23 13:04:55.621  2418  2418 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-23 13:04:55.621  2418  2418 I NegaLab :   time per search: Safe 231 ms, Fast 154 ms (median)
+11-23 13:04:55.621  2418  2418 I NegaLab :   confidence 0.60: found
+11-23 13:04:55.621  2418  2418 I NegaLab :   confidence 0.70: found
+11-23 13:04:55.621  2418  2418 I NegaLab :   confidence 0.80: found
+11-23 13:04:55.621  2418  2418 I NegaLab :   confidence 0.85: found
+11-23 13:04:55.621  2418  2418 I NegaLab :   confidence 0.90: found
+11-23 13:04:55.621  2418  2418 I NegaLab :   confidence 0.95: found
+11-23 13:04:55.621  2418  2418 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-23 13:04:55.621  2418  2418 I NegaLab :   time per search: Safe 20 ms, Fast 16 ms (median)
+11-23 13:04:55.621  2418  2418 I NegaLab :
+11-23 13:04:55.621  2418  2418 I NegaLab : Repeat test at confidence 0.85
+11-23 13:04:55.621  2418  2418 I NegaLab :   attempts 100, captured 98, refused for rate 2
+11-23 13:04:55.621  2418  2418 I NegaLab :   other capture failures 0
+11-23 13:04:55.621  2418  2418 I NegaLab :   detections 98 of 98 captured frames
+11-23 13:04:55.621  2418  2418 I NegaLab :   match time ms: median 113, p95 126
+11-23 13:04:55.621  2418  2418 I NegaLab :   capture to result ms: median 221, p95 249
+11-23 13:04:55.621  2418  2418 I NegaLab :   searches per second 2.2
+11-23 13:04:55.622  2418  2418 I NegaLab :   learned minimum gap 400 ms
+11-23 13:04:55.622  2418  2418 I NegaLab :   best score per frame: first 1.00, min 1.00, median 1.00, max 1.00
+11-23 13:04:55.622  2418  2418 I NegaLab :   best match at the place the reference was cut: 98 of 98 frames
+11-23 13:04:55.622  2418  2418 I NegaLab :   frames scoring below 0.85: 0
+11-23 13:04:55.622  2418  2418 I NegaLab :   first scores: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+11-23 13:04:55.622  2418  2418 I NegaLab :   Java heap MB every 10 attempts (limit 192): 16 14 17 19 19 14 24 19 14 24
+11-23 13:04:55.622  2418  2418 I NegaLab :
+11-23 13:04:55.622  2418  2418 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-23 13:04:55.622  2418  2418 I NegaLab :   requests 100, accepted 35, refused 65
+11-23 13:04:55.622  2418  2418 I NegaLab :   gap between accepted captures ms: min 300, median 413
+11-23 13:04:55.622  2418  2418 I NegaLab :
+PASS  leak probe 2
+11-23 13:05:18.768  2418  2418 I NegaLab : done: Leak probe | leak probe heap MB after a forced collection: start 18, after 40 captures 18, after 40 searches 13
+11-23 13:05:18.773  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:05:18.773  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:05:18.773  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:05:18.773  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:05:18.773  2418  2418 I NegaLab : Reference image: 600x180 px, cut at (100, 120)
+11-23 13:05:18.773  2418  2418 I NegaLab :
+11-23 13:05:18.773  2418  2418 I NegaLab : Single frame match
+11-23 13:05:18.773  2418  2418 I NegaLab :   best score 1.00 at (100, 120, 700, 300)
+11-23 13:05:18.774  2418  2418 I NegaLab :   time per search: Safe 231 ms, Fast 154 ms (median)
+11-23 13:05:18.774  2418  2418 I NegaLab :   confidence 0.60: found
+11-23 13:05:18.774  2418  2418 I NegaLab :   confidence 0.70: found
+11-23 13:05:18.774  2418  2418 I NegaLab :   confidence 0.80: found
+11-23 13:05:18.774  2418  2418 I NegaLab :   confidence 0.85: found
+11-23 13:05:18.774  2418  2418 I NegaLab :   confidence 0.90: found
+11-23 13:05:18.774  2418  2418 I NegaLab :   confidence 0.95: found
+11-23 13:05:18.774  2418  2418 I NegaLab :   typical script: 96x64 px template in a 496x484 px region, score 1.00
+11-23 13:05:18.774  2418  2418 I NegaLab :   time per search: Safe 20 ms, Fast 16 ms (median)
+11-23 13:05:18.774  2418  2418 I NegaLab :
+11-23 13:05:18.774  2418  2418 I NegaLab : Repeat test at confidence 0.85
+11-23 13:05:18.774  2418  2418 I NegaLab :   attempts 100, captured 98, refused for rate 2
+11-23 13:05:18.774  2418  2418 I NegaLab :   other capture failures 0
+11-23 13:05:18.774  2418  2418 I NegaLab :   detections 98 of 98 captured frames
+11-23 13:05:18.774  2418  2418 I NegaLab :   match time ms: median 113, p95 126
+11-23 13:05:18.774  2418  2418 I NegaLab :   capture to result ms: median 221, p95 249
+11-23 13:05:18.774  2418  2418 I NegaLab :   searches per second 2.2
+11-23 13:05:18.774  2418  2418 I NegaLab :   learned minimum gap 400 ms
+11-23 13:05:18.774  2418  2418 I NegaLab :   best score per frame: first 1.00, min 1.00, median 1.00, max 1.00
+11-23 13:05:18.774  2418  2418 I NegaLab :   best match at the place the reference was cut: 98 of 98 frames
+11-23 13:05:18.774  2418  2418 I NegaLab :   frames scoring below 0.85: 0
+11-23 13:05:18.774  2418  2418 I NegaLab :   first scores: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+11-23 13:05:18.774  2418  2418 I NegaLab :   Java heap MB every 10 attempts (limit 192): 16 14 17 19 19 14 24 19 14 24
+11-23 13:05:18.774  2418  2418 I NegaLab :
+11-23 13:05:18.774  2418  2418 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-23 13:05:18.774  2418  2418 I NegaLab :   requests 100, accepted 35, refused 65
+11-23 13:05:18.774  2418  2418 I NegaLab :   gap between accepted captures ms: min 300, median 413
+11-23 13:05:18.774  2418  2418 I NegaLab :
+PASS  quick test on Settings
+11-23 13:05:24.269  2418  2418 I NegaLab : sample after 0 frames: heap 19 MB, frames alive 0
+11-23 13:05:28.391  2418  2418 I NegaLab : sample after 8 frames: heap 13 MB, frames alive 1
+11-23 13:05:32.902  2418  2418 I NegaLab : sample after 18 frames: heap 17 MB, frames alive 2
+11-23 13:05:37.415  2418  2418 I NegaLab : sample after 28 frames: heap 20 MB, frames alive 3
+11-23 13:05:41.928  2418  2418 I NegaLab : sample after 38 frames: heap 17 MB, frames alive 2
+11-23 13:05:46.442  2418  2418 I NegaLab : sample after 48 frames: heap 20 MB, frames alive 3
+11-23 13:05:50.958  2418  2418 I NegaLab : sample after 58 frames: heap 13 MB, frames alive 1
+11-23 13:05:55.471  2418  2418 I NegaLab : sample after 68 frames: heap 17 MB, frames alive 2
+11-23 13:05:59.982  2418  2418 I NegaLab : sample after 78 frames: heap 20 MB, frames alive 3
+11-23 13:06:04.495  2418  2418 I NegaLab : sample after 88 frames: heap 13 MB, frames alive 1
+11-23 13:06:08.507  2418  2418 I NegaLab : done: Quick test | Repeat test finished.
+11-23 13:06:08.511  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:06:08.511  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:06:08.511  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:06:08.511  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:06:08.511  2418  2418 I NegaLab : Reference image: 96x64 px, cut at (128, 444)
+11-23 13:06:08.511  2418  2418 I NegaLab :
+11-23 13:06:08.511  2418  2418 I NegaLab : Repeat test at confidence 0.85
+11-23 13:06:08.511  2418  2418 I NegaLab :   attempts 100, captured 98, refused for rate 2
+11-23 13:06:08.511  2418  2418 I NegaLab :   other capture failures 0
+11-23 13:06:08.511  2418  2418 I NegaLab :   detections 98 of 98 captured frames
+11-23 13:06:08.511  2418  2418 I NegaLab :   match time ms: median 23, p95 24
+11-23 13:06:08.511  2418  2418 I NegaLab :   capture to result ms: median 95, p95 108
+11-23 13:06:08.512  2418  2418 I NegaLab :   searches per second 2.2
+11-23 13:06:08.512  2418  2418 I NegaLab :   learned minimum gap 400 ms
+11-23 13:06:08.512  2418  2418 I NegaLab :   best score per frame: first 1.00, min 1.00, median 1.00, max 1.00
+11-23 13:06:08.512  2418  2418 I NegaLab :   best match at the place the reference was cut: 98 of 98 frames
+11-23 13:06:08.512  2418  2418 I NegaLab :   frames scoring below 0.85: 0
+11-23 13:06:08.512  2418  2418 I NegaLab :   first scores: 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+11-23 13:06:08.512  2418  2418 I NegaLab :   Java heap MB every 10 attempts (limit 192): 19 13 17 20 17 20 13 17 20 13
+11-23 13:06:08.512  2418  2418 I NegaLab :
+11-23 13:06:08.512  2418  2418 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-23 13:06:08.512  2418  2418 I NegaLab :   requests 100, accepted 35, refused 65
+11-23 13:06:08.512  2418  2418 I NegaLab :   gap between accepted captures ms: min 300, median 413
+11-23 13:06:08.512  2418  2418 I NegaLab :
+panel: 11-23 13:06:15.830  2418  2418 I NegaLab : panel: Success(value=kotlin.Unit)
+run: 11-23 13:06:19.264  2418  2640 I NegaLab : run: Success(value=kotlin.Unit)
+PASS  crop confirmed
+11-23 13:06:34.622  2418  2418 I NegaLab : done: Capture reference | Reference captured.
+11-23 13:06:34.623  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:06:34.627  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:06:34.627  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:06:34.628  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:06:34.628  2418  2418 I NegaLab : Reference image: 500x400 px, cut at (150, 700)
+11-23 13:06:34.628  2418  2418 I NegaLab :
+11-23 13:06:34.628  2418  2418 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-23 13:06:34.629  2418  2418 I NegaLab :   requests 100, accepted 35, refused 65
+11-23 13:06:34.629  2418  2418 I NegaLab :   gap between accepted captures ms: min 300, median 413
+11-23 13:06:34.629  2418  2418 I NegaLab :
+PASS  test frame after crop
+11-23 13:06:38.394  2418  2418 I NegaLab : done: Capture test frame | Test frame captured.
+11-23 13:06:38.395  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:06:38.395  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:06:38.395  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:06:38.395  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:06:38.396  2418  2418 I NegaLab : Reference image: 500x400 px, cut at (150, 700)
+11-23 13:06:38.396  2418  2418 I NegaLab :
+11-23 13:06:38.396  2418  2418 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-23 13:06:38.397  2418  2418 I NegaLab :   requests 100, accepted 35, refused 65
+11-23 13:06:38.397  2418  2418 I NegaLab :   gap between accepted captures ms: min 300, median 413
+11-23 13:06:38.397  2418  2418 I NegaLab :
+PASS  match after crop
+11-23 13:06:43.031  2418  2418 I NegaLab : done: Match | Match finished.
+11-23 13:06:43.033  2418  2418 I NegaLab : Nega Detection lab report
+11-23 13:06:43.033  2418  2418 I NegaLab : Device: Google sdk_gphone64_x86_64
+11-23 13:06:43.033  2418  2418 I NegaLab : Android: Android 14 (API 34)
+11-23 13:06:43.033  2418  2418 I NegaLab : App: 0.1.0-debug
+11-23 13:06:43.033  2418  2418 I NegaLab : Reference image: 500x400 px, cut at (150, 700)
+11-23 13:06:43.033  2418  2418 I NegaLab :
+11-23 13:06:43.033  2418  2418 I NegaLab : Single frame match
+11-23 13:06:43.033  2418  2418 I NegaLab :   best score 0.66 at (150, 700, 650, 1100)
+11-23 13:06:43.033  2418  2418 I NegaLab :   time per search: Safe 439 ms, Fast 300 ms (median)
+11-23 13:06:43.033  2418  2418 I NegaLab :   confidence 0.60: found
+11-23 13:06:43.033  2418  2418 I NegaLab :   confidence 0.70: not found
+11-23 13:06:43.033  2418  2418 I NegaLab :   confidence 0.80: not found
+11-23 13:06:43.033  2418  2418 I NegaLab :   confidence 0.85: not found
+11-23 13:06:43.033  2418  2418 I NegaLab :   confidence 0.90: not found
+11-23 13:06:43.033  2418  2418 I NegaLab :   confidence 0.95: not found
+11-23 13:06:43.033  2418  2418 I NegaLab :   typical script: 96x64 px template in a 546x664 px region, score 1.00
+11-23 13:06:43.033  2418  2418 I NegaLab :   time per search: Safe 34 ms, Fast 30 ms (median)
+11-23 13:06:43.033  2418  2418 I NegaLab :
+11-23 13:06:43.033  2418  2418 I NegaLab : Screenshot rate probe (one request every 100 ms)
+11-23 13:06:43.033  2418  2418 I NegaLab :   requests 100, accepted 35, refused 65
+11-23 13:06:43.033  2418  2418 I NegaLab :   gap between accepted captures ms: min 300, median 413
+11-23 13:06:43.033  2418  2418 I NegaLab :
+fatal or app error lines: 0
